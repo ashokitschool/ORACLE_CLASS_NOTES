@@ -1,0 +1,163 @@
+				                  "Welcome To Ashok IT"
+                                   		    "Oracle Database"
+                                 		 Topic : Introduction To Database
+                               			   Date  : 14/11/2022
+                                                     (Session - 01)
+______________________________________________________________________________________________________________________________________
+Today Session
+==============
+1) Course Content
+
+2) Course Duration
+
+3) Introduction To Database Concepts
+
+4) prequisite for this training
+
+5) QA Session
+
+Downloading Course Content  : https://ashokitech.com/uploads/course/1726243158_1667612569.pdf
+
+Course Duration : 1 Month +/- 10 Days
+
+Prequisite For Training : Nothing
+
+Session Timings Fixed : 9PM To 10PM (+ / - 10 Mins), Monday- Saturday 
+
+++++++++++++++++++++++++++++++++++
+Introduction To Database Concepts
+++++++++++++++++++++++++++++++++++
+
+*************************************************************************
+1) Understanding the Data & Database & Database Management System (DBMS)
+*************************************************************************
+     Data  >> Information about any Real World Object.
+
+       Ex: Chairs,Tables,Mobiles,Computers,Laptop,Student,Employee,Customer etc.,
+
+  Example : If we are considering the College Management System of Student
+
+        Student
+        =======
+        RollNo,Name,Branch,Gender,Age ---> Data (It is Something particular about one student)
+
+   
+   Database >> Grouping of Data in structured Format (or) Grouping of Several Students information.
+ 
+       Student-1                 Student-2 			  Student-3
+       =========                 ============                     ===========
+     RollNo :1121                 RollNo:2255                     RollNo:8989
+     Name   :Mahesh               Name  :Suresh                   Name  : Rajesh
+     Branch :CSE                  Branch:IT                       Branch: ECE
+     Gender : Male                Gender : Male                   Gender : Male
+     Age    :28			  Age    :29			  Age    :30
+
+   
+   Database Management System(DBMS)  >> It is atechnique for Storing and Retreiving the Information from                                         Database.
+
+   In this Digitial Era (or) In our Day-2-Day life we are seeing the lot of application such as 
+   
+   naukri portal,monster portal,Flipkart,Amazon,ashokittech portal etc.,
+
+   EndUser  >> Interacting the Applications  >> Runs in Server at Remote Machine >> Servers Connected
+    
+   To Database(Managing the Information of an Application)
+
+********************************************
+2) Various Techniques for Managing the Data
+********************************************
+  >> Traditional Approach >> Books (or) Ledger Books >> Collection of Pages >> Each Page >> 
+  
+     one Student Information
+
+     Problems
+     ========
+     1) Security Challenges
+     2) Backup issues
+     3) Space issues
+     4) Costly
+     5) Time consuming for retrieving particular Student Information.
+
+  >> In the 1940's computers was discovered and people are thinking to store this kind of information in computer.
+
+  >> After discovering the computer the people are managing the data in the form Of Files (or) File System (or) Flat Files.
+
+     Problems
+     =========
+     1) Security Challenges
+
+     2) Data Redundancy  >> Duplication of Data (or) Repeatitive Data 
+         
+         Students.txt			 StudentBranches.txt
+         =============                   ===================
+         StudentId  StudentName          StudentId   Branch Name
+         ---------  -----------          ---------   -----------
+     
+     3) Data Inconsistency : When ever we are updating studentId in One file may forget to update in another File
+
+         Students.txt			 StudentBranches.txt
+         =============                   ===================
+         StudentId  StudentName          StudentId   Branch Name
+         ---------  -----------          ---------   -----------
+
+     4) Time Consuming For Storing and Retrieving Information from Files(or) FileSystem (or) Flat Files
+
+     5) We can't maintaing the Backups of files
+
+     6) We can store limited amount of Information only in files etc.,
+
+    Database Softwares
+    ==================
+     * Currently In Market we are managing the data of an application in Database Softwares
+
+     Advantages
+     ==========
+     1) Strong Security(Username and password)
+     
+     2) Manage and Storing and Retreving the Information
+
+     3) We can store the huge Amount of Information in Database.
+
+     4) We can maintain the data in database in structured format(Tables(Rows and Columns)).
+
+         Table >> RealWorld Entity  >> Student 
+
+         Columns >> Fields  >> Rollno,Name,branch,gender 
+           
+          Rows   >> Values  >> 123,Mahesh,CSE,Male
+
+     5) No Data Redundancy
+
+     6) Data Integrity
+
+     7) Associations 
+
+*********************
+3) Database Softwares
+*********************
+    > Oracle Database  >> oracle Corporation   >> Propertiary License
+
+    > MySQL Database   >> Oracle Coroporation  >> Open Source
+
+    > DB2 Database     >> IBM Corporation
+ 
+    > SQL Server Database >> Microsoft Corporation
+
+    > Derby Database >> Sun MicroSystem
+  
+    > PostgreSql Database etc.,
+
+  NOTE:  
+  =====
+   ** The above all the database softwares are comes under "RDBMS Database Software".
+
+******************************
+4) Types of Database Softwares
+******************************
+    * We have two types of Database Softwares 
+
+          1) RDBMS Database Software
+
+          2) NRDBMS Database Software
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
