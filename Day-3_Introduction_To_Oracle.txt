@@ -1,0 +1,149 @@
+				                  "Welcome To Ashok IT"
+                                   		    "Oracle Database"
+                                 		 Topic : Introduction To Oracle
+                               			   Date  : 16/11/2022
+                                                     (Session - 03)
+_____________________________________________________________________________________________________________________________
+Course Information
+******************
+Downloading Course Content  : https://ashokitech.com/uploads/course/1726243158_1667612569.pdf
+
+Course Duration : 1 Month (+/-) 10 Days
+
+Prequisite For Training : Nothing
+
+Mode of Training : Online Training
+
+Session Timings Fixed : 9PM To 10.15PM Max
+                        Monday - Saturday
+Course Fee : 4k
+
+👉 Session-01 : https://youtu.be/6PbFcAVMlsI
+👉 Session-02 : https://youtu.be/_-av1aNx-aQ
+_____________________________________________________________________________________________________________________________
+
+Yesterday : Different Types of Database Softwares
+=================================================
+* Database is meant for Storing data of an Application
+
+* Always Data will be Populated into Database from Several Application.
+
+   Ex: Internet Banking >> we are performing some transaction on day-2-day Activities this will leads generate data into                            database
+
+* We have two types of Database Softwares are available in Market
+
+    1) SQL Databases (or) RDBMS Databases  : Oracle,MySQL,SQLServer,PostgreSQL,DB2,Derby DB etc.,
+       
+       > In RDBMS/SQL Databases always data will be stored in two dimensional format i.e.,Tables
+
+       > Table will contains Rows & Columns, Always Columns represented as "Fields" and Rows represented as "tuples" and          Table represented as "Relation".
+
+       > In RDBMS/SQL Databases always data will be stored in "Structured Format".
+
+       > In Realtime most of banking application,e-commerce application are using RDBMS Database Softwares only.
+
+   2) No-SQL Database (or) NRDBMS Databases : MongoDB,Cassandar,Redis,Hbase,DynamoDB etc.,
+
+        >> Data will be stored in Several Kinds of Formats (or) Unstructured Format
+             - Document based Databases
+             - Key-value Pair Databases
+             - Coulumn wise Databases
+             - Graph Databases
+
+      		 Training Program will be focusing on SQL Databases i.e., Oracle,MySQL
+
+_____________________________________________________________________________________________________________________________
+SQL
+===
+ * SQL Stands for Structured Query Language.
+
+ * SQL is used to communicate with any RDBMS Database Softwares.
+
+ * SQL is database Query language/ database Programming language.
+
+ * As End user we can pass statements to execute in Database such statements called "SQL Statements / Queries"  
+
+ * SQL Statements are just like normal English Statements.
+ 
+ * We can write the SQL Statements either in upper case letters (or) lower case letters i.e.,SQL is case-Insensitive Database    programming language.
+
+ * SQL Language becomes ANSI(American National Standard Information) Standard will becomes common language for any RBDMS   
+   
+   Datbase softwares /SQL Databases Softwares
+
+ * When we writing the SQL Statements every SQL statement must be terminated with Semicolon(;)
+
+ * In SQL at atime only one SQL Statement will be executed.
+
+ * If we wanted to execute some bunch of SQL Statements at time for your business requirement we need to go for "PLSQL".
+
+ * Procedural Language using SQL.
+
+
+   Example
+   =======
+         Customers(Table)
+         ===============         
+         Customer_Id          Customer_Name              Customer_Location
+         ===========          ==============             =================
+           1025                  Mahesh                    Hyderabad   
+           1026                  Suresh                    Delhi	
+           1027                  Rajesh 		   Bangalore    
+           1028                  Nagesh                    Chennai      
+           1029                  Naresh                    Pondicherry  
+
+   
+If we store the above customers information into database we can get the particular customers information based on our business requirement in easy manner
+
+   EndUser  >> Writing SQL Statement >> Based On Business Requirement (Need to get All Customers Information belongs to                                                                              Hyderabad)
+
+      select * from customers where customer_location='Hyderabad';  >> SQL Statement  (or) Query  
+
+                                                                    >> Milli Seconds the information will be infront of you.
+
+      OUTPUT
+      ======
+       Customer_Id          Customer_Name              Customer_Location
+       ===========          ==============             =================
+          1025                  Mahesh                    Hyderabad  
+
+      select * from customers;  >> It will give you all customers information
+
+      OUTPUT
+      ======
+         Customer_Id          Customer_Name              Customer_Location
+         ===========          ==============             =================
+           1025                  Mahesh                    Hyderabad   
+           1026                  Suresh                    Delhi	
+           1027                  Rajesh 		   Bangalore    
+           1028                  Nagesh                    Chennai      
+           1029                  Naresh                    Pondicherry  
+
+   
+        Wanted to get the customerID based on Customer Name
+
+        select customer_id from customer where customer_name='Mahesh';
+
+       OUTPUT
+       ======
+           Customer_Id 
+           ===========
+             1025
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Introduction To Oracle
+======================
+ About Oracle
+
+ How to Install the Oracle Database Software in our machine i.e., Oracle 11G Express Edition (Light Weight)
+
+ Connect to Oracle Database
+
+ Interacting with Oracle Database
+  
+ Components Oracle Database 
+
+Download URL For Oracle 11g Expression Edition
+==============================================
+https://www.mediafire.com/file/ungqk8ggwof4h1h/OracleXE112_Win64.zip/file
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
