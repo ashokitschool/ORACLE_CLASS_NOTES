@@ -1,0 +1,138 @@
+				                  "Welcome To Ashok IT"
+                                   		    "Oracle Database"
+                                 		 Topic : Oracle - Environmental Setup
+                               			   Date  : 17/11/2022
+                                                     (Session - 04)
+_____________________________________________________________________________________________________________________________
+Course Information
+******************
+Downloading Course Content  : https://ashokitech.com/uploads/course/1726243158_1667612569.pdf
+
+Course Duration : 1 Month (+/-) 10 Days
+
+Prequisite For Training : Nothing
+
+Mode of Training : Online Training
+
+Session Timings Fixed : 9PM To 10.15PM Max
+                        Monday - Saturday
+Course Fee : 4k
+
+=============
+Backup Videos
+=============
+👉 Session-01 : https://youtu.be/6PbFcAVMlsI
+👉 Session-02 : https://youtu.be/_-av1aNx-aQ
+👉 Session-03 : https://youtu.be/l5NpqX99-Rw
+_____________________________________________________________________________________________________________________________
+
+Yesterday: 
+==========
+Basics of Database Concepts
+    1) Terminologies in Database
+
+    2) Types of Database Softwares 
+           - RDBMS Database Softwares / SQL Database Softwares :: Oracle,Mysql,SQLServer,Postgresql,DB2,Derby DB etc.,
+
+           - NRDBMS Databae Softwares /No-SQL Database Softwares :: MongoDB,Cassander,Hbase,DynamoBD,Neo4J etc., 
+
+    3) Understanding the SQL(Structured Query Language)
+
+    End User(User) >>>>>>>>>> SQL Statements/Queries  >>>>> RDBMS Database Softwares
+
+     Example
+     =======
+         Customers(Table)
+         ===============         
+         Customer_Id          Customer_Name              Customer_Location
+         ===========          ==============             =================
+           1025                  Mahesh                    Hyderabad   
+           1026                  Suresh                    Delhi	
+           1027                  Rajesh 		   Bangalore    
+           1028                  Nagesh                    Chennai      
+           1029                  Naresh                    Pondicherry  
+
+         
+       Business Requirement  ::: Wanted to get All customers who are residing at Hyderabad
+
+       End User/Programer/Developer >>>>>>>> select * from customers where customer_location='Hyderabad'; >>>> RDBMS Database
+                                                   (SQL Statement / Query)                                                 
+
+       OUTPUT
+       ======
+        Customer_Id          Customer_Name              Customer_Location
+         ===========          ==============             =================
+           1025                  Mahesh                    Hyderabad 
+
+Today Session
+=============  
+1) What is Oracle
+=================
+ * Oracle is an one of RDBMS Database Software which can maintains the data in structured Format.
+
+ * In Oracle Always Data will be stored in two-dimensional Format/ Tabular Format.
+
+ * Oracle Database is From Oracle Corporation 
+
+ * Using SQL Language we can interact with Oracle Database
+
+ * Oracle will contains two Parts
+ 
+      1) SQL   >> Which is used to storing and managing and retreving Data from Database Software
+  
+      2) PlSQL >> Executing some business rules/business logic in Database Software using stored procedure,Stored Functions.  
+
+ * Oracle Latest Version of Express Edition : Oracle 21C Express Edition
+
+_____________________________________________________________________________________________________________________________ 2) Installing Oracle (or) Environmental Setup For Oracle
+========================================================
+Step-1 : We are going to Install the Oracle 11g Express Edition which is an Light weight version of Oracle Database and               download the Oracle Database in the below url
+
+       URl : https://www.mediafire.com/file/ungqk8ggwof4h1h/OracleXE112_Win64.zip/file 
+
+Step-2 : After Completion of Downloading need to extract the zip file into folder by using either winzip/7Zip Software
+
+           Extracting the ZIP File  >>>>>>> Normal Folder
+
+Step-3 : Open the Extracted the Folder and find the executable file(.exe file) in below location in extracted folder
+        
+               <Oracle_Home>\DISK1\setup.exe
+
+           <Oracle_Home>  >> A Place where Oracle Database Software is available i.e.,Oracle Home
+
+Step-4 : Complete the installation process just by double clicking on it untill finish button (or) Just like normal Software          Installation process in our machine.
+
+Step-5 : During the Oracle Database Installation we need to rememeber password given for DBA Account(sys (or) system) and we 
+         provided the password for DBA accounts in my case as "manager".
+
+NOTE : Just For Your Information
+================================
+Destination Folder: C:\oraclexe\
+Oracle Home: C:\oraclexe\app\oracle\product\11.2.0\server\
+Oracle Base:C:\oraclexe\
+Port for 'Oracle Database Listener': 1521
+Port for 'Oracle Services for Microsoft Transaction Server': 2030
+Port for 'Oracle HTTP Listener': 8080
+_____________________________________________________________________________________________________________________________
+Interacting with Oracle Database
+================================
+* Inorder to interact with Oracle database, Oracle vendor provided "SQL* Plus editor" which is an "Command Line Interface"
+
+   Go to Start menu >> Search word as  "SQL" >> Find the Option as "Run SQL Command Line prompt" will comes along with the 
+   Oracle 11g Express edition installation process
+
+* After opening the SQL Command Line execute the below command to connect with oracle Database Software
+
+     SQL> connect(Hit Enter)
+     Enter user-name: system(Hit Enter)
+     Enter password:manager(Password will not visible to You just we need to type password and hit on enter)
+     Connected.
+
+     SQL>> Show user  (Viewing current user name)
+  
+     SQL>> cl scr (clear screen)
+  
+     SQL>> exit (Quit from SQL Prompt)
+     
+     SQL>> select * from all_users;
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
