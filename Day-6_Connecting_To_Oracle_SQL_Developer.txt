@@ -1,0 +1,184 @@
+				              "Welcome To Ashok IT"
+                                   		"Oracle Database"
+                                 	    Topic : Connecting To Oracle
+                               		    Date  : 19/11/2022
+                                              (Session - 06)
+_____________________________________________________________________________________________________________________________
+Yesterday Session :
+===================
+Backup Videos
+=============
+👉 Session-01 : https://youtu.be/6PbFcAVMlsI
+👉 Session-02 : https://youtu.be/_-av1aNx-aQ
+👉 Session-03 : https://youtu.be/l5NpqX99-Rw
+👉 Session-04 : https://youtu.be/La57rKkPREs
+👉 Session-05 : https://youtu.be/hefHd0gXXYM
+
+**********************************
+Interacting with Oracle Database
+**********************************
+Approach-1 
+----------
+Using Command Line Interface(CLI) oracle Database i.e.,Sql*plus
+
+  Start Menu >> Search Word "sql" >> Find option "Run SQL Command Line" >> Select that Option will open SQL Prompt
+
+
+     SQL >>  Connect 
+
+
+     Enter Username ::: System
+
+     Enter Password ::: manager(not visible)
+
+     Connected
+
+
+     SQL >> show user
+
+      OUTPUT
+      ======
+       system
+
+ 
+      SQL >> Select * from all_users;  >> To get all the users information from Oracle Database
+
+       OUTPUT
+       ======
+         Users Information
+
+      SQL>> cl scr  >>> Clearing the Screen
+
+
+      SQL >> exit   >>> Exiting the SQL Prompt
+
+Approach-2 
+----------
+>>  By Using Oracle WebPage we can interact with Oracle Database and during installation of Oracle11g Express Edition we got      one webpage into our Machine Desktop  i.e., "Get Started With Oracle Database 11g Express Edition"
+
+
+>>  When we Open the following page i.e.,Get Started With Oracle Database 11g Express Edition by default it will given you an
+ 
+    error because need to configure the Oracle Port Listener Number(8080) for this webPage.
+
+
+>>> Adding the Oracle Listener Port Number to the above web page
+
+    Right Click on the web page >>> choose an option "Open File Location" >>> select "Get Started" Page and Right click on  
+    this page >>> Select the option "Properties" >> Change the url as below
+
+          Exisiting URL ::::    http://127.0.0.1:%HTTPPORT%/apex/f?p=4950 
+
+ 
+          Changed URL   ::::   http://127.0.0.1:8080/apex/f?p=4950 
+
+>>> After the doing the Above url change now just try to open the Same Page.....Will be getting Some Home Page 
+
+    Select option "Application Express" >> will getting another Screen infront of you
+
+             Create Database User  >>> Create new User (Select this Option)
+
+                 Username          >>> mahesh
+
+    Application Express Workspace  >>> mahesh
+
+                 Password          >>> ashokit (Invisible Characters)
+
+       Confirm Password            >>> ashokit (Invisible Characters)
+
+
+   We need to Click on button  "Create Workspace" >>After clicking on it will get Success Message workspace got created.
+
+
+>>> We need to Login with New credentials of an Newly created workspace
+
+          Workspace name  :::: mahesh
+
+          username        :::: mahesh
+
+          password        :::: ashokit
+
+         Click on  "Login" Button
+
+>>> After Login we need select menu "SQL Workshop"
+
+       1) SQL Commands    >>> Here we can write the required Sql Commands to test with oracle Database
+
+
+       2) Object Browser  >>> We can see the Oracle Database Objects information (table,views,sequences,SP,SF etc.,)
+
+                          >>> Using this option we can create any Database Object using graphical Objects.
+
+Approach-3
+==========
+ * We can interact with Oracle Database by using Graphical User Interface(GUI) Tools.
+
+ * Inorder to interact with Oracle Database we have some GUI Tools i.e.,Oracle SQL Developer,Toad For Oracle etc..,
+
+Step-1 :
+--------
+Downlaod the SQL Developer Software from Oracle Corporation.
+ 
+  URL :https://www.oracle.com/database/sqldeveloper/technologies/download/  >>> Current Version (22.2.1)
+
+ NOTE
+ ====
+  If we required to download the Oracle Products definetly need to have account with Oracle WebSite.
+  
+      Oracle Products ::: Oracle 11g Express Edition , Oracle SQL Developer Tool, Java Software etc.,
+
+Step-2
+------
+ After completion of Download as zip file we need to extract the Zip file to Normal Folder by using either winzip/7-zip     Software
+
+      sqldeveloper-22.2.1.234.1810-x64.zip   >>>>> sqldeveloper-22.2.1.234.1810-x64(Normal Folder)
+
+Step-3
+------
+  Switch/navigate to Extracted Folder and click on following executable file i.e.,sqldeveloper.exe and will open Sql      Developer tool page.  
+  
+  In the left hand side we have two panels 1) Connections 2) Reports 
+
+Step-4
+------
+  We need to create new Connection in SQL Developer Tool by clicking on "Green Color + Icon" onces you clicked on it 
+  need to provide the below Inputs
+     
+       Connection Name :::  DBA_CONNECTION   (Given Color as Red Color)
+
+        username : system
+
+        password : manager
+
+        Hostname : localhost
+
+        port :1521
+
+        sid : xe
+
+  We need to Verify the whether Database Connection will be success or not by clicking on "Test" Button.
+
+  If we are getting success then we need to click on "Connect" Button
+
+Step-5
+------
+  We need to SQL Queries/SQL Statements by using SQL Developer Tool
+
+  Right Click on Connection Name(DBA_CONNECTION) under Connection Panel >> Choose an Option "Open SQL Work Sheet".
+
+  Once SQL Worksheet got Opened we can write and test our required SQL statements
+
+     select sysdate from dual;
+
+  Executing the above Statement ::::: select the entire sql statement(ctrl+A) >>>> Click on "Run" Button(Green Color) on tool 
+  bar.
+
+
+NOTE
+=====
+1) We can able to login DBA Account(system,manager) either in Webpage (or) SQL*plus Client Application.
+
+2) We can able to login Database Developer Account(mahesh(ashokit), rajesh(ashokit)) either in webpage (or) sql*plus client     application
+
+   Already Having Account : http://127.0.0.1:8080/apex/f?p=4500:1000:4516113379588092
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
