@@ -1,0 +1,125 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	      Topic : SQL Commands
+                               		      Date  : 21/11/2022
+                                                (Session - 07)
+_____________________________________________________________________________________________________________________________
+Yesterday Session :
+===================
+Backup Videos
+=============
+👉 Session-01 : https://youtu.be/6PbFcAVMlsI
+👉 Session-02 : https://youtu.be/_-av1aNx-aQ
+👉 Session-03 : https://youtu.be/l5NpqX99-Rw
+👉 Session-04 : https://youtu.be/La57rKkPREs
+👉 Session-05 : https://youtu.be/hefHd0gXXYM
+=============================================================================================================================
+Last Session
+============
+* We Seen How to Interact with oracle Database Software using three appproach
+
+   1) Command Line Interface(CLI) i.e., SQL*Plus
+
+   2) Web page 
+
+   3) Graphical User Interface(GUI) i.e., Oracle SQL Developer, Toad For Oracle etc.,   >>> Trending Market
+
+Oracle Accounts
+===============
+1) Database Administrator Account(DBA) Account i.e., sys(or)system (Manager)
+
+2) We created some Database User using WebPage Approach  i.e.,rajesh(ashokit),mahesh(ashokit)
+
+3) We will create one Database user using CLI Approach i.e.,ramesh(ashokit)
+
+  Step-1 : Creating the user using CLI Screen
+  +++++++++++++++++++++++++++++++++++++++++++
+     SQL> create user ramesh identified by ashokit;
+
+      User created.
+
+    NOTE:
+    =====
+     >>  Database Username : ramesh and Database Password: ashokit
+
+
+  Step-2 : Giving the Permissions to Newly Created User i.e.,ramesh
+  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+     SQL> grant resource,connect to ramesh;
+
+     Grant succeeded.
+
+    NOTE: After Creating the User make sure we need to give permissions for Creating Database Objects       
+          (Table,Sequence,Index,view,Stored procedure,Stored Function etc.,)
+
+ 
+  Step-3 : Connecting to Newly Created User Using CLI Approach
+  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   SQL> connect
+  
+    Enter user-name: ramesh
+   
+    Enter password:ashokit(Invisible)
+   
+    Connected.
+
+  
+NOTE:
+====
+* We can always create an new Database user account through DBA Account only.
+
+
+* We can't create newly Database user account from another User account.
+ 
+ERROR : Checking for Oracle XE service instance FAILED During Installation
+==========================================================================
+Solution ::: Swith to Command Prompt  >>> type the below command 
+
+               C:\Users\NEW>sc delete OracleServiceXE
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+SQL Commands
+============
+* SQL Commands is nothing but SQL Statements (or) SQL Queries.
+
+* Basically Statement represents preforming the particular task (or) Statement is group of predefined Words
+   
+   Example : select * from emp;
+
+* Every Statement must be terminated by Semicolon.
+
+* The Statement which we are Passed to Database Software System such statements is called as "SQL Statements".
+
+* Basically SQL Commands/SQL Statements are Categorized as below
+
+   1) Data Definition Language(DDL) Commands (or) DDL Statements  
+
+      >> Deals with Creating/Modifying/Dropping Structure of Database Objects.
+
+      >> DDL Commands are  "create, alter, drop,truncate"
+
+   2) Data Manipulation Lanaguage(DML) Commands (or) DML Statements
+      
+       >> Deals with Data of an Database objects
+
+       >> DML Commands are "insert, update,delete"     
+
+   3) Data Control Language(DCL) Commands (or) DCL Statements
+       
+       >> Deals with giving the Permission (or) Revoking the permisssion of an users
+ 
+       >> DCL Commands are used By "DBA Persons"
+
+       >> DCL Commands are "grant,revoke"       
+
+   4) Date Retrevial Language(DRL) Commands (or) DRL Statements
+
+       >> Deals with Retreving the data from Database objects
+
+       >> DRL Commands are "select"
+
+   5) Transaction Control Language(TCL) Commands (or) TCL Statements
+
+       >> Deals with Transaction Management
+  
+       >> TCL Commands are "commit, rollback"
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
