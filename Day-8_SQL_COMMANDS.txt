@@ -1,0 +1,162 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	      Topic : SQL Commands
+                               		      Date  : 22/11/2022
+                                                (Session - 08)
+_____________________________________________________________________________________________________________________________
+Yesterday Session:
+==================
+SQL Commands
+============
+* SQL Commands is nothing but SQL Statements (or) SQL Queries.
+
+* Basically Statement represents preforming the particular task (or) Statement is group of predefined Words
+   
+   Example : select * from emp;
+
+* Every Statement must be terminated by Semicolon.
+
+* The Statement which we are Passed to Database Software System such statements is called as "SQL Statements".
+
+* Basically SQL Commands/SQL Statements are Categorized as below
+
+   1) Data Definition Language(DDL) Commands (or) DDL Statements  
+
+      >> Deals with Creating/Modifying/Dropping Structure of Database Objects.
+
+      >> DDL Commands are "create, alter, drop,truncate"
+
+   2) Data Manipulation Lanaguage(DML) Commands (or) DML Statements
+      
+       >> Deals with Data of an Database objects
+
+       >> DML Commands are "insert, update,delete"     
+
+   3) Data Control Language(DCL) Commands (or) DCL Statements
+       
+       >> Deals with giving the Permission (or) Revoking the permisssion of an users
+ 
+       >> DCL Commands are used By "DBA Persons"
+
+       >> DCL Commands are "grant,revoke"       
+
+   4) Date Retrevial Language(DRL) Commands (or) DRL Statements
+
+       >> Deals with Retreving the data from Database objects
+
+       >> DRL Commands are "select"
+
+   5) Transaction Control Language(TCL) Commands (or) TCL Statements
+
+       >> Deals with Transaction Management
+  
+       >> TCL Commands are "commit,rollback,savepoint"
+
+NOTE
+====
+Database Objects in Oracle : Tables,Views,Sequences,indexes,Stored Procedures,Stored Functions etc.,
+_____________________________________________________________________________________________________________________________
+
+Today Session : (Database Object >> Table)
+==========================================
+
+* To Create a Database Object of an Table we need to use DDL Command of "create".
+
+* After Creating the Database object of an Table in Database, as programmer we need to insert data into table then we need to 
+  use DML command "insert".
+
+* After Inserting the data into Database as programmer we need to validate the information by using DRL Command "select"
+
+
+Example : Creating sample Database table 
+========================================
+Write a Query for Creating Database Table of "customers" information with following fields                    >  CustomerId     >>  only numbers
+                >  CustomerName   >>  string
+                >  Gender         >>  string
+                >  Age            >>  only numbers
+                >  location       >>  string
+
+Step-1
+======
+>> In order to create the Database table we will use DDL Command "create" and observe the syntax as below
+
+              create table <table_name>(
+                                           <column_name_1> <Datatype>,
+                                           <column_name_2> <Datatype>,
+                                           ...........................
+                                           ...........................
+                                           ...........................
+                                           <column_name_n> <Datatype>,
+          
+                                       );
+
+      NOTE: Naming Conventions need to be follow for any name in Oracle Database
+      ==========================================================================
+      1) Every name in Database must begins with "Alphabet".
+
+      2) We need to follow the mentioned charset i.e.,a-z,A-Z,0-9,@,$,#,_
+
+      3) Names are not Case Sensitive.
+ 
+      4) Predefined keywords are not allowed.
+
+      5) Blank Spaces are also not allowed in the names.
+
+  
+      Query For Creating Database table 
+      =================================
+      SQL> create table ashokit_customers(
+                                   customer_id number,
+                                   customer_name varchar(50),
+                                   gender varchar(15),
+                                   age number,
+                                   location varchar(50)
+                                  );
+
+      OUTPUT
+      ======
+      Table Created
+
+Step-2: 
+=======
+ * Inserting the data into Database table by using DML Command "insert"
+
+
+  Syntax For Insert Command 
+  ==========================   
+   1) insert into <table_name>(column_name_1,column_name_2.................column_name_n) values(value1,value2,.....valuen);
+
+  Example
+  =======
+    insert into ashokit_customers(customer_id,customer_name,gender,age,location) values(01,'Mahesh','Male',35,"Hyderabad");
+
+    insert into ashokit_customers(customer_id,customer_name,gender,age,location) values(02,'Ashok','Male',35,"Hyderabad");
+
+  
+  2) insert into <table_name> values(value1,value2,value3,value4..................valuen);
+
+  Example
+  =======
+    insert into ashokit_customers values(03,'Rajesh','Male',40,'Mumbai');
+
+  3) insert into <table_name> values(&customerId,&customername,&gender,&age,&location);
+
+
+
+Step-3
+======
+ * Just Validating the Information by selecting data from Database Table using DRL Command "select"
+
+    Syntax for Select Command
+    =========================
+       select * from <table_name>;   >> Retrieves all the information from given table
+
+   Example 
+   =======
+      select * from ashokit_customers;
+
+NOTE
+====
+ sql >> set linesize 300;
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
