@@ -1,0 +1,200 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	      Topic : SQL Commands
+                               		      Date  : 24/11/2022
+                                                (Session - 09)
+_____________________________________________________________________________________________________________________________
+Last Session:
+=============
+Example : Creating sample Database table 
+========================================
+Write a Query for Creating Database Table of "ashokit_customers" information with following fields                    
+                >  CustomerId     >>  only numbers
+                >  CustomerName   >>  string
+                >  Gender         >>  string
+                >  Age            >>  only numbers
+                >  location       >>  string
+
+Step-1
+======
+>> In order to create the Database table we will use DDL Command "create" and observe the syntax as below
+
+              create table <table_name>(
+                                           <column_name_1> <Datatype>,
+                                           <column_name_2> <Datatype>,
+                                           ...........................
+                                           ...........................
+                                           ...........................
+                                           <column_name_n> <Datatype>,
+          
+                                       );
+
+      NOTE: Naming Conventions need to be follow for any name in Oracle Database
+      ==========================================================================
+      1) Every name in Database must begins with "Alphabet".
+
+      2) We need to follow the mentioned charset i.e.,a-z,A-Z,0-9,@,$,#,_
+
+      3) Names are not Case Sensitive.
+ 
+      4) Predefined keywords are not allowed.
+
+      5) Blank Spaces are also not allowed in the names.
+  
+      Query For Creating Database table 
+      =================================
+      SQL> create table ashokit_customers(
+                                   customer_id number,
+                                   customer_name varchar(50),
+                                   gender varchar(15),
+                                   age number,
+                                   location varchar(50)
+                                  );
+
+      OUTPUT
+      ======
+      Table Created
+
+Step-2: 
+=======
+ * Inserting the data into Database table by using DML Command "insert"
+
+
+  Syntax For Insert Command 
+  ==========================   
+  1) insert into <table_name>(column_name_1,column_name_2.................column_name_n) values(value1,value2,.....valuen);
+
+  Example
+  =======
+    insert into ashokit_customers(customer_id,customer_name,gender,age,location) values(01,'Mahesh','Male',35,'Hyderabad');
+
+    insert into ashokit_customers(customer_id,customer_name,gender,age,location) values(02,'Ashok','Male',35,'Hyderabad');
+
+  
+  2) insert into <table_name> values(value1,value2,value3,value4..................valuen);
+
+  Example
+  =======
+    insert into ashokit_customers values(03,'Rajesh','Male',40,'Mumbai');
+
+  3) insert into <table_name> values(&customerId,&customername,&gender,&age,&location);
+
+
+
+Step-3
+======
+ * Just Validating the Information by selecting data from Database Table using DRL Command "select"
+
+    Syntax for Select Command
+    =========================
+       select * from <table_name>;   >> Retrieves all the information from given table
+
+   Example 
+   =======
+      select * from ashokit_customers;
+
+
+How Can we Clear the Screen of Oracle SQL* Plus Editor
+======================================================
+SQL >> cl scr
+
+How can we increase the characters per line oracle SQL* Plus Editor
+===================================================================
+SQL >> set linesize <number>;  Ex: set linesize 300;
+
+
+How to Modify the data in Database Table
+========================================
+* By using update statement we can change the existing column value based on some conditions.
+
+* Condition means whether you want to update columns values for all records (or) particular record.
+
+* If you omit (or) ignore the condition in the update statement then will performs update for all records of columns values.
+
+ Syntax For Updating all rows in the Database table
+ ===================================================
+   update <table_name> set <modifyingcolumn1>=<modifyingcolumn1value>.......<modifyingcolumnn>=<modifyingcolumnnvalue>
+
+
+ Example : Write SQL Query to update the location as "Delhi" for all customers in ashokit_customers table
+
+    SQL >>>> update ashokit_customers set location='Delhi';
+
+    Result  :::  3 rows updated.
+
+ Syntax For Updating Particular rows in the Database table
+ ===================================================
+   update <table_name> set <modifyingcolumn1>=<modifyingcolumn1value>.......<modifyingcolumnn>=<modifyingcolumnnvalue>
+
+                       where <conditions>
+
+  Example : Write SQL Query to update the location as "Delhi" for particular customers in ashokit_customers table whose             customer_id is 1 
+
+   SQL >>> update ashokit_customers set location='Pune' where customer_id = 1;
+
+
+  Example : Write SQL Query to update the location as "Pune" for particular customers in ashokit_customers table whose             customername is mahesh
+
+   SQL >>> update ashokit_customers set location='Pune' where customer_name='Mahesh';
+
+   Result::::: 1 row updated.
+
+
+   Example : Write SQL Query to update the location as "Guntur" and age "40" for particular customer in ashokit_customers                 table whose customername is mahesh
+
+   SQL >>> update ashokit_customers set location='Guntur',age=40 where customer_name='Mahesh';
+
+   Result::::: 1 row updated.
+
+
+   SQL >>> update ashokit_customers set location='Guntur',age=40 where customer_name='Mahesh' and gender='Male';
+
+    Result  ::::: 1 row updated.
+
+  NOTE:
+  =====
+  * As of now in our table we have only one customer record whose customer name as "Mahesh" that is reason we are getting     only one row updated in the above update SQL Statements
+
+  * If we are having more than one customer whose customer names having "Mahesh" then will get respective rows matched got     updated.
+
+  * In the Realtime always recommended to perform the update statement based on the custome_id because customer_id will         be unique number for every customer
+
+  * we used two predefined keywords in update statement i.e., set and where 
+
+        "set" is used for defining the modifying columns in Database table
+
+        "where" is used specifying the condition to update the particular row (or) rows in database table
+
+
+How to Remove the Unwanted records from Database Table
+======================================================
+* By using delete command from DML statements
+
+* By using delete command we can remove unwanted records from Database table.
+
+* If you specifying the where condition in delete statement then will delete particular records based on condition specified.
+
+* If you omit (or) ignore the condition in delete statement then will delete all rows from database table.
+
+ Syntax
+ ======
+       delete from <table_name>;
+
+   Ex: delete from ashokit_customers;  >>>> It will delete all rows from database table because we don't have any where                                             condition in sql statement.
+
+  
+ Syntax:
+ =======
+
+     delete from <table_name> where <Conditions>;
+
+  Ex : delete from ashokit_customers where customer_id=1; >>> Deleting record from Table whose customer_id as 1
+
+       delete from ashokit_customers where customer_name='Ashok'; >>> Deleting record from Table whose customer_name as Ashok
+
+       delete from ashokit_customers where gender='Male'>>> Deleting customers from table whose gender as "Male"
+
+       delete from ashokit_csutomers where gender='Male' and age >=35;>>>> Deleting customers from table whose gender as                                                                            "Male" and age should be greater than 35.
+
+mahesh.ashokit@gmail.com
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
