@@ -1,0 +1,185 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : Oracle Datatypes
+                               		         Date  : 30/11/2022
+                                                  (Session - 10)
+_____________________________________________________________________________________________________________________________
+Last Session
+============
+1) Complete the Oracle Installation
+
+2) Different ways for Connecting the Oracle Database
+
+       -> SQL* Plus CLI
+
+       -> SQL Developer GUI Tool
+
+3) DDL & DML Commands
+    
+    -> Create
+
+    -> Insert
+
+    -> Update
+   
+    -> Delete
+
+Oracle Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES >> You can find in Oracle whatapp group
+
+Recording     ::: Will be available through Ashok IT Portal
+
+
+Oracle SQL Developer :::: https://www.oracle.com/database/sqldeveloper/technologies/download/
+
+Any Questions ::: mahesh.ashokit@gmail.com
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Today Session ::: Oracle DataTypes
+==================================
+
+ Datatype >>> It is used to define the type of the value to be holded in the database column
+
+
+ Basically Oracle classified the datatypes in the below categories
+
+  1) number 
+  =========
+   * These datatypes allows use to define the numeric/Number values into Database column such as integers(whole numbers) (or)      
+     decimal numbers(fractional numbers).
+
+          Whole numbers:: 10,20,50,60,70,58,,958 etc.,
+
+          decimal numbers:::10.25,25.36.69.58.47.1232 etc.,
+
+      i) number(size)
+      ================
+       > This datatype allows us to define only integers (or) whole numbers either postive (or) negative numbers such as
+
+         studentrollno,employeeno,customerbillno etc.,
+
+       > Here size represents the number of digits 
+ 
+       Example
+       ======= 
+         studentNo number(4) >>>> 9999
+        
+     ii) number(precision,scale)
+     ===========================
+       > This datatype allows us to define decimal values(or) fractional values such as student average marks,employee    
+         salary,Bill Amount of an Customer,Interest Rates in Bank etc.,
+
+       > Here Precision means no of digits including decimal values where as scale means no of decimal values.
+   
+       Example
+       ========
+          employeesalary number(6,2);   >>>> 9999.99
+
+          billAmount number(8,3)  >>>> 12345.678  
+
+  2) Alphabets : This datatype further divided into below types
+  ============
+      i) char(size) : 
+      ===============
+       > This datatype allows us to define character values  such as employee names,student names etc.,
+
+       > The maximium length of datatype is 1-2000 characters.
+
+       > It always allocates the memory in a static passion.
+
+        Example:
+        ========
+          studentName char(25);
+
+          Name of Student ::: Mahesh     
+
+     ii) varchar(size) / varchar2(size)
+     =================================
+        > This datatype allows us to define character values such as employee names,student names,customer names etc.,
+
+        > The maximium length of this datatype is 1-4000 characters.
+
+        > It always allocates the memory in Dynamic Passion.
+
+        Example
+        ========
+           studentName varchar(30);
+
+           Name of Student :::: Ashok
+        
+       NOTE
+       =====
+         Difference between varchar (Vs) varchar2 datatype ?
+
+             varchar is developed by SQL 
+       
+             varchar2 is developed by Oracle Corporation       
+
+  3) Date
+  =======
+   > This datatype allows us to defind date values in the Database column such as      DateofJoining,HireDate,BirthDate,PurchasedDate,DateofBooking etc.,
+
+   > The default format of Date in Oracle Database is "DD-MON-YY"  >>> 12-FEB-13
+ 
+  4) Timestamp
+  ============
+   > This dataype allows us to defined both Date and time values into Database Column
+
+   > The default format of timestamp in oralce Database is "DD-MON-YY HH:MM:SS"  >> 12-Feb-13 18:20:35
+
+  5) Miscellaneous 
+  =================
+       i) Clob  >>> Character Large Object  >> Which is extension of Varchar datatype >> 1 GB -TO - 4GB
+
+      ii) Blob  >>> Binary Large Object >>> Which can be used for storing files,audios,videos etc.,>>>> 1 GB -TO - 4GB
+
+ iii) BFile >>> Binary File >> which can be used for externdal data such as external files,binary files etc.,> 1 GB -TO - 4GB
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+SQL Commands
+============
+
+SQL >>> create table ashokit_employees(empId number(5),empName varchar2(50),gender char(1),dob date,created_dt timestamp);
+
+SQL >>>  insert into ashokit_employees values(256,'Mahesh','M',12-SEP-2015,sysdate); 
+
+SQL >>>> insert into ashokit_employees values(5656,'Rani','F','24-APR-2004',sysdate);
+
+SQL >>>> insert into ashokit_employees values(5657,'Ramesh','M','24-APR-2004',sysdate);
+
+SQL >>>> insert into ashokit_employees values(5658,'Kumari','F','18-APR-2002',sysdate);
+
+SQL >>>> insert into ashokit_employees values(5659,'Swapna','F','04-APR-2014',sysdate);
+
+SQL >>>> insert into ashokit_employees values(5660,'Suresh','M','14-04-2003',sysdate);
+
+SQL >>>> select * from ashokit_employees
+
+OUTPUT
+======
+256	Mahesh	M	12-09-15	30-11-22 10:01:20.000000000 PM
+556	Ashok	M	18-10-15	30-11-22 10:01:52.000000000 PM
+1556	Karthik	M	18-12-05	30-11-22 10:04:02.000000000 PM
+1589	Kumar	M	28-03-10	30-11-22 10:04:32.000000000 PM
+5656	Rani	F	24-04-04	30-11-22 10:10:56.000000000 PM
+5657	Ramesh	M	24-04-04	30-11-22 10:12:31.000000000 PM
+5658	Kumari	F	18-04-02	30-11-22 10:12:31.000000000 PM
+5659	Swapna	F	04-04-14	30-11-22 10:12:31.000000000 PM
+5660	Suresh	M	14-04-03	30-11-22 10:12:32.000000000 PM
+5660	Suresh	M	14-04-03	30-11-22 10:14:19.000000000 PM
+5660	Suresh	M	14-04-03	30-11-22 10:14:19.000000000 PM
+5659	Swapna	F	04-04-14	30-11-22 10:14:53.000000000 PM
+
+SQL >>>> desc ashokit_employees 
+
+OUTPUT
+======
+Name       Null? Type         
+---------- ----- ------------ 
+EMPID            NUMBER(5)    
+EMPNAME          VARCHAR2(50) 
+GENDER           CHAR(1)      
+DOB              DATE         
+CREATED_DT       TIMESTAMP(6) 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
