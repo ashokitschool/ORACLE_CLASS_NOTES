@@ -1,0 +1,256 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : Oracle Datatypes
+                               		         Date  : 01/12/2022
+                                                  (Session - 11)
+______________________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes    ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording       ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group"
+
+>> Oracle SQL Developer  ::: https://www.oracle.com/database/sqldeveloper/technologies/download/
+
+*****************
+Yesterday Session
+*****************
+* We Explored on Oracle DataTypes
+
+     -> Whole Numbers  >>>> number
+
+     -> Decimal Numbers >>>> number(precision,scale) >>> Precision(No of Digits) ,Scale(no of Decimal Points)
+
+     -> char >>> Fixed Length of Character Datatype
+
+     -> varchar >>> Variable length of Character Datatype
+
+     -> varchar/varchar2   >>> Varchar(SQL Language), Varchar2(Oracle)
+
+     -> Holding Date Values in DB Column >>>> Date
+
+     -> Holding Date & Time Value in DB Column >>>> Timestamp
+
+     -> Clob >>>> Storing > 4000 Characters
+     
+     -> Blob >>>> Storing Files,Audios,Videos etc.,
+
+
+******************************************
+Today Session  : Exploring on DDL Commands
+******************************************
+* DDL Stands "Database Definintion Language".
+
+* DDL Commands always deals with Structure of Database Objects.
+
+* Database Objects means table,views,sequences,storedprocedure,storedfunctions etc.,
+
+* Following are the DDL Commands "create,alter,truncate,drop,rename"
+
+* By using DDL Commands we can apply on any Database Objects.
+
+1) Create
+==========
+ * By using this DDL Command we can create any Database Object(Table,View,Sequences,Synonymns,Stored Procedure,Stored    Functions)
+
+ * As of now we are going to create any Database table (Database Object)
+
+   Syntax
+   ======
+     create table <table_name>(columnname1 column1Datatype,columnname2 column2datatype.........columnnamen columnndatatype);
+
+   Example
+   =======
+     SQL >>> create table ashokit_users(username varchar2(50),user_password varchar2(100));
+
+2) Alter
+========
+  * By using this DDL Command we can modify the structure of the Database Objects.
+
+  * As of Now By using this DDL Command we can modify the structure of the Database table.
+
+  * By using this command we can perform below things
+    
+         i) We can add the new column to the existing table.
+
+        ii) We can remove/drop the existing column from table.
+
+       iii) We can rename column names for existing columns in table.
+
+       iv)  We can modify the datatypes for exisitng columns in table.
+
+  
+   i) Adding new column into Exisiting Table(alter-add) :  
+   ====================================================
+    >> This command is used to add one column (or) more than one column to existing table 
+
+     Syntax
+     ======
+        alter table <table_name> add(columnname1 column1datatype..... columnnamen columnndatatype);
+
+     Example 
+     =======
+       SQL >> alter table ashokit_users add (gender char(1),city_name varchar2(50));
+
+   
+     NOTE:
+     =====  
+     >>> We cannot add the new columns at required positions in the table.
+
+     >>> Always newly added columns will be added at end of existing columns.
+
+   ii) We can drop the existing column from table(alter-drop)
+   ==========================================================
+    * This command is used to remove the columns from the existing Database table.
+
+    * By using this command either we can drop one column (or) more than one at atime.
+
+    Syntax
+    ======
+      alter table <table_name> drop column <columname-1>; -- Removing only one column
+
+      alter table <table_name> drop (columnname-1,columnname-2......columnname-n);
+
+    Example
+    =======
+      SQL >>> alter table ashokit_employees drop column created_dt; -- Removing the one column 
+  
+      SQL >>> alter table ashokit_employees drop(created_dt,dob);   -- Removing the multiple columns
+ 
+
+    iii) We can rename column names for existing columns in table(alter-rename)
+    ===========================================================================
+     * This command is used to chagen the column names from old column name to new column name.
+
+     * By using this command we can't rename columns name for more than one columns at atime.
+
+     Syntax
+     =======
+       alter table <table_name> rename column <old_column_name> to <new_column_name>;
+
+     Example
+     =======
+      SQL>>alter table ashokit_employees rename column empname to employee_name;
+
+     Syntax for Renaming the Table name
+     ==================================
+       alter table <old_table_name> to <new_table_name>;
+ 
+       old_table_name >>>> ashokit_employees
+
+       new_table_name >>>> maheshit_employees
+
+      Example
+      =======
+        SQL >>> alter table ashokit_employees rename to maheshit_employees;
+
+        OUTPUT
+        ======
+            Table ASHOKIT_EMPLOYEES altered.
+
+        SQL >>> select * from ashokit_employees;
+
+         OUTPUT
+         ======
+            ORA-00942: table or view does not exist
+            00942. 00000 -  "table or view does not exist"
+
+         SQL >> select * from mahesit_employees;
+
+         OUTPUT
+         ======
+           256	Mahesh
+          5656	Rani
+	  5657	Ramesh
+	  5658	Kumari
+          5659	Swapna
+          5660	Suresh
+
+  iv)  We can modify the datatypes for exisitng columns in table(alter-modify)
+  ===========================================================================
+    > By using this command we can increase/decrease the size of the datatype of database columns and we can change the       datatype from old datatype to new datatype.
+
+   Syntax
+   ======
+      alter table <table_name> modify column_name datatype(size);
+
+      alter table <table_name> modify(column_name-1 datatype(size)...........column_name-n datatype(size));
+   Example
+   ========
+    SQL >>>> alter table maheshit_employees modify employee_name varchar2(100);
+
+    SQL >>>>> alter table maheshit_employees modify(employee_id number(6), employee_name varchar2(140));
+
+  3)truncate
+  ===========
+   * This command is used to delete the records permanently from the exisiting table.
+
+   * create,alter,rename,drop are concentrating on struture of Database object but where as trunscate concentrates on data.
+
+   Syntax:
+   =======
+       truncate table <table_name>;
+
+   Example 
+   =======
+       truncate table maheshit_employees;
+
+   OUTPUT
+   ======
+       Table MAHESHIT_EMPLOYEES truncated.
+
+ 4)drop 
+ ======
+   * This command is used to remove the table structure from Database objects
+ 
+     Syntax
+     ======
+        drop table <table_name>;
+
+     Example
+     =======
+       drop table maheshit_employees;
+
+     OUTPUT
+     =======
+      Table MAHESHIT_EMPLOYEES dropped.
+
+ 5) rename
+  =========
+   * This command is used to change the table name from old table name to new table name
+
+    Syntax
+    ======
+        rename  <old_table_name> to <new_table_name>
+
+    Example
+    ========
+        rename asholkit_users to maheshit_users;
+
+     OUTPUT
+     ======
+        Table renamed.
+
+NOTE
+====
+ >>> What ever the tables we got dropped in oracle database those table are available in oracle recycle bin.
+
+ >>> To retreive the oracle recycle bin then we need to use the below command 
+
+     SQL >>> select * from recylebin;
+
+ >>>> We can restore the dropped table back to Oracle database by using flashback command
+
+    Syntax:
+    =======
+        flashback table <table_name> to before drop;
+
+    Example
+    =======
+        flashback table maheshit_employees to before drop;
+
+>>> To See all the tables in the database(select * from tab;)
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
