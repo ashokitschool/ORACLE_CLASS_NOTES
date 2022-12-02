@@ -1,0 +1,228 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : SQL Commands(DDL,DML,DRL,TCL)
+                               		         Date  : 02/12/2022
+                                                  (Session - 12)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes    ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording       ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Yesterday Session
+******************
+* We Covered DDL Commands such "create,alter,drop,truncate,rename".
+
+* Onces any Database table got dropped that dropped table will be stored in "Oracle Recyclebin".
+
+     SQL >>> select * from recylebin;
+
+* We get back the dropped table into Database space by using "flash command"
+
+     SQL >>> flashback table <table_name> to before drop;
+
+* To Display all the tables from the currently connected database
+
+     SQL >>> select * from tab;
+
+* How can we drop the user which we created earlier of mahesh,suresh,rajesh accounts
+  
+     SQL >>> drop user <user_name> cascade;  
+
+  Example
+  =======
+     SQL >>> drop user rajesh cascade;
+
+   OUTPUT
+   ======
+     User dropped.
+
+  NOTE
+  ====
+   *** Make sure we need to connect with DBA Account(system/manager)
+
+* To View all the users of an Oracle Database
+ 
+    SQL >>> select * from all_users;
+
+* We can delete the dropped table from oracle recycle bin with help of "purge" command
+
+   SQL >>> purge table <table_name> 
+
+   Example
+   ========
+   SQL >>> purge table maheshit_employees;
+
+   OUTPUT
+   ======
+   Table purged.
+
+* Differences between truncate and delete
+ 
+  truncate
+  =========
+  1) It is a DDL Command.
+  
+  2) Truncate will leads to Permanent deletion of all records at a time.
+
+  3) We cannot delete the specific record through truncate command.
+
+  delete
+  ======
+  1) It is a DML Command.
+
+  2) delete will leads to temporary deletion of all records (or) particular records.
+
+  3) We can delete the specific record.
+
+
+* Difference between truncate and Drop
+
+  truncate and Drop both are DDL Commands.
+
+  truncate will be focusing on data to be deleted permanently but it will not delete Database Structure.
+
+  drop always focusing on deleting the database object structure permanently.
+   
+***************************
+Today Session: SQL Commands 
+***************************
+
+ 1) DDL Commands : Create,alter,drop,truncate,rename,flashback,purge >>>>>> All DDL Commands are by default "Auto Commit";
+
+ 2) DML Commands : insert,update,delete >>>>>>> All DML Commands are not by default "Auto Commit".
+
+    NOTE
+    ====
+    *****When we are talking about update and delete commands we used "where" clause which can be used to specify the   
+         condition for sql statements
+
+    ***** If we are not using where clause in update statment (or) delete statement means it will perform update operation
+              
+          and delete operation on all rows of the database table.
+
+ 3) DQL/DRL Commands : select 
+
+***************
+Select Command
+***************
+  DQL >>> Data Query Language
+
+  DRL >>> Data Retrevial Language
+
+* This command is used to retreive the data from the existing table.
+
+* By using this command we can retrieve all the records in the table and also we can retrieve specific recoreds from the  
+  Database table.
+
+   Syntax::
+   ========
+       select * from <table_name>;
+
+       select * from <table_name> where <condition>;
+
+   Example
+   ========
+       select * from emp;
+
+       select * from emp where dept=10;
+
+  >> In the above select command we are retrieving all the records from emp table
+
+  >> * represent selecting all columns from emp table
+
+  **********
+  selection
+  **********
+  >> Retrieving the data from Database table completely or partially based on condition 
+   
+   Example:
+   ========
+      select * from emp;
+ 
+      select * from emp where deptno=10;
+
+  **********
+  Projection
+  **********
+  >>> Retreiving the data from specific columns of an Database table known as "Projection"
+
+  >>> In projection we can't use * symbol in the select query.
+
+   Example
+   =======
+     select empno,ename from emp;
+ 
+     select empno,ename,job from emp;
+
+     select empno,ename,job,sal from emp;
+
+     select empno from emp;
+
+     select empname from emp
+
+4) Transaction Control Language(TCL) Commands ::commit,rollback,savepoint
+==========================================================================
+  
+    commit >>> saving the information permanently in the database
+
+    rollback >>> Undo Operation
+
+    Savepoint >>>> Marking some of transaction as miletones
+
+Transaction
+===========
+ * Any Operation which we can perform on the database by using DML Commands i.e.,insert,update,delete on the Database then 
+   
+   it is known as "Transaction"
+
+Session
+=======
+ * It can be defined certain amount of time (or) interval given to user to perform some activities.
+
+   During the Login to Logoff of an user what ever operation done by the user i.e.,Transactions
+
+ * Basically sessions can be terminated in two ways
+
+    1) Normal termination  >>> exit (or) quite   >>> Always save the data (or) transactions successfully
+
+    2) Abnormal Termination >>>> Directly switching off the CPU, Directly Hit PowerOff Button etc., >>> Doesn't saves the 
+                                 data (or) transactions successfully
+
+**********
+commit
+**********
+>> This command is used to save the transactions explictly from the moment of the user login to database to till execute 
+
+   this command.
+
+ Syntax
+ =======
+   commit
+
+
+********
+Rollback
+********
+>>> This command is used to discard all the transactions done on Database table before performing commit operation
+
+
+Syntax
+======
+   rollback
+
+Example Scenario on Commit and Rollback
+=======================================
+
+    User  >>>>>> Logged into DB   >>>>>> Insert(10),Update(10),delete(15) >>>> By Default this operations will not saved
+
+
+    If we want to save all these operations permanently to the database table >>>> commit(SAVE)
+
+ 
+    If we don't want to save all these operations into Database >>> Rollback (UNDO)
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
