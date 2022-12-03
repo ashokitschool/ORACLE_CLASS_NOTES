@@ -1,0 +1,173 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : SQL Commands(TCL,DCL)
+                               		         Date  : 03/12/2022
+                                                  (Session - 13)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes    ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording       ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Yesterday Session
+******************
+Transaction Control Language(TCL) Commands :: (commit,rollback,savepoint)
+=========================================================================
+  
+    commit >>> saving the information permanently in the database
+
+    rollback >>> Undo Operation
+
+    Savepoint >>>> It is used to save a set of transactions under a name
+
+Transaction
+===========
+ * Any Operation which we can perform on the database by using DML Commands i.e.,insert,update,delete on the Database then 
+   
+   it is known as "Transaction"
+
+Session
+=======
+ * It can be defined certain amount of time (or) interval given to user to perform some activities.
+
+   During the Login to Logoff of an user what ever operation done by the user i.e.,Transactions
+
+ * Basically sessions can be terminated in two ways
+
+    1) Normal termination  >>> exit (or) quite   >>> Always save the data (or) transactions successfully
+
+    2) Abnormal Termination >>>> Directly switching off the CPU, Directly Hit PowerOff Button etc., >>> Doesn't saves the 
+                                 data (or) transactions successfully
+
+******
+commit
+******
+>> This command is used to save the transactions explictly from the moment of the user login to database to till execute 
+
+   this command.
+
+ Syntax
+ =======
+   commit
+
+
+********
+Rollback
+********
+>>> This command is used to discard all the transactions done on Database table before performing commit operation
+
+
+Syntax
+======
+   rollback
+
+Example Scenario on Commit and Rollback
+=======================================
+
+    User  >>>>>> Logged into DB   >>>>>> Insert(10),Update(10),delete(15) >>>> By Default this operations will not saved
+
+
+    If we want to save all these operations permanently to the database table >>>> commit(SAVE)
+
+ 
+    If we don't want to save all these operations into Database >>> Rollback (UNDO)
+
+Savepoint
+=========
+* This command is used to save a set of transactions under a name.
+
+ Syntax
+ ======
+    savepoint <save_point_name>;
+
+Example
+=======
+   user >>>>> Logged into DB >>>> Insert(2)   >>>> Added One Savepoint      >>>> savepoint  insertSavePoint
+
+                             >>>> Update(2)   >>>> Added one More SavePoint >>>>> savepoint updateSavePoint
+
+   User >>>>> I can do "Rollback" Operation >> Insert(2),Update(2) will be discarded from Database.
+
+   User >>>>> I can do "commit" Operation   >> Insert(2),Update(2) will be saved into Database permanently
+
+   User >>>>> I can do "Rollback" to particular "Savepoint" 
+ 
+        SQL>>> rollback to updateSavePoint >>> Only Update(2) will be discarded
+
+        SQL>>> rollback to insertSavePoint >>>> only Insert(2) will be discarded
+
+        SQL >>> Commit;   >>>>>> Nothing will be saved
+
+DCL(Data Control Language)
+==========================
+ * This commands are used by DBA for granting permissions to users and Revoking the permission from users.
+
+ * We have two DCL Commands i.e., grant, revoke
+
+     grant >>>> providing the permissions
+ 
+     revoke >>>> Takingout the permissions
+
+SQL Commands
+============
+/** This Page is Related to DBA Administrator **/
+-- creating the new user 
+-- username i.e.,karthik
+-- password i.e.,ashokit 
+create user karthik identified by ashokit;
+--O/P::User KARTHIK created.
+
+-- granting the permissions to karthik user for creating,insert,updating,deleting
+grant resource,connect to karthik;
+--O/P:::Grant succeeded.
+
+-- remove the permisssion to karthik account
+revoke resource from karthik;
+--O/P :: Revoke succeeded.
+
+To view all the users in the Database
+=====================================
+SQL >>> select * from all_users;
+
+To view all the details about Database users
+============================================
+SQL >>>> select * from dba_users;
+
+
+To View all the tables in Particular Account
+============================================
+SQL >>>> select * from tab;
+
+
+To Know the username Of Connected Account
+=========================================
+SQL  >>>>> show user
+
+To Change the Password of an User Account
+==========================================
+SQL >>>> alter user karthik identified by karthik;
+
+How to lock an User Account
+============================
+SQL >>> alter user karthik account lock;   >>>>> Locking the account
+
+
+How to unlock the User Account
+==============================
+SQL >>>> alter user karthik account unlock;  >>>> Unlocking the account
+
+
+How to drop the user
+====================
+SQL >>> drop user <username> cascade
+
+    >>> drop user karthik cascade;
+
+NOTE
+====
+  If the user account is empty then we no need to define cascade and if the user account is non-empty then we need to use 
+  cascade.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
