@@ -1,0 +1,184 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : Orderby clause,NULL Values,Oracle Alias Names
+                               		         Date  : 05/12/2022
+                                                  (Session - 14)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes    ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording       ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Last Session : We Completed with SQL Commands
+=============================================
+
+Today Session:
+==============
+1) Order by Clause
+
+2) Understanding NULL values in Oracle
+
+3) Working with Alias Names in Oracle
+
+
+Order by Clause
+===============
+* In oracle ,Basically Table contains rows of information in unspecificed order regardless ways which rows are inserted into   Database.
+
+* By using orderby clause we can query/retrieve the data from Database either ascending (or) Descending order.
+
+* By default Order by clause will query/retrieve the data from Database in ascending order.
+
+* If we want to retreive the data from database in descending order means, As DB Developer need to specify the "desc"     keyword in order by clause.
+
+* We can apply the order by clause on any column name in the Database table.
+
+* If we apply order by clause in character column then it will easy to populate data in alphabetical order.
+
+* We can apply the order by clause on more than one column in the Database table.
+
+* Whenever we need to submit the report to enduser in an understandable format then will use order by clause.
+
+Syntax For Order By Clause
+==========================
+   
+     select * from <table_name> order by <column_name> [asc/desc];
+
+
+Example
+=======
+  
+    select * from emp order by ename asc;  >>>>>> We are getting the List of employees in ascending order based on name;
+
+
+Q) Dispaly all employee names in descending order
+
+ ****** SQL >>> select ename from emp order by ename desc;
+
+Q) Display employeeId,employeeName,Salary of an employees in descending order based on salary ?
+
+ ****** SQL>>> select empno,ename,sal from emp order by sal desc;
+
+Q) Display all employees information based on ename in ascending order
+
+******* SQL>>> select * from emp order by ename;
+
+Q) Display all employeee information whose working under job as "SALESMAN"
+
+******  SQL>>> select * from emp where job='SALESMAN' order by ename;
+
+        SQL>>> select * from emp where job='SALESMAN' order by ename desc;
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Understanding NULL values in Oracle Database
+=============================================
+* In Database world, NULL is special.It is a marker for missing information or the information is not applicable.
+
+* NULL is special in the sense that it is not a value like a number, character string, or datetime, therefore, you cannot   compare it with any other values like zero (0) or an empty string (”).
+
+* We can test null values by using two conditions 
+
+   1) is null
+
+   2) is not null
+
+1) is null
+==========
+ * By Using this condition we can find null values in particular Database Column.
+
+Examples
+========
+ Q) Display all the product information whose produce price is null?
+
+******* SQL>>>> select * from products where product_price is null;
+
+
+ Q) Display all the employee information whose commision is null ?
+
+******** SQL>> select * from emp where comm is null;
+
+2) is not null
+==============
+ * It is used to finding the non-null values from the particular Database column
+
+
+Examples
+========
+ Q) Display all the products information whose product price are not existed?
+ 
+******* SQL>>> select * from products where product_price is not null;
+
+ Q) Display all the employee information who earning the commision ?
+
+******** SQL>>>> select * from emp where comm is not null;
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Oracle Alias
+============
+* Alias is an duplicate name (or) alternate name for the original column name (or) table name (or) any expression name.
+
+* Oracle supports the alias names for three levels
+
+  1) Column level alias
+
+  2) Table level alias
+
+  3) Expression level alias
+
+Column level alias
+==================
+ * Providing alias names for columns is known as  "Column level alias".
+
+ * Whenever we need to provide understandable (or) meaningful report to the end user the we need to use alias name for    Database columns of an Database table
+
+  Syntax
+  =======
+       select column-1 as "aliasname-Column1",
+              column-2 as "aliasname-column2",
+              ...............................
+              ...............................
+              column-n as "aliasname-columnn" from <table_name>;
+
+
+  Example
+  =======
+
+   SQL>>>>>> select empno as "Employee No", ename as "Employee Name" from emp;         
+            
+   SQL>>>>>> select empno "Employee No", ename  "Employee Name" from emp;
+
+   SQL>>>>>> select empno EmployeeNo, ename EmployeeName from emp;
+
+
+2) Table name alias
+===================
+  * Providing the alias name to the Database table name.
+
+ Syntax
+ ======
+   select * from <table_name> <alias_name>;
+
+ Example
+ ========
+  SQL >>>> select * from emp;  --with out alias name for table
+
+  SQL >>>> select * from emp e;  --Using alias name for table i.e., e
+
+  SQL >>>> select e.* from emp e; --Using alias name for table i.e., e
+
+  SQL >>>> select e.empno,e.ename,e.sal,e.comm from emp e;
+
+
+3) Expression level Alias
+==========================
+  * Providing the alias names for the expressions is  known as "Expresesion level alias".
+
+ Example
+ ========
+   SQL>>>>>> select empno,ename,sal,sal*12 "Annual Salary" from emp;
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+mahesh.ashokit@gmail.com
