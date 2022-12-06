@@ -1,0 +1,365 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : SQL Constraints
+                               		         Date  : 06/12/2022
+                                                  (Session - 15)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes    ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording       ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
+
+>> December 8,9,10,12
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Today Session : SQL Constraints
+===============================
+Introduction
+============
+* As of now We Created some database tables in Oracle Database in those tables contains some duplicate records and some       columns also contains null values this will leads to in accurate data.
+
+* In the realtime while creating tables in oracle database will have business rules those are nothing but "Constraints".
+
+Constraints
+===========
+* Constraints are set of rules / business rules which will be defined at DDL statements.
+
+* Constraints enforce the database to allow only valid values into the Database tables.
+
+* Constraints ensure the user to fetch only valid/accurate data from the Database tables.
+
+* We can apply the Constraints at two levels
+
+  1) Column level constraints
+  ===========================
+     Applying the constraints after defining the column immediately then those constraints are called as 
+     "Column level constraints"
+
+  2) Table level constraints
+  ===========================
+     Applying the constraints after defining all the columns in the table (or) at the end of the table are called as 
+     "Table level constraints".
+
+* Basically Oracle constraints are broadly divided into six types
+
+   1) Unique
+
+   2) not null
+
+   3) check
+
+   4) default
+
+   5) primary key
+  
+   6) foreign key (or) Referential Integrity
+
+********************
+1) Unique Constraint
+********************
+* This constraint does not allows us to enter duplicate values into column of an Database table.
+
+* We can apply the unique constraint morethan one column in the Same table(advantage)
+
+* This constraint allows the user to enter the null values (disadvantage)
+
+Syntax-1:: column level constraint
+========
+  CREATE TABLE table_name (
+    ...
+    column_name data_type UNIQUE
+    ...
+  );
+
+Syntax-2
+========
+CREATE TABLE table_name (
+    ...,
+    UNIQUE(column_name)
+);
+
+Syntax-3: Defining the unique constraint by constraint clause
+========
+CREATE TABLE table_name (
+    ...
+    column_name data_type CONSTRAINT <constraint_name> <contraint_type>;
+    ...
+);
+
+Syntax-4 : Table level Constraint
+========
+CREATE TABLE table_name (
+    ...
+    column_name data_type,
+    ...,
+    CONSTRAINT <constraint_name> UNIQUE(column_name)
+);
+
+Syntax-5 : Table level constraint for defining multiple columns as unique
+========
+CREATE TABLE table_name (
+    ...
+    column_name1 data_type,
+    column_name2 data_type,
+    ...,
+    CONSTRAINT <constraint_name> UNIQUE(column_name1, column_name2)
+);
+
+Syntax-6 :: Adding constraint after creation of table
+=====================================================
+ALTER TABLE table_name ADD CONSTRAINT <constraint_name> UNIQUE(column_name1, column_nam2);
+
+Syntax-7 : How to disable the constraint temporarily
+====================================================
+ALTER TABLE table_name DISABLE CONSTRAINT unique_constraint_name;
+
+Syntax-8 : How to enable the constraint back
+=============================================
+ALTER TABLE table_name ENABLE CONSTRAINT unique_constraint_name;
+
+Syntax-9 : Dropping the constraint
+==================================
+ALTER TABLE table_name DROP CONSTRAINT unique_constraint_name;
+
+Example-1 on Unique Constraint
+============================
+CREATE TABLE clients (
+    client_id NUMBER unique,
+    first_name VARCHAR2(50) ,
+    last_name VARCHAR2(50)
+);
+
+Example-2 on Unique Constraint
+============================
+CREATE TABLE clients (
+    client_id NUMBER,
+    first_name VARCHAR2(50) ,
+    last_name VARCHAR2(50),
+    constraint unique_client_id unique(client_id)  
+);
+
+Workspace Queries
+=================
+-- column level constraint i.e. constraint name allocated by oracle i.e.,SYS_C007242
+CREATE TABLE clients (
+    client_id NUMBER unique,
+    first_name VARCHAR2(50) ,
+    last_name VARCHAR2(50)
+);
+
+-- adding column as unique after creating the table
+ALTER TABLE clients ADD CONSTRAINT ashokit_first_name UNIQUE(first_name);
+
+-- Table level constraint i.e.constraint name allocated by oracle i.e.,ASHOKIT_UNIQUE_ID
+CREATE TABLE clients_1 (
+    client_id NUMBER,
+    first_name VARCHAR2(50) ,
+    last_name VARCHAR2(50),
+    constraint ashokit_unique_id unique(client_id)  
+);
+
+CREATE TABLE clients_2 (
+    client_id NUMBER,
+    first_name VARCHAR2(50) ,
+    last_name VARCHAR2(50),
+    constraint ashokit_unique_id_1 unique(client_id,first_name,last_name)  
+);
+
+insert into clients values(01,'Mahesh','Kumar');
+insert into clients values(null,'Mahesh','Kumar');
+insert into clients values(02,'Ashok','Kumar');
+-- while inserting duplicate clientid of unique column in Database table
+insert into clients values(01,'Sarath','Kumar');
+/*
+Error starting at line : 19 in command -
+insert into clients values(01,'Sarath','Kumar')
+Error report -
+ORA-00001: unique constraint (MAHESH.SYS_C007242) violated
+*/
+
+**********************
+2) Not Null constraint
+**********************
+* This constraint doesnot allows us to enter null values on a particular column of the database table
+
+* We can apply not null constraint on more than one column in the table
+
+* If we don't enter the values in any particular column in the table that column automatically takes null, But by using 
+  not null constraint we can forcely enter the values into the columns.
+
+* This constraint allows us to enter the duplicate values 
+
+NOTE
+====
+**** The Oracle NOT NULL constraints are inline constraints which are typically used in the column definition of the CREATE        TABLE statement.
+
+Syntax-1
+========
+ CREATE TABLE table_name (
+    ...
+    column_name data_type NOT NULL
+    ...
+);
+
+Syntax-2: 
+========
+>>> If you want to add a NOT NULL constraint to the column, you use the following ALTER TABLE statement
+
+ALTER TABLE table_name MODIFY(column_name NOT NULL);
+
+NOTE
+====
+**** In this case, the column_name must not contain any NULL value before applying the NOT NULL constraint.
+
+Example
+=======
+CREATE TABLE clients (
+    client_id NUMBER unique not null,
+    first_name VARCHAR2(50) ,
+    last_name VARCHAR2(50)
+);
+
+Drop NOT NULL constraints
+=========================
+* Sometimes, you need to change a column with a NOT NULL constraint to accept NULL values.
+
+* To do this, you need to remove the NOT NULL constraint from the column by using the ALTER TABLE statement as below:
+
+Syntax
+======
+ALTER TABLE table_name MODIFY (column_name NULL)
+
+
+Conclusion For Today Discusssion
+================================
+ >>> Unique  >>>>>>>>>>>>>>Doesn't allow the duplicates values but problem is accepting one null value
+
+ >>> not null >>>>>>>>>>>>>>> Doesn't allow the null values but problem is allowing duplicating values
+
+ >>> These two constraints can be create during table creation (or) after table creation using alter command
+
+********************
+3) Check Constraint
+********************
+* This constraint does not allows the values which are not satisfies the given condition.
+
+* We can apply the check constraint on more than one column in the same table.
+
+* check constraint allows us to enter null values (disadvantage)
+
+* We can apply a check constraint to a column or a group of columns. A column may have one or more check constraints.
+
+Syntax-1
+========
+CREATE TABLE table_name (
+    ...
+    column_name data_type CHECK (expression),
+    ...
+); 
+
+Syntax-2
+========
+CREATE TABLE table_name (
+    ...,
+    CONSTRAINT check_constraint_name CHECK (expresssion)
+);
+
+Example
+=======
+CREATE TABLE parts (
+    part_id NUMBER unique not null,
+    part_name VARCHAR2(255) NOT NULL,
+    buy_price NUMBER(9,2) CHECK(buy_price > 0)
+);
+
+CREATE TABLE parts (
+    part_id NUMBER unique not null,
+    part_name VARCHAR2(255) NOT NULL,
+    buy_price NUMBER(9,2),
+    constraint check_constraint check(buy_price > 0)
+);
+
+Attempting to insert 0 or negative buy price will cause an error:
+=================================================================
+INSERT INTO parts(part_name, buy_price) VALUES('HDD',0);
+
+Oracle Error
+============
+SQL Error: ORA-02290: check constraint (OT.SYS_C0010681) violated
+
+Information
+============
+In this error message, SYS_C0010681 is the name of the check constraint assigned by Oracle and OT is the schema name.
+
+Now, if you try to insert a part with a negative price:
+======================================================
+INSERT INTO parts(part_name, buy_price) VALUES('Screen',-100);  
+
+Oracle Error
+============
+SQL Error: ORA-02290: check constraint (OT.CHECK_POSITIVE_BUY_PRICE) violated
+
+Add Check constraint to a table
+===============================
+ALTER TABLE table_name ADD CONSTRAINT check_constraint_name CHECK(expression);
+
+Adding New Column To Existing Table
+====================================
+ALTER TABLE parts ADD cost NUMBER(9,2);
+
+Example
+========
+ALTER TABLE parts ADD CONSTRAINT check_positive_cost CHECK (cost > 0);
+
+Dropping the check constraint
+=============================
+ALTER TABLE table_name DROP CONSTRAINT check_constraint_name;
+
+Enable/Disable Check Constraint
+===============================
+ALTER TABLE table_name DISABLE CONSTRAINT check_constraint_name;
+
+ALTER TABLE table_name ENABLE CONSTRAINT check_constraint_name;
+
+
+******************
+default constraint
+******************
+* This constraint allows the given value is treated as a default value even though the user doesn't enter the value for a     column otherwise default value will be inserted
+
+* default constraint indirectly doesn't allow null values.
+
+* We can apply the default constraint on more than one column in the same table.
+
+* We can't apply default and unique constraint at a time.
+
+Syntax
+======
+  create table <table_name> (
+
+          ..............................
+     
+          column_name datatype default <value>
+           
+          ..............................
+   );
+
+Example
+=======
+CREATE TABLE Employee (
+    ID number NOT NULL,
+    Name VARCHAR2(20) NOT NULL,
+    Age number,
+    Country VARCHAR2(10) DEFAULT 'INDIA',
+    DOJ DATE DEFAULT SYSDATE
+);
+
+Adding Default constraint after creation of table
+=================================================
+ALTER TABLE <TABLENAME> MODIFY <COLUMN NAME> DEFAULT <VALUE / EXPRESSION>;
+
+How to remove the default value of a column?
+============================================
+ALTER TABLE <TABLE_NAME> MODIFY <COLUMN_NAME>DEFAULT NULL;
