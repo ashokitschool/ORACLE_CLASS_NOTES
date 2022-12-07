@@ -1,0 +1,291 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : SQL Constraints(Check,default)
+                               		         Date  : 07/12/2022
+                                                  (Session - 16)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes    ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording       ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
+
+>> 8th December - 12th December >>> No Session >>>> 
+
+>> 13th December >>> Regular Session with Same timings
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Yesterday Session
+*****************
+* We Started with Discussion on SQL Constraints
+
+* Two Level Constraints
+   
+    1) Column level Constraint >>>> Defining the constraint at column level
+
+    2) Table level Constraint  >>>> Defining the constraint at Table level
+
+* Types of Oracle Constraints
+
+   1) Unique
+
+   2) Not null
+
+   3) check
+   
+   4) default
+
+   5) primary
+
+   6) foreign key 
+
+*  Unique Constraint  >>>> It will not allow the duplicate values and it will allow only one null value.
+
+                      >>>> We can apply this constraint Columns level & Table level
+
+                      >>>> We can add the unique constraint after creating the table by using alter command.
+
+                      >>>> we can have option for temporaily for enabling & disabling the unique constraint
+
+                      >>>> After adding the constraint to column of table we can have option to drop constraint by using                            alter command.
+
+                      >>>> We can add unique constraint to more than one column in a table.
+
+
+* Not null Constraint >>>> It doesn't allow the null values in the database column
+
+                      >>>> It will allow the duplicate values of the database column.
+
+                      >>>>> We can define the not null constraint for more than one column.
+
+                      >>>>> Not null constraint always can be define at column level only.
+
+                      >>>>> oracle database by default every column will allow null values.
+
+                      >>>>> After creating table we can add the not null to existing column of table by using alter modify
+
+3) Check Constraint
+*******************
+* This constraint does not allows the values which are not satisfies the given condition.
+
+* We can apply the check constraint on more than one column in the same table.
+
+* check constraint allows us to enter null values (disadvantage)
+
+* We can apply a check constraint to a column or a group of columns. A column may have one or more check constraints.
+
+Syntax-1::column level constraint
+=================================
+CREATE TABLE table_name (
+    ...
+    column_name data_type CHECK (expression),
+    ...
+); 
+
+Syntax-2:::Table level constratint
+===================================
+CREATE TABLE table_name (
+    .................
+    column_name data_type,
+    column_name data_type,
+    ......................
+    ...................
+    CONSTRAINT check_constraint_name CHECK(expresssion)
+);
+
+Example
+=======
+CREATE TABLE parts (
+    part_id NUMBER unique not null,
+    part_name VARCHAR2(255) NOT NULL,
+    buy_price NUMBER(9,2) CHECK(buy_price > 0)
+);
+
+WorkSpace Queries
+=================
+--inserting records into parts
+insert into parts values(01,'Engine',2500);
+insert into parts values(02,'Horn',3500);
+insert into parts values(03,'Mirror',1500);
+
+select * from parts;
+
+OUTPUT
+======
+1	Engine	2500
+2	Horn	3500
+3	Mirror	1500
+
+
+Negative Scenario
+=================
+insert into parts values(01,'Engine',0);
+
+OUTPUT
+======
+Error starting at line : 16 in command -
+insert into parts values(01,'Engine',0)
+Error report -
+ORA-02290: check constraint (MAHESH.SYS_C007262) violated
+
+CREATE TABLE parts (
+    part_id NUMBER unique not null,
+    part_name VARCHAR2(255) NOT NULL,
+    buy_price NUMBER(9,2) CHECK(buy_price between 5000 and 99999)
+);
+
+Workspace Queries
+=================
+-- Positive Scenario
+insert into parts_1 values(01,'Engine',25000);
+insert into parts_1 values(02,'Horn',35000);
+insert into parts_1 values(03,'Mirror',15000);
+
+-- selecting the data
+select * from parts_1;
+
+OUTPUT
+======
+1	Engine	25000
+2	Horn	35000
+3	Mirror	15000
+
+--Negative Scenario
+insert into parts_1 values(03,'Mirror',4500);
+
+insert into parts_1 values(03,'Mirror',4999);
+
+insert into parts_1 values(03,'Mirror',5000);
+
+insert into parts_1 values(03,'Mirror',99999);
+
+OUTPUTS
+=======
+Error starting at line : 33 in command -
+insert into parts_1 values(03,'Mirror',4500)
+Error report -
+ORA-02290: check constraint (MAHESH.SYS_C007266) violated
+
+
+Error starting at line : 35 in command -
+insert into parts_1 values(03,'Mirror',4999)
+Error report -
+ORA-02290: check constraint (MAHESH.SYS_C007266) violated
+
+
+Error starting at line : 37 in command -
+insert into parts_1 values(03,'Mirror',5000)
+Error report -
+ORA-00001: unique constraint (MAHESH.SYS_C007267) violated
+
+
+Error starting at line : 39 in command -
+insert into parts_1 values(03,'Mirror',99999)
+Error report -
+ORA-00001: unique constraint (MAHESH.SYS_C007267) violated
+
+
+CREATE TABLE parts (
+    part_id NUMBER unique not null,
+    part_name VARCHAR2(255) NOT NULL,
+    buy_price NUMBER(9,2),
+    constraint check_constraint check(buy_price > 0)
+);
+
+Example on Check Constraint
+===========================
+CREATE TABLE parts_3 (
+    part_id NUMBER unique not null,
+    part_name VARCHAR2(255) not null,check(part_name in('HORN','MIRRORS','SCREWS','TOOLS')),
+    buy_price NUMBER(9,2)
+);
+
+Positive Scenario
+=================
+insert into parts_3 values(03,'MIRRORS',3500);
+insert into parts_3 values(03,'HORN',3500);
+
+Attempting to insert 0 or negative buy price will cause an error:
+=================================================================
+INSERT INTO parts(part_name, buy_price) VALUES('HDD',0);
+
+Oracle Error
+============
+SQL Error: ORA-02290: check constraint (OT.SYS_C0010681) violated
+
+Information
+============
+In this error message, SYS_C0010681 is the name of the check constraint assigned by Oracle and OT is the schema name.
+
+Now, if you try to insert a part with a negative price:
+======================================================
+INSERT INTO parts(part_name, buy_price) VALUES('Screen',-100);  
+
+Oracle Error
+============
+SQL Error: ORA-02290: check constraint (OT.CHECK_POSITIVE_BUY_PRICE) violated
+
+Add Check constraint to a table
+===============================
+ALTER TABLE table_name ADD CONSTRAINT check_constraint_name CHECK(expression);
+
+Adding New Column To Existing Table
+====================================
+ALTER TABLE parts ADD cost NUMBER(9,2);
+
+Example
+========
+ALTER TABLE parts ADD CONSTRAINT check_positive_cost CHECK (cost > 0);
+
+Dropping the check constraint
+=============================
+ALTER TABLE table_name DROP CONSTRAINT check_constraint_name;
+
+Enable/Disable Check Constraint
+===============================
+ALTER TABLE table_name DISABLE CONSTRAINT check_constraint_name;
+
+ALTER TABLE table_name ENABLE CONSTRAINT check_constraint_name;
+
+*********************
+4) default constraint
+*********************
+* This constraint allows the given value is treated as a default value even though the user doesn't enter the value for a       column otherwise default value will be inserted
+
+* default constraint indirectly doesn't allow null values.
+
+* We can apply the default constraint on more than one column in the same table.
+
+* We can't apply default and unique constraint at a time.
+
+Syntax
+======
+  create table <table_name> (
+
+          ..............................
+     
+          column_name datatype default <value>
+           
+          ..............................
+   );
+
+Example
+=======
+CREATE TABLE Employee (
+    ID number NOT NULL,
+    Name VARCHAR2(20) NOT NULL,
+    Age number,
+    Country VARCHAR2(10) DEFAULT 'INDIA',
+    DOJ DATE DEFAULT SYSDATE
+);
+
+Adding Default constraint after creation of table
+=================================================
+ALTER TABLE <TABLENAME> MODIFY <COLUMN NAME> DEFAULT <VALUE / EXPRESSION>;
+
+How to remove the default value of a column?
+============================================
+ALTER TABLE <TABLE_NAME> MODIFY <COLUMN_NAME>DEFAULT NULL;
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
