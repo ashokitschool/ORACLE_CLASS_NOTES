@@ -1,0 +1,124 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : SQL Constraints(Primary Key)
+                               		         Date  : 16/12/2022
+                                                  (Session - 17)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes    ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording       ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Last Session:: (SQL Constraints)
+================================
+* We have Six SQL Constraints
+
+   1) Unique :  Doesn't allow the duplicate values but it will allow null value.
+ 
+   2) Notnull : Doesn't allow the null values but it will allow the duplicate values
+
+   3) check : It will allows the values between the specified condition (or) expression.
+
+   4) default : It will insert the default value into column when ever user doesn't supplied the value for column
+
+   5) primary key: 
+   ================
+    >>> It is an combination two constraints(Unique + Not Null)
+
+    >>> It doesn't allow the duplicate values and null values into Database column.
+
+    >>> We can define the Primary key at Column level and table level.
+
+    >>> Every Database table must and should only one primary key.
+
+    >>> Following syntax for defining the primary key at column level
+
+         create table <table_name>(columnn_name1 datatype1 primary key,
+                                   columnn_name2 datatype2,
+                                   columnn_name3 datatype3
+                                   ......... 
+                                   .........
+                                   column_name_n datatypen);
+
+    >>> Following syntax for defining the primary key at table level by using constraint clause
+
+          create table <table_name>(columnn_name1 datatype1,
+                                   columnn_name2 datatype2,
+                                   columnn_name3 datatype3
+                                   ......... 
+                                   .........
+                                   column_name_n datatypen
+
+                                   constraint <constraint_name> primary key(column_name));
+
+
+
+WorkSheet Queries
+=================
+create table ashokit_students(student_id number primary key,
+                              student_name varchar2(30) not null,
+                              courses varchar2(30) check (courses in('Core Java','Advanced Java','Java Full Stack')),
+                              course_fee number(7,2) check (course_fee between 5000 and 10000),
+                              contact_no varchar2(10) unique not null,
+                              created_dt TIMESTAMP default sysdate
+                             );
+
+insert into ashokit_students values(01,'Mahesh','Core Java',5000,'2112112121',sysdate);
+insert into ashokit_students values(02,'Suresh','Advanced Java',6000,'12323232',sysdate);
+insert into ashokit_students values(03,'Nagesh','Java Full Stack',7000,'343434343',sysdate);
+insert into ashokit_students values(04,'Ramesh','Java Full Stack',8000,'545454545',sysdate);
+insert into ashokit_students values(05,'Rajesh','Java Full Stack',9000,'8676767676',sysdate);
+insert into ashokit_students values(06,'Umesh','Advanced Java',10000,'977876563',sysdate);
+insert into ashokit_students values(07,'Anil','Java Full Stack',5000,'22323232',sysdate);
+insert into ashokit_students values(08,'Ashok','Core Java',6000,'333333333',sysdate);
+insert into ashokit_students values(09,'Karthik','Java Full Stack',8500,'6666666666',sysdate);
+insert into ashokit_students values(10,'Chanti','Advanced Java',9500,'787878787',sysdate);
+
+insert into ashokit_students(student_id,student_name,courses,course_fee,contact_no) 
+values(11,'Suman','Advanced Java',9500,'454565654');
+
+select * from ashokit_students;
+
+-- Listing the constraints on all the tables
+select * from user_constraints;
+
+-- Listing the constratints at table level
+select * from user_constraints where table_name='ASHOKIT_STUDENTS';
+
+-- removing the primary key for existing table column
+alter table ashokit_students drop primary key; 
+
+-- adding the primary key for existing table
+alter table ashokit_students add primary key(student_id);
+
+
+
+OUTPUT
+======
+1	Mahesh	Core Java	5000	1234567890	16-DEC-22 9:54:50.000000000 PM
+2	Suresh	Advanced Java	6000	12323232	16-DEC-22 9:59:15.000000000 PM
+3	Nagesh	Java Full Stack	7000	343434343	16-DEC-22 9:59:15.000000000 PM
+4	Ramesh	Java Full Stack	8000	545454545	16-DEC-22 9:59:15.000000000 PM
+5	Rajesh	Java Full Stack	9000	8676767676	16-DEC-22 9:59:15.000000000 PM
+6	Umesh	Advanced Java	10000	977876563	16-DEC-22 9:59:15.000000000 PM
+8	Ashok	Core Java	6000	333333333	16-DEC-22 9:59:15.000000000 PM
+9	Karthik	Java Full Stack	8500	6666666666	16-DEC-22 9:59:15.000000000 PM
+10	Chanti	Advanced Java	9500	787878787	16-DEC-22 9:59:15.000000000 PM
+7	Anil	Java Full Stack	5000	22323232	16-DEC-22 9:59:33.000000000 PM
+11	Suman	Advanced Java	9500	454565654	16-DEC-22 10:01:39.000000000 PM
+
+
+Constraints Information
+========================
+SYS_C007283	Check	"STUDENT_NAME" IS NOT NULL
+SYS_C007284	Check	"CONTACT_NO" IS NOT NULL
+SYS_C007285	Check	courses in('Core Java','Advanced Java','Java Full Stack')
+SYS_C007286	Check	course_fee between 5000 and 10000
+SYS_C007288	Unique	
+SYS_C007293	Primary_Key
+
+alter user system identified by <new password>;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
