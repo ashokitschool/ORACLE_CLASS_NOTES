@@ -1,0 +1,139 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : SQL Operators
+                               		         Date  : 19/12/2022
+                                                  (Session - 19)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes    ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording       ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Yesterday Session:
+==================
+Example for Creating Parent-Child Table
+=======================================
+-- creating parent Table 
+create table ashokit_companies_info(company_code varchar2(10),
+                                    company_name varchar2(30) not null,
+                                    country varchar2(50) not null,
+                                    constraint ashokit_comp_cde_pk primary key(company_code)
+                                    );
+                                    
+-- creating child table
+create table ashokit_products_info(pid varchar2(10) primary key,
+                                   pname varchar2(30) not null,
+                                   pcost number,
+                                   pmfg_dt date not null,
+                                   pwarranty varchar2(50) not null,
+                                   company_code varchar2(10),                                   
+                                   constraint ashokit_comp_code_fk foreign key(company_code) 
+                                   references ashokit_companies_info(company_code)
+                                  );
+
+-- Adding the Foreign Key after creating the table
+alter table ashokit_products_info add constraint ASHOKIT_COMP_CODE_FK foreign key(company_code) 
+REFERENCES ashokit_companies_info(company_code);
+
+-- Dropping the Foreign Key Constraint 
+ALTER TABLE ashokit_products_info DROP CONSTRAINT ASHOKIT_COMP_CODE_FK;
+
+Syntax For creating Foreign Key
+===============================
+CREATE TABLE child_table (
+    ...
+    CONSTRAINT fk_name
+    FOREIGN KEY(col1, col2,...) REFERENCES parent_table(col1,col2) 
+    ON DELETE [ CASCADE | SET NULL ]
+);
+
+>> First, to explicitly assign the foreign key constraint a name, you use the CONSTRAINT clause followed by the name. The        CONSTRAINT clause is optional. If you omit it, Oracle will assign a system-generated name to the foreign key constraint.
+
+>> Second, specify the FOREIGN KEY clause to defines one or more column as a foreign key and parent table with columns to        which the foreign key columns reference.
+
+>> Third, use the ON DELETE clause to specify consequence when the rows in the parent table are deleted.
+
+   ON DELETE CASCADE: if a row in the parent is deleted, then all the rows in the child table that reference the removed row                        will be deleted.
+
+   ON DELETE SET NULL: if a row in the parent is deleted, then all the rows in the child table reference the removed row will                        be set to NULL for the foreign key columns.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+IIQ) What is differences between defining the constraint at Column level & Table Level
+
+>>>> If we are defining the constraint at column level oracle engine will get assigned constraint name as predefined number.
+       Ex: SYS_008975
+
+>>>> If we  are defining the constratint at table level by using constraint clause programmer need to define our own       constraint name 
+
+       Ex: ASHOKIT_COMP_CODE_FK;
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+IIQ) List all the constraints for a particular table ?
+ 
+ SQL>> select * from user_constraints;  >>>>>> It will give you all the constraints in the Database.  
+
+ SQL>> select * from user_constraints where table_name='ASHOKIT_PRODUCTS_INFO'; >>> Will provide table specific constraints
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+SQL Operators
+=============
+Operator  >>>>> It is symbol representing the particular operation.
+
+Operation >>>>> Collection of Operands and Operators 
+
+Operands >>>>> Variables
+
+ Example 
+ =======
+      a = 10; // operand
+
+      b = 20; // operand
+
+      c = a + b;  // 3 Operands (a,b,c), 2 Operators (=,+)
+
+Oracle Supports following below operators
+
+1) Arthimetic Operators : +,-,*,/,%
+
+2) Relational Operators : >,>=,<,<=,=,<>
+
+3) Logical Operators: and,or
+
+4) Special Operators : between,notbetween,in,notin,like etc.,
+
+
+Examples
+========
+select * from ashokit_products_info;
+
+OUTPUT
+======
+P001	Mobile	14000	05-AUG-22	1YEAR	CMP1
+P002	Laptop	12000	15-FEB-21	2YEAR	CMP2
+P003	Tablet	11000	25-MAR-98	3YEAR	CMP2
+P004	Camera	10000	23-SEP-99	4YEAR	CMP1
+P009	Keyboard	10000	25-FEB-21	3YEAR	
+P008	HeadSet	14000	15-AUG-22	2YEAR	
+
+-- Write SQL Query to extract productid,productname,productcost,20% discount on Product price for all products
+select pid,pname,pcost,((pcost*20)/100) as discount_price from ashokit_products_info;
+
+-- Write SQL Query to extract productid,productname,productcost,20% discount on Product price,final price for all products
+select pid,pname,pcost,(pcost*0.2) as discount_price,(pcost - (pcost * 0.2)) as final_price from ashokit_products_info;
+
+-- Write SQL Query to extract all products whose product cost is above 12000
+select * from ashokit_products_info where pcost > 12000;
+
+-- Write SQL Query to extract all products whose product cost which is less than 12000
+select * from ashokit_products_info where pcost <= 12000 order by pcost asc;
+
+-- Write SQL Query to extract all products whose product cost which is greater than 12000 and lessthan 14000
+select * from ashokit_products_info where pcost >= 12000 and pcost <=14000 order by pcost asc;
+
+-- Write SQL Query to extract the products whose warranty is equal to 2 Years
+select * from ashokit_products_info where pwarranty='2YEAR';
+
+-- Write SQL Query to extract the products whose warranty is not equal to 2 Years
+select * from ashokit_products_info where pwarranty <>'2YEAR';
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
