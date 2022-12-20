@@ -1,0 +1,218 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : SQL Operators
+                               		         Date  : 20/12/2022
+                                                  (Session - 20)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes    ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording       ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+SQL Operators
+=============
+Operator  >>>>> It is symbol representing the particular operation.
+
+Operation >>>>> Collection of Operands and Operators 
+
+Operands >>>>> Variables
+
+ Example 
+ =======
+      a = 10; // operand
+
+      b = 20; // operand
+
+      c = a + b;  // 3 Operands (a,b,c), 2 Operators (=,+)
+
+Oracle Supports following below operators
+
+1) Arthimetic Operators : +,-,*,/,%
+
+2) Relational Operators : >,>=,<,<=,=,<>(or)!=
+
+3) Logical Operators: and,or
+
+4) Special Operators : between,notbetween,in,notin,like etc.,
+
+Examples
+========
+select * from ashokit_products_info;
+
+OUTPUT
+======
+P001	Mobile	14000	05-AUG-22	1YEAR	CMP1
+P002	Laptop	12000	15-FEB-21	2YEAR	CMP2
+P003	Tablet	11000	25-MAR-98	3YEAR	CMP2
+P004	Camera	10000	23-SEP-99	4YEAR	CMP1
+P009	Keyboard	10000	25-FEB-21	3YEAR	
+P008	HeadSet	14000	15-AUG-22	2YEAR	
+
+-- Write SQL Query to extract productid,productname,productcost,20% discount on Product price for all products
+select pid,pname,pcost,((pcost*20)/100) as discount_price from ashokit_products_info;
+
+OUTPUT
+======
+P001	Mobile	14000	2800
+P002	Laptop	12000	2400
+P003	Tablet	11000	2200
+P004	Camera	10000	2000
+P009	Keyboard10000	2000
+P008	HeadSet	14000	2800
+
+-- Write SQL Query to extract productid,productname,productcost,20% discount on Product price,final price for all products
+select pid,pname,pcost,(pcost*0.2) as discount_price,(pcost - (pcost * 0.2)) as final_price from ashokit_products_info;
+
+OUTPUT
+======
+P001	Mobile	14000	2800	11200
+P002	Laptop	12000	2400	9600
+P003	Tablet	11000	2200	8800
+P004	Camera	10000	2000	8000
+P009	Keyboard10000	2000	8000
+P008	HeadSet	14000	2800	11200
+
+-- Write SQL Query to extract all products whose product cost is above 12000
+select * from ashokit_products_info where pcost > 12000;
+
+OUTPUT
+======
+P001	Mobile	14000	05-AUG-22	1YEAR	CMP1
+P008	HeadSet	14000	15-AUG-22	2YEAR	null
+
+-- Write SQL Query to extract all products whose product cost which is less than 12000
+select * from ashokit_products_info where pcost <= 12000 order by pcost asc;
+
+OUTPUT
+=====
+P004	Camera	10000	23-SEP-99	4YEAR	CMP1
+P009	Keyboard10000	25-FEB-21	3YEAR	null
+P003	Tablet	11000	25-MAR-98	3YEAR	CMP2
+P002	Laptop	12000	15-FEB-21	2YEAR	CMP2
+
+-- Write SQL Query to extract all products whose product cost which is greater than 12000 and lessthan 14000
+select * from ashokit_products_info where pcost >= 12000 and pcost <=14000 order by pcost asc;
+
+OUTPUT
+======
+P002	Laptop	12000	15-FEB-21	2YEAR	CMP2
+P008	HeadSet	14000	15-AUG-22	2YEAR	
+P001	Mobile	14000	05-AUG-22	1YEAR	CMP1
+
+-- Write SQL Query to extract the products whose warranty is equal to 2 Years
+select * from ashokit_products_info where pwarranty='2YEAR';
+
+OUTPUT
+======
+P002	Laptop	12000	15-FEB-21	2YEAR	CMP2
+P008	HeadSet	14000	15-AUG-22	2YEAR	
+
+-- Write SQL Query to extract the products whose warranty is not equal to 2 Years
+select * from ashokit_products_info where pwarranty <>'2YEAR';
+
+
+OUTPUT
+======
+P001	Mobile	14000	05-AUG-22	1YEAR	CMP1
+P003	Tablet	11000	25-MAR-98	3YEAR	CMP2
+P004	Camera	10000	23-SEP-99	4YEAR	CMP1
+P009	Keyboard10000	25-FEB-21	3YEAR	null
+
+
+Today SQL Queries
+==================
+-- child table (primary key - empno,foreign key - deptno)
+select * from emp;
+
+-- parent table (primary key - deptno)
+select * from dept;
+
+-- Display all employees information who are not receving the commission amount
+select * from emp where comm is null;
+
+-- Display all employees information who are receving the commission amount
+select * from emp where comm is not null;
+
+-- Display all employees information who receving the commission greater than 100 and less than equal to 500
+select * from emp where comm > 100 and comm <=500; -- Relational operator
+select * from emp where comm between 100 and 500; -- special operator between
+
+-- Display all the employees information who joined in the year of 1981(01/Jan/1981- TO- 31/Dec/1981select * from emp where hiredate between '01-JAN-1981' and '31-DEC-1981';
+select * from emp where hiredate between '01-JAN-1981' and '31-DEC-1981';
+
+-- Display all the employees information who are working as clerk 
+select * from emp where job ='CLERK';
+
+-- Display all the employees information who are working as clerk and salesman
+select * from emp where job='CLERK' or job='SALESMAN' order by job asc;  -- Relational operator
+select * from emp where job in('CLERK','SALESMAN') order by job asc; -- oracle IN Operator
+
+-- Display all the employees information who are not  working as clerk and salesman
+select * from emp where job !='CLERK' and job !='SALESMAN' order by job asc;
+select * from emp where job <> 'CLERK' and job <> 'SALESMAN' order by job asc;
+select * from emp where job not in ('CLERK','SALESMAN'); -- Recommended Query
+
+-- Display all the employees who are working under sales department?
+   select * from dept;
+   select * from dept where dname='SALES';
+   select deptno from dept where dname='SALES';
+   select * from emp where deptno in (select deptno from dept where dname='SALES');
+   
+-- Display all the employees information who are working as clerk and managers 
+ select * from emp where job in('CLERK','MANAGER');
+ select * from emp where sal in(800);
+ 
+-- Display the employees information whose salaries are 1250,3000,5000
+select * from emp where sal in (1250,3000,5000);
+
+-- Display all the employees information whose name starts with 'A' character
+-- Display all the employees information whose name ends with 'S' Character
+   select * from emp where ename like 'A%' order by ename asc;
+   select * from emp where ename like '%S' order by ename asc;
+   select * from emp where hiredate like '%82' order by ename asc;
+   select * from emp where ename like 'A%S'order by ename asc;
+   select * from emp where ename like 'J%S'order by ename asc;
+
+-- Display all the employees whose employee name contains 4 characters
+   select * from emp where ename like '_____';
+   
+-- Display all the employeew whose employee salary contains 3 digits
+   select * from emp where sal like '___';
+   
+-- Display all the employees whose employee name contains 5 characters and ending with S 
+   select * from emp where ename like '____S';
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+emp Table
+=========
+7839	KING	PRESIDENT	17-NOV-81	5000		10
+7698	BLAKE	MANAGER	7839	01-MAY-81	2850		30
+7782	CLARK	MANAGER	7839	09-JUN-81	2450		10
+7566	JONES	MANAGER	7839	02-APR-81	2975		20
+7788	SCOTT	ANALYST	7566	09-DEC-82	3000		20
+7902	FORD	ANALYST	7566	03-DEC-81	3000		20
+7369	SMITH	CLERK	7902	17-DEC-80	800		20
+7499	ALLEN	SALESMAN	7698	20-FEB-81	1600	300	30
+7521	WARD	SALESMAN	7698	22-FEB-81	1250	500	30
+7654	MARTIN	SALESMAN	7698	28-SEP-81	1250	1400	30
+7844	TURNER	SALESMAN	7698	08-SEP-81	1500	0	30
+7876	ADAMS	CLERK	7788	12-JAN-83	1100		20
+7900	JAMES	CLERK	7698	03-DEC-81	950		30
+7934	MILLER	CLERK	7782	23-JAN-82	1300		10
+
+
+dept table
+==========
+10	ACCOUNTING	NEW YORK
+20	RESEARCH	DALLAS
+30	SALES	CHICAGO
+40	OPERATIONS	BOSTON
+
+Live Script for Oracle Emp & Dept table : 
+=========================================
+https://apexplained.wordpress.com/2013/04/20/the-emp-and-dept-tables-in-oracle/
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
