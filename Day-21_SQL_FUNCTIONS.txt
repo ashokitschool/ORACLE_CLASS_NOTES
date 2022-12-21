@@ -1,0 +1,202 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : SQL Functions
+                               		         Date  : 21/12/2022
+                                                  (Session - 21)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Yesterday Session
+=================
+* We completed the SQL Operators 
+   1) Arthimetic Operators
+   2) Relational Operators
+   3) Logical Operators
+   4) Special Operators
+        - between
+        - not between
+        - in
+        - not in
+        - like
+        - is null
+        - is not null
+
+* Do we have tables of emp & dept in DBA Account(System/Manager) or not ??? NO 
+
+Live Script for Oracle Emp & Dept table
+=======================================
+https://apexplained.wordpress.com/2013/04/20/the-emp-and-dept-tables-in-oracle/
+
+* If we created the one Database User(mahesh/ashokit) in that user by default will get emp & dept table.
+Today Session :: Working with SQL Functions
+===========================================
+* A Function is a self contained block of statements which performs the particular task.
+
+* The main of advantage of using functions is "Code Reusability".
+
+* Every Function will always returns only one value.
+
+* Basically SQL Functions are categorized into two 
+   
+   1) System defined Functions
+
+   2) User defined Functions
+
+System Defined Functions
+========================
+   A Function which is defined by the system along with software such functions are called "system defined functions (or) 
+   predefined functions".
+
+User Defined Functions
+======================
+   A Functions which is defined by the user (or) programmer such functions are called "User Defined Functions".
+
+
+>>> In SQL System defined Functions are further divided into three types
+
+    1) Single Row Functions
+    =======================
+    These Functions will work on every record in the Database table and return more than one value.
+
+    2) Multi(or) Multiple Row Functions
+    ====================================
+    These Functions will work on entire Database table and returns only one value.
+
+    3) Miscellaneous Functions
+    ==========================
+     These Functions will work on null values of Database table column.
+
+      
+>>>  In Oracle Database we can have two types of tables
+
+       1) Database Tables
+       ==================
+        * A Database table is a table which contains actual information of an entity
+
+        Ex: emp,dept,ashokit_customers,ashokit_products_info,ashokit_companies_info etc., 
+
+       2) Non Database Tables
+       ====================== 
+        * A Non Database Table is a table which doesn't contains any information in table.
+        
+        Ex : In oracle database we have one non-Database table i.e.,dual sometimes we can call it is an "Temporary Table".
+       
+        * The Purpose of the dual table (or) temporary table is to hold some values for an SQL Statements/SQL Expressions
+
+        * We have three advantages of this dual table 
+
+          1) Evaluating the Mathematical Expression i.e., 2+3+5+8/2
+
+              -- Evaluating the Math Expression using dual table 
+	      -- Added column alias names
+              select (2+3+4+5)/2 "Expression" from dual;
+              select (2+3+4+5)/2 as "Division Operation" from dual;
+
+          2) Evaulating the pseudo column values
+            
+               -- Wanted to know about current date from oracle
+               select sysdate from dual;
+
+          3) Evaulating the predefied functions
+
+               -- Finding the length of given string 
+              select length("Welcome To Ashok IT") from dual;
+
+ 1) Single Row Functions
+    =======================
+    These Functions will work on every record in the Database table and return more than one value.
+
+    1) length(): This function is used to find the length of given characters which include white spaces
+
+       Ex: select length('Welcome To Hyderabad') from dual;
+            
+           select ename,length(ename) from emp;
+
+    2) initcap() : This function is used to convert the first letter of every word into capital letter
+ 
+       Ex: select initcap('Welcome to ashok it hyderabad') from dual;
+
+       O/P: Welcome To Ashok It Hyderabad
+
+    3) chr(): This function return the high level language code from ASCII Value
+        
+        Ex: select chr(122) from dual;
+        
+        O/P :z
+
+    4) ascii(): This function return the ascii value form high level language code
+      
+        Ex: select ascii('a') from dual
+
+    5) upper() : This function is used to convert into upper case from given case of letters
+
+        Ex: select upper('mahesh') from dual
+
+    6) lower():  This function is used to convert into lower case from given case of letters(uppers)
+
+        Ex: select lower('MAHESH') form dual;
+
+    7) reverse(): This funciton is used to reverse of given string
+
+        Ex: select reverse('Mahesh') from dual;
+    
+    8) trim(): This function removes the white spaces from both left and right hand side of the given string
+
+        Ex: select trim(' Welcomt To Ashok IT Hyderabad   ') from dual;
+
+            select length(' Welcomt To Ashok IT Hyderabad   '),length(trim(' Welcomt To Ashok IT Hyderabad   ')) from dual;
+  
+    9) ltrim(): This function only removes the white spaces form left hand side of given string
+
+         Ex: select ltrim('       Welcome To Ashok IT      ') from dual
+        
+   10) rtrim(): This function only removes the white spaces from right hand side of given string
+ 
+        Ex: select rtrim('       Welcome To Ashok IT      ') from dual;
+
+
+   11) lpad() : This function add the specificed charaters from the left hand side of the given string
+
+         Ex: select lpad('Ashok IT',15,'*') from dual;
+
+   12) rpad() : This function add the specificed charaters from the right hand side of the given string
+
+         Ex: select rpad('Ashok IT',15,'*') from dual;
+
+   13) translate(): This function replaces the given string with another string
+
+         Ex: select translate('JACKJ','J','B') from dual;
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
