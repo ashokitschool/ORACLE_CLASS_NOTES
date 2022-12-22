@@ -1,0 +1,223 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : SQL Functions-Session2
+                               		         Date  : 22/12/2022
+                                                  (Session - 22)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+SQL Functions
++++++++++++++
+
+ 1) Single Row Functions
+  =======================
+    These Functions will work on every record in the Database table and return more than one value.
+
+  ******************
+  a) String Functions
+  ******************
+    1) length(): This function is used to find the length of given characters which include white spaces
+
+       Ex: select length('Welcome To Hyderabad') from dual;
+            
+           select ename,length(ename) from emp;
+
+    2) initcap() : This function is used to convert the first letter of every word into capital letter
+ 
+       Ex: select initcap('Welcome to ashok it hyderabad') from dual;
+
+       O/P: Welcome To Ashok It Hyderabad
+
+    3) chr(): This function return the high level language code from ASCII Value
+        
+        Ex: select chr(122) from dual;
+        
+        O/P :z
+
+    4) ascii(): This function return the ascii value form high level language code
+      
+        Ex: select ascii('a') from dual
+
+    5) upper() : This function is used to convert into upper case from given case of letters
+
+        Ex: select upper('mahesh') from dual
+
+    6) lower():  This function is used to convert into lower case from given case of letters(uppers)
+
+        Ex: select lower('MAHESH') form dual;
+
+    7) reverse(): This function is used to reverse of given string
+
+        Ex: select reverse('Mahesh') from dual;
+    
+    8) trim(): This function removes the white spaces from both left and right hand side of the given string
+
+        Ex: select trim(' Welcomt To Ashok IT Hyderabad   ') from dual;
+
+            select length(' Welcomt To Ashok IT Hyderabad   '),length(trim(' Welcomt To Ashok IT Hyderabad   ')) from dual;
+  
+    9) ltrim(): This function only removes the white spaces form left hand side of given string
+
+         Ex: select ltrim('       Welcome To Ashok IT      ') from dual
+        
+   10) rtrim(): This function only removes the white spaces from right hand side of given string
+ 
+        Ex: select rtrim('       Welcome To Ashok IT      ') from dual;
+
+
+   11) lpad() : This function add the specificed charaters from the left hand side of the given string
+
+         Ex: select lpad('Ashok IT',15,'*') from dual;
+
+   12) rpad() : This function add the specificed charaters from the right hand side of the given string
+
+         Ex: select rpad('Ashok IT',15,'*') from dual;
+
+   13) translate(): This function replaces the given string with another string with only one character
+
+         Ex: select translate('JACK','J','B') from dual; O/P: BACK
+             
+             select translate('JACKJ','J','B') from dual; O/P: BACKB
+
+	     select translate('JACK','J','HI') from dual; O/P : HACK
+
+   14) replace() : This function is replaces the given string with another string and it replaces more than one character
+
+         Ex: SELECT REPLACE('This is a test', 'is', 'IS' ) FROM dual; O/P : ThIS IS atest
+              
+             select replace('Welcome To Hyd','Hyd','Hyderabad')from dual;  O/P: Welcome To Hyderabad
+   
+   15) instr(): This function searches for a substring in a string and returns the position of the substring in a string.
+
+         Ex: SELECT INSTR('This is a playlist','is') substring_location FROM dual; O/P :: 3
+
+             SELECT INSTR( 'This is a playlist', 'is', 1, 2 ) second_occurrence,
+                    INSTR( 'This is a playlist', 'is', 1, 3 ) third_occurrence FROM dual;  O/P: 6 16
+
+             SELECT INSTR( 'This is a playlist', 'are' ) substring_location FROM dual; O/P: 0
+
+             SELECT INSTR( 'This is a playlist', 'is',-1 ) substring_location FROM dual; O/P:
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Math Functions
+++++++++++++++
+1) abs(): This Function converts the negative number into positive number
+
+    Ex: select abs(-19) from dual;
+
+2) round(): This function rounds the given number into nearest integer
+   
+    Ex: select round(9.5) from dual; O/P: 10
+
+        select round(9.4) from dual; O/P: 9
+
+3) floor(): This functions rounds the given number into least integer
+
+     Ex: select floor(9.5) from dual; O/P: 9
+
+         select floor(9.6) from dual; O/P: 9
+ 
+         select floor(9.9) from dual; O/P: 9
+
+4) ceil() : This function round the given number into maxmimium integer
+ 
+     Ex: select ceil(9.1) from dual;  O/P:10
+ 
+         select ceil(9.95) from dual; O/P: 10
+
+
+5) greatest(): This function return the maximumn value from the list of numbers
+
+     Ex: select greatest(5,7,3,2,6,1) from dual  O/P:7
+
+         select greatest(10.25,25.68,89.47,25.14)as "Max" from dual; O/P:89.47
+
+6) least(): This function return the minimium value from list of numbers
+
+     Ex: select least(5,7,3,2,6,1) from dual  O/P:1
+
+         select least(10.25,25.68,89.47,25.14)as "Max" from dual; O/P:10.25
+
+7) mod(): This function returns remainder values from the given numbers
+
+     Ex: select mod(10,2) from dual; O/P: 0
+
+         select mod(16,5) from dual; O/p :1
+
+8) sqrt() : This function returns the square root of the given number
+
+     Ex: select sqrt(100) from dual;  O/P:10
+
+
+9) power() : This function returns the power of given number
+
+     Ex: select power(5,3) from dual; O/P: 125
+
+10) log(): This function returns alogrithmic value fo the given number
+
+     Ex: select log(10,10) from dual;
+
+11) sign(): This function returns the sign value of the given number
+
+
+12) sin(): This functions return sin value of the given number.
+
+
+13) cos(): This function retuns cos value of the given number.
+
+
+14) tan(): This function returns tan value of the given number.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Date Functions
+==============
+1) add_months(): This function adds the given number of months to the given date.
+
+   Ex: select sysdate from dual; 
+
+       select add_months(sysdate,12) from dual;
+
+2) months_between(): This function counts the no of months between two dates
+
+    Ex: select months_between(sysdate,'22-DEC-23') from dual;
+
+3) last_day(): This function returns the last day of the given date
+
+     Ex: select last_day(sysdate) from dual
+
+4) next_day(): This function returns the next day from the given date
+
+     Ex: select next_day(sysdate,'SUNDAY') from dual;
+
+5) extract(): This function extracts the date,month,year from the given date
+
+     Ex: select extract(year from sysdate) from dual;
+
+         select extract(day from sysdate) from dual;
+
+         select extract(month from sysdate) from dual;
+
+  Banking Domain >>>>> 01/Jan/2022 - 31/Dec/2022 >>> Hitorical data
+                                                                           RollForward Process
+                       01/Jan/2023 - 31/Dec/2023 >>> Current Data   
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Conversion Functions
+====================
+1) to_char(): This function converts the normal date into character format and the format must be specified in single quotes
+
+       Syntax: to_char(date,'FORMAT')
+
+ Ex: select to_char(sysdate,'DD/MM/YYYY') from dual;
+     select to_char(sysdate,'DD-MON-YYYY') from dual;
+     select to_char(sysdate,'DAY') from dual;
+     select to_char(sysdate,'MONTH') from dual;
+     select to_char(sysdate,'DD-MON-YYYY HH:MM::SS') from dual;
+     select to_char(sysdate,'YYYY') from dual;
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
