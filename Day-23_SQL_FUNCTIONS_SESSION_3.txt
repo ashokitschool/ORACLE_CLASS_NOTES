@@ -1,0 +1,126 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : SQL Functions-Session3
+                               		         Date  : 23/12/2022
+                                                  (Session - 23)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+SQL Functions
++++++++++++++
+1) Single Row Functions
+
+a) String Functions
+
+b) math Functions
+
+c) Date Functions
+
+d) Conversion Functions
+
+  i) to_char(): This function converts the oracle date into character format and the format must be specified in single                        quotes
+
+       Syntax: to_char(date,'FORMAT')
+
+      select to_char(sysdate,'DD/MM/YYYY') from dual;  -- 23/12/2022
+      select to_char(sysdate,'DD-MON-YYYY') from dual; -- 23-DEC-2022
+      select to_char(sysdate,'YYYY/MM/DD') from dual; --2022/12/23
+      select to_char(sysdate,'DAY') from dual; -- FRIDAY   
+      select to_char(sysdate,'MONTH') from dual; --DECEMBER 
+      select to_char(sysdate,'DD-MON-YYYY HH:MM:SS') from dual; --23-DEC-2022 09:12:55
+      select to_char(sysdate,'YYYY') from dual; --2022
+      select to_char(sysdate,'DD-MONTH-YYYY') from dual; --23-DECEMBER -2022
+      select to_char(sysdate,'DD-MONTH-YYYY-DAY') from dual; --23-DECEMBER -2022-FRIDAY   
+
+   ii) to_date(): This function converts the non-oracle data format into oracle date format and It accepts any char format of                   date(dd/mm/yy or dd-mm-yyyy or dd:mon:yyyy or yyyy-mm-dd) and converts it into oracle's default date                          format(dd-mon-yy).
+
+         Syntax: TO_DATE('char fmt of date',date)
+
+        Ex: select to_date('22/03/2015','dd/mm/yyyy') from dual;   O/P: 22-mar-15
+            select to_date('2015:03:12','yyyy:mm:dd') from duall   O/P: 12-mar-15
+
+2) Multi Row Functions : These functions will work on the entire table of information and returns only one value.
+
+   i) sum(): This function is used to find sum of all values in particular column of the Database table.
+
+        Ex: select sum(sal) from emp; -- 29025
+
+  ii) avg(): This function is used to find average value of a particular column of the Database table.
+
+        Ex: select avg(sal) from emp; -- 2073.2142......
+
+  iii) max(): This function is used to find out the maximium value of a particular column of the Database table.
+
+        Ex: select max(sal) from emp;
+
+   iv) min(): This function is used to find out the minimium value of a particular column of the Database table.
+       
+        Ex: select min(sal) from emp;
+
+    v) count(): This function counts the no of records in the given table and this functions having three sub functions
+
+        a) count(*) : This function is used to count the no of records in the given table including both duplicate and null 		              value.
+ 
+             Ex: select count(*) from emp; --14
+
+        b) count(exp) : This function is also used to count the no of records in the given table including duplicate values
+                        but excluding null values.
+
+             Ex: select count(mgr) from emp;
+
+        c) count(distinct expression) : This function is also used to count the no of records in the given table excluding
+                                        duplicate and null values
+
+              Ex: select count(distinct mgr) from emp;
+
+Miscellaneous Functions
+=======================
+These functions are classified into four types
+
+ 1) nvl() : This function is used to converts the null values into non-null values
+
+      Syntax: nvl(a,b)  Here a represents column name
+
+                             b represents replacing value
+
+    If Column contains null then it will replace with b value.
+
+    Ex: select empno,sal,comm,sal + nvl(comm,1000) total_sal from emp;
+
+        select empno,ename,sal,comm,nvl(comm,100),sal+nvl(comm,100) as "total_salary" from emp order by empno asc;
+
+
+ 2) nvl2() : This function is also used to converting the null value into non-null values
+    
+       Syntax: nvl2(a,b,c) Here a represents column
+
+                                b,c  represents replacing values
+
+     Ex: select nvl2(null,1,2) from dual;
+
+         select nvl2(10,'ABC','XYZ') from dual;
+
+         select empno,ename,sal,comm,nvl2(comm,comm,sal) from emp;
+ 
+ 3) nullif(): This function converts normal value into null value
+ 
+       Syntax: nullif(a,b)
+   
+    If a and b both are equal then it returns null value
+
+    If a is not equal to b then returns a value
+ 
+    Ex: select ename,length(ename),job,length(job),nullif(length(ename),length(job)) from emp;
+
+4) Coalesce(): This function return the first occurance of non-null values
+
+      Ex: select coalesce(null,null,123,null,5332) from dual
+
+          select empno,ename,sal,comm,coalesce(comm,sal) from emp;
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
