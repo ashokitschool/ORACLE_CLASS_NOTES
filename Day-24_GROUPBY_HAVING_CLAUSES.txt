@@ -1,0 +1,181 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : GroupBy & Having Clause
+                               		         Date  : 24/12/2022
+                                                  (Session - 24)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Yesterday Session : We Completed working wth SQL Functions
+==========================================================
+ 1) System defined functions
+
+      i) single Row Functions
+          
+           - String Handling Functions
+
+           - Math Functions
+
+           - Date Functions
+
+           - Miscellenous Functions
+    
+      ii) Multi Row Functions
+ 
+           - Math Functions (sum(),max(),min(),avg(),count(*),count(exp),count(distinct(expr)))
+
+           - Miscelleanous Functions(nvl(),nvl2(),nullif(),coalesce)              
+ 
+ 
+ 2) user defined functions
+
+Group By Clause
+===============
+>> The GROUP BY clause is used in a SELECT statement to group rows into a set of summary rows by values of columns or       expressions. The GROUP BY clause returns one row per group.
+
+>> The GROUP BY clause is often used with aggregate functions such as AVG(), COUNT(), MAX(), MIN() and SUM(). In this case,      the aggregate function returns the summary information per group.
+
+   Syntax
+   ======
+    SELECT column_list FROM Table_name GROUP BY c1,c2,c3;
+
+>> The GROUP BY clause appears after the FROM clause. In case WHERE clause is presented, the GROUP BY clause must be placed      after the WHERE clause as shown in the following query
+  
+   Syntax
+   ======  
+     SELECT  column_list  FROM  Table_name  WHERE condition GROUP BY c1, c2, c3;
+
+>> The GROUP BY clause groups rows by values in the grouping columns such as c1, c2 and c3. The GROUP BY clause must contain     only aggregates or grouping columns.
+
+*********************************************
+Queries on Group by Clause based on emp table
+*********************************************
+   1) If you wanted to find out no of employees are working under each department of emp table?
+
+   2) Find out salaries for each department wise based on department no ?
+
+   3) Find out the maximium salary for each department ?
+
+   4) Find out no of employees under each department who is getting morethan 1000 Salary based on order of department no?
+
+   5) Finding min salary for each job category based on order of job? 
+
+Queries From SQL Worksheet
+==========================
+-- Finding no of employees working under each department number?
+select deptno,count(*) from emp group by deptno;
+select deptno,count(*) from emp group by deptno order by deptno asc;
+
+-- Finding max salary of employee under each department based on department number using emp table ?
+select deptno,max(sal) from emp group by deptno;
+select deptno,max(sal) from emp group by deptno order by deptno asc;
+
+-- Finding no of employees working based on JOB by using emp table?
+select job,count(*) from emp group by job order by count(*) asc;
+
+--Display All Aggregate Salary information(min(),max(),sum())based on job wise by using emp table
+select job,min(sal),max(sal),sum(sal),count(*) from emp group by job order by job asc;
+
+-- Find out no of employees under each department who is getting morethan 1000 Salary based on order 
+-- of department no?
+select deptno,sal,count(*) from emp where sal > 2500 group by deptno,sal;
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Having Clause
+=============
+* The HAVING clause is an optional clause of the SELECT statement. It is used to filter groups of rows returned by the GROUP    BY clause. This is why the HAVING clause is usually used with the GROUP BY clause.
+
+  Syntax
+  ======
+  SELECT
+    column_list
+  FROM
+    TABLE_NAME
+  GROUP BY
+    c1
+  HAVING
+    group_condition;
+
+* In above statement, the HAVING clause appears immediately after the GROUP BY clause.
+
+* If you use the HAVING clause without the GROUP BY clause, the HAVING clause works like the WHERE clause.
+
+* Note that the HAVING clause filters groups of rows while the WHERE clause filters rows. This is a main difference between     the HAVING and WHERE clauses.
+
+*******************************************
+Queries on Having Clause based on emp table
+********************************************
+1) Find out number of emps working under each dept on order of deptno if a dept contains at least 5 emps?
+
+2) Find out number of emps working under each dept on order of deptno if a dept contains greater than equal to 5 ?
+
+3) Find out number of emps count based on job and need get the employee count <=3 based on job?
+
+4) Display the aggregate information of salaries in which department more than 1000 as minimium Salary?
+
+5) List the aggregate information Job Wise in each department having more than 2000 as max salary?
+
+Queries From SQL Developer
+==========================
+--1) Find out number of emps working under each dept on order of deptno if a dept contains at least 8 emps?
+select deptno,count(*) as "NOOFEmps" from emp group by deptno order by deptno asc;
+select deptno,count(*) as "NOOFEmps" from emp group by deptno having count(*) >= 5 order by deptno asc;
+
+-- 3) Find out number of emps count based on job and need get the employee count <=3 based on job?
+select job,count(*) as "NoOfEmps" from emp group by job;
+select job,count(*) as "NoOfEmps" from emp group by job having count(*) <=3;
+
+--4) Display the aggregate information of salaries in which department more than 1000 as minimium Salary?
+select min(sal),max(sal),sum(sal),deptno from emp group by deptno having min(sal) < 1000;
+
+--5) List the aggregate information Job Wise in each department having more than 2000 as max salary?
+select min(sal),max(sal),sum(sal),deptno from emp group by deptno having max(sal) > 2500;
+
+Oracle Clause
+=============
+1) from clause
+2) where clause
+3) order by clause
+4) group by clause
+5) having clause
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Assignment task : Creating database tables and populate information of table
+============================================================================
+
+1) Account_details
+==================
+account_details_id >>>>>> Primary Key
+holder_name
+gender
+address
+city
+contact_no
+email_id
+created_dt
+updated_dt
+account_type_id >>>>> FK >>>> (account_type)
+
+Account_balance
+=============== 
+account_balance_id  >>>>>>> Primary Key
+account_details_id  >>>>>>> Foreign Key (account_details(account_details_id)))
+balance
+created_dt
+updated_dt
+
+account_type 
+============
+account_type_id   >>>>>>> Primary Key
+account_type
+created_dt
+updated_dt
+
+Parent Table  >>>>>>> account_type table
+
+Child Tables  >>>>>>> account_details,account_balances
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
