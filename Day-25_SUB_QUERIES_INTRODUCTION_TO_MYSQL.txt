@@ -1,0 +1,157 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : SUB QUERIES
+                               		         Date  : 26/12/2022
+                                                  (Session - 25)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Last Session:
+=============
+* We Just Completed the SQL Clauses
+    
+     1) From clause
+
+     2) Where clause
+
+     3) Order by Clause
+
+     4) group by clause
+
+     5) Having Clause
+
+* We Just Performed some SQL on emp & dept table by using Group by Clause & Having Clause.
+
+* Group by Clause >>>> Grouping of Several rows of information as group 
+
+* Having Clause   >>>> Adding some filters for group by results.
+
+* Given you Some Assignment for Creating Database Tables 
+
+     1) account_types
+
+     2) account_details
+
+     3) account_balance
+
+Today Session : SUB QUERIES
+===========================
+* A Query with in a Query is Known as Sub Query (or) Nested Query (or) Inner Query.
+
+* When ever We required to execute one Query depending on another Query result then we need to use Sub Queries.
+
+* Sub queries are preferable to display output from one table and having an input value from other table.
+
+* When we are working with Sub Queries always first execute's the inner query and then will execute Outer Query means Outer     Query always executed depending on Inner Query result.
+
+**********************************
+Execution Process For Sub Queries
+**********************************
+>> The execution process is always from innermost query to the outermost.
+
+>> Outer query <-----------o/p<------------ Inner query <----------o/p <---------Inner query
+
+*******
+Syntax
+*******
+>>  select ..... from table...where [=/IN/exists/not exists](select ..... from table......where....[=/IN/exits/not exists]
+    (select.......).....);
+
+*******
+Example
+*******
+SQL >>> select * from emp where sal = (select max(sal) from emp);  >>> Getting Highest Salary of Employee Details
+
+SQL >>> select * from emp where sal in (select min(sal) from emp); >>> Getting Lowest Salary of Employee Details
+
+
+******************
+Types of Sub Query
+******************
+* Sub Queries are classified into two types.
+
+     1) Single Row Sub Query
+
+     2) Multi Row Sub Query
+
+***********************
+1) Single Row Sub Query
+***********************
+* A sub query/Inner Query which returns only one row of information then those query called as "Single Row Sub Query".
+
+* Single row SubQuery returns only one row in two cases
+
+Case-1: If We write select query based on primary key column (or) unique key column.
+
+Case-2: If we are using aggregate functions in select query on database table.
+
+**********************
+2) Multi Row Sub Query
+**********************
+* A sub query/ Inner Query which returns more than one row of information then those query called as "Multi Row Sub Query"
+
+* The Operators which we are using in multi row sub queries ar IN,ANY,ALL etc.,
+
+************************
+Working With Sub Queries
+************************
+Query-1: Display department details of employee smith?
+
+SQL >> select * from dept where deptno IN(select deptno from emp where ename='SMITH');
+
+Query-2: Display employee details who is working under SALES
+
+SQL >> select * from emp where deptno=(select deptno from dept where dname='SALES');
+
+Query-3: Display employee details whose salary is less than employee id as 7788 ?
+
+SQL >> Select * from emp where sal <=(select sal from emp where empno=7788);
+
+Query-4: Display employee details whose salary is less than 7788 and who are getting commission?
+
+SQL >> select * from emp where sal <=(select sal from emp where empno=7788) and comm is not null;
+
+Query-5: Display employee details who are working under Blake-Manager?
+
+SQL >> select * from emp where mgr = (select empno from emp where upper(ename) ='BLAKE');
+
+Query-6: Display employee details who are working in chicago ?
+
+SQL >> select * from emp where deptno = (select deptno from dept where upper(location) ='CHICAGO');
+
+Query-7: Display the employee details for second maximium salary.
+
+SQL  >> select max(sal) from emp where sal < (select max(sal) from emp where sal < (select max(sal) from emp);
+
+***************
+MYSQL Database
+***************
+* It is also one of Relational Database Software which maintains the data in the form Rows & Columns as Tables.
+
+* The Name of MySQL is a combination for two words MY & SQL i.e.,MYSQL
+
+* The reason behind adding My is the daughter’s name of the MySQL’s co-founder, Monty Widenius.
+
+* It is an Open Source Database when it comes for Oracle is Properitary License.
+
+* As we discussed earlier By using Structured Query Language(SQL) We can interact with any RDBMS Database Software.
+
+* SQL Commands are command for every database slightly datatypes will be changed from one database to another database.
+
+* We can download the My SQL Database Software in the below URL
+
+     https://dev.mysql.com/downloads/installer/ 
+
+* Click on Download button for ollowing installer in the webpage as "Windows (x86, 32-bit), MSI Installer"  >>> 431.7 MB
+
+* After completion of Downloading the executable file complete the installation process which will take 20-30 Mins Process.
+
+
+
+
