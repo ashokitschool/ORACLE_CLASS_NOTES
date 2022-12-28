@@ -1,0 +1,283 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : Interacting With MYSQL Database
+                               		         Date  : 28/12/2022
+                                                  (Session - 27)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Yesterday Session
+=================
+MYSQL Database
+***************
+* It is also one of Relational Database Software which maintains the data in the form Rows & Columns as Tables.
+
+* The Name of MySQL is a combination for two words MY & SQL i.e.,MYSQL
+
+* The reason behind adding My is the daughter’s name of the MySQL’s co-founder, Monty Widenius.
+
+* It is an Open Source Database when it comes for Oracle is Properitary License.
+
+* As we discussed earlier By using Structured Query Language(SQL) We can interact with any RDBMS Database Software.
+
+* SQL Commands are command for every database slightly datatypes will be changed from one database to another database.
+
+*************************************
+MySQL Database Software Installation
+*************************************
+Step-1 : Download the MYSQL Database from web in below URL
+
+          https://dev.mysql.com/downloads/installer/
+
+Step-2 : Select the below option and click on Download button 
+
+          Windows (x86, 32-bit), MSI Installer        8.0.31 	431.7M      Download (We need to Click on this Button)
+
+Step-3 : Select option on the web page i.e.,"No thanks, just start my download." for download the MYSQL installer file into            our machine
+
+Step-4 : After completion of download double click on executable file (or) installer file to start with installation process.
+
+
+Step-5 : After Double clicking on installer file will get MYSQL Installer Popup (or) Wizard with setup type
+
+         We need to select setup type "Full" >> For Getting all required component for MYSQL Database 
+
+            MYSQL Shell      >>>> Communication with MYSQL Database using CLI Interface.
+
+            MYSQL WorkBench  >>>> Communicating with MYSQL Database using GUI Interface.
+
+Step-6 : Path Selection ::: Where MYSQL is going to install in our Machine
+
+         Default location :::: Operating System directory(C:\Program Files\MYSQL)
+
+Step-7 : System Requirement Checking and need to verify which components are Installing in our machine
+
+         We need to Click on "Execute" button to install the components after completion of all component installation we 
+         
+         need to click on "Next" Button. >>>>(Some of Missing Components Warning  >>>> Yes Option)
+
+Step-8 : Installation Screen ::: In this Dialog (or) Wizard we need to click on "Execute" button to install MYSQL Components.
+
+         After Completion of all components installation we need to click "Next" Button.
+
+Step-9: Product Conifguration Screen ::: We no need to do anything in this screen and we Just need to click on "Next" Button
+
+
+Step-10 : Type and Networking Screen  >>>> We need to Select option from Dropdown (Development Computer)
+
+                                      >>>> MYSQL Database Occupying the Port no  : 3306
+
+                                      >>>> Observe the Default values given in the screen and then click on "Next" button
+
+Step-11:  Authentication Method screen : we need to select only first option(Use Strong Password encryption For                                          Authentication)
+
+          Need to Click on "Next" Button.
+
+Step-12: Oracle Database we have DBA Account : system/manager
+
+         MYSQL Database we have DBA Account  : root/root
+
+         After Providing password for root account we need to click on "Next" Button
+
+Step-13: Windows Service Screen : The MYSQL Service which is going to create in our operating system
+            
+         We no need to change (or) we no need to touch any value in this screen just click on "Next" Button.
+
+Step-14: Server File permissions screen : We need to select first option  and then click on "Next" Button.
+
+Step-15: Apply Configuration Screen ::: We need to Click on "Execute" Button First.
+
+         After completion of installation in the screen we will be gettin option "Done".
+
+Step-16: verify the Database DBA Account details(root/root) and then followed click on Done.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Interacting with MySQL Database
+===============================
+* For Every Database we have two options to interact it
+
+    1) CLI Interface i.e., Command Line Interface
+
+        Example : Oracle Database  >>>>> Run SQL Command Line (Goto Start Menu >>>> Search word as "SQL")
+
+                  MYSQL Database   >>>>> MYSQL8.0 Command Line Client(Goto Start Menu  >>>>> "MySQL")
+
+    2) GUI Interface 
+
+         Example : Oracle Database >>>>> SQL Developer etc.,
+
+                   MYSQL Database  >>>>> MySQL WorkBench,MYSQLYOG etc.,
+
+ NOTE
+ ====
+  Oracle Database >>>> DBA Account is  "system/manager".
+
+  MYSQL Database  >>>> DBA Account is  "root/root".
+
+
+*****************************************************
+Connecting with DBA Account(root) using CLI Interface
+******************************************************
+
+Step-1 : Hit on Start button in keyword will get into Start Menu  >>> Search for Word "Mysql" 
+                                                                  >>> Select "MySQL 8.0 CommandLine Client" option
+
+
+Step-2 : After selecting the above option will get Command Line interface by prompting password for root account
+
+                Enter password : root(****)
+
+         NOTE: MYSQL 8.0 Command Line Client always used for connecting root account only.
+
+Step-3 : Getting to know the user name of the account
+
+          Mysql> select current_user();
+
+          O/P : root@localhost
+
+Step-4 : Getting to know about databases in the root account
+
+          MYSQL> show databases
+
+          O/P : Will get the list of database which comes along with MYSQL Installation process
+
+                                (or)
+
+                Preloaded Databases
+
+Step-5 : Creating our own Database for application 
+
+          MYSQL>>>> create database <database_name>
+
+          MYSQL>>>> create datatabase ashokit;
+
+           O/P: Query Ok,0 Rows are affected
+
+         Validating database is created or not 
+     
+           MYSQL> show databases
+OUTPUT:
++--------------------+
+| Database           |
++--------------------+
+| ashokit            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.00 sec)
+
+Step-6 : Connecting to particular database(ashokit) from the above list of database
+
+         MYSQL> use <database_name>
+
+         MYSQL> user ashokit
+
+    O/P: Database changed
+
+Step-7 : Getting to know what tables are available in database(ashokit)
+
+         MYSQL> show tables
+
+         O/P: EmptySet (No tables are available under ashokit)
+
+Step-8 : Creating the new Database table with following commands
+
+     MYSQL>create table ashokit_customers(customer_id bigint,customer_name varchar(50),customer_location varchar(50));
+
+     MYSQL> insert into ashokit_customers values(1,'Mahesh','Hyderabad');
+
+     mysql> insert into ashokit_customers values(4, 'Ashok','Hyderabad');
+         Query OK, 1 row affected (0.12 sec)
+
+     mysql> insert into ashokit_customers values(5, 'Nagesh','Hyderabad');
+           Query OK, 1 row affected (0.14 sec)
+
+     mysql> insert into ashokit_customers values(6, 'Anil','Chennai');
+          Query OK, 1 row affected (0.11 sec)
+
+       NOTE: Need to Insert some customer Records into Table (11 Records)
+
+     mysql> update ashokit_customers set customer_location='Bangalore' where customer_id=6;
+           Query OK, 1 row affected (0.10 sec)
+           Rows matched: 1  Changed: 1  Warnings: 0
+
+     mysql> delete from ashokit_customers where customer_id=11;
+           Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from ashokit_customers;
+
+OUTPUT
+======
++-------------+---------------+-------------------+
+| customer_id | customer_name | customer_location |
++-------------+---------------+-------------------+
+|           1 | Mahesh        | Hyderabad         |
+|           2 | Suresh        | Bangalore         |
+|           3 | Ramesh        | Bangalore         |
+|           4 | Ashok         | Hyderabad         |
+|           5 | Nagesh        | Hyderabad         |
+|           6 | Anil          | Bangalore         |
+|           7 | Rambabu       | Chennai           |
+|           8 | SaiKumar      | Hyderabad         |
+|           9 | Yagnesh       | Chennai           |
+|          10 | Avinash       | Hyderabad         |
++-------------+---------------+-------------------+
+10 rows in set (0.00 sec)
+       
+*****************************************************
+Connecting with DBA Account(root) using GUI Interface
+******************************************************
+Step-1 : Goto Start Menu  >>>> Search for word "workbench" >>> Find the option "MySQL WorkBench 8.0 CE" >> Click on this          option
+
+Step-2 : Activating the Particular Database from Schemas Explorer
+
+        Activating the particular database is nothing but double clicking on ashokit (Bold Letters)
+
+
+Step-3: Right Side we workplace to execute the SQL Queries
+
+        select * from ashokit_customers;
+
+        Toolbar :::: First Icon >>> open
+                     second Icon >>>> Save
+                     Third Icon  >>>> Execute 
+                     Fifith Icon >>>> Commit(Default will be disabled)
+                     Sixth Icon  >>>> Rollback(Default will be disabled)
+
+          BY Default Autocommit is enabled in mysql if you want to disable click on "AutoCommit" Icon in Tool bar.
+
+
+Step-4 : Created New users from Root account or DBA Account
+
+         -- we can create an users in mysql database as well through DBA Account always
+         create user 'suresh'@'localhost' identified by 'suresh';
+         create user 'naresh'@'localhost' identified by 'naresh';
+
+         -- providing the permission for creating,inserting,updating,deleting on Database object
+         grant all privileges on *.* to suresh@localhost;
+         grant all privileges on *.* to naresh@localhost;
+
+Step-5: Connecting users accounts using "MYSQL Work Bench"
+
+        Open MySQL Work Bench >>> Click on home button >>> Click on + Icon for Creating new Connection 
+
+                              >>> Connection Name  ::: Suresh_connection
+
+                                  Username :::: suresh
+
+                                  password :::: suresh
+  
+                              >>>> Click on Test COnnection button >>> will Get successful made the connection.
+
+
+Step-6: Opening the newly created connection.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
