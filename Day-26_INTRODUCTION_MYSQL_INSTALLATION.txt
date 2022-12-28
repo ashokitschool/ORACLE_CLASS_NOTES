@@ -1,0 +1,132 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : MYSQL Database
+                               		         Date  : 27/12/2022
+                                                  (Session - 26)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Yesterday Session
+=================
+* Understanding about Sub Queries
+
+* Types of Sub Queries
+
+    1) Single Row Sub Query : Single Row of Information from database table
+
+    2) Multi Row Sub Query  : More than one row of information from database table
+
+* Practicsed on writing Sub Queries
+
+Today Session : MySQL Database and Installation Process
+=======================================================
+MYSQL Database
+***************
+* It is also one of Relational Database Software which maintains the data in the form Rows & Columns as Tables.
+
+* The Name of MySQL is a combination for two words MY & SQL i.e.,MYSQL
+
+* The reason behind adding My is the daughter’s name of the MySQL’s co-founder, Monty Widenius.
+
+* It is an Open Source Database when it comes for Oracle is Properitary License.
+
+* As we discussed earlier By using Structured Query Language(SQL) We can interact with any RDBMS Database Software.
+
+* SQL Commands are command for every database slightly datatypes will be changed from one database to another database.
+
+*************************************
+MySQL Database Software Installation
+*************************************
+Step-1 : Download the MYSQL Database from web in below URL
+
+          https://dev.mysql.com/downloads/installer/
+
+Step-2 : Select the below option and click on Download button 
+
+          Windows (x86, 32-bit), MSI Installer        8.0.31 	431.7M      Download (We need to Click on this Button)
+
+Step-3 : Select option on the web page i.e.,"No thanks, just start my download." for download the MYSQL installer file into            our machine
+
+Step-4 : After completion of download double click on executable file (or) installer file to start with installation process.
+
+
+Step-5 : After Double clicking on installer file will get MYSQL Installer Popup (or) Wizard with setup type
+
+         We need to select setup type "Full" >> For Getting all required component for MYSQL Database 
+
+            MYSQL Shell      >>>> Communication with MYSQL Database using CLI Interface.
+
+            MYSQL WorkBench  >>>> Communicating with MYSQL Database using GUI Interface.
+
+Step-6 : Path Selection ::: Where MYSQL is going to install in our Machine
+
+         Default location :::: Operating System directory(C:\Program Files\MYSQL)
+
+Step-7 : System Requirement Checking and need to verify which components are Installing in our machine
+
+         We need to Click on "Execute" button to install the components after completion of all component installation we 
+         
+         need to click on "Next" Button. >>>>(Some of Missing Components Warning  >>>> Yes Option)
+
+Step-8 : Installation Screen ::: In this Dialog (or) Wizard we need to click on "Execute" button to install MYSQL Components.
+
+         After Completion of all components installation we need to click "Next" Button.
+
+Step-9: Product Conifguration Screen ::: We no need to do anything in this screen and we Just need to click on "Next" Button
+
+
+Step-10 : Type and Networking Screen  >>>> We need to Select option from Dropdown (Development Computer)
+
+                                      >>>> MYSQL Database Occupying the Port no  : 3306
+
+                                      >>>> Observe the Default values given in the screen and then click on "Next" button
+
+Step-11:  Authentication Method screen : we need to select only first option(Use Strong Password encryption For                                          Authentication)
+
+          Need to Click on "Next" Button.
+
+Step-12: Oracle Database we have DBA Account : system/manager
+
+         MYSQL Database we have DBA Account  : root/root
+
+         After Providing password for root account we need to click on "Next" Button
+
+
+Step-13: Windows Service Screen : The MYSQL Service which is going to create in our operating system
+            
+         We no need to change (or) we no need to touch any value in this screen just click on "Next" Button.
+
+Step-14: Server File permissions screen : We need to select first option  and then click on "Next" Button.
+
+Step-15: Apply Configuration Screen ::: We need to Click on "Execute" Button First.
+
+         After completion of installation in the screen we will be gettin option "Done".
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Interacting with MySQL Database
+===============================
+* For Every Database we have two options to interact it
+
+    1) CLI Interface i.e., Command Line Interface
+
+        Example : Oracle Database  >>>>> Run SQL Command Line (Goto Start Menu >>>> Search word as "SQL")
+
+                  MYSQL Database   >>>>> MYSQL8.0 Command Line Client(Goto Start Menu  >>>>> MySQL)
+
+    2) GUI Interface 
+
+         Example : Oracle Database >>>>> SQL Developer etc.,
+
+                   MYSQL Database  >>>>> MySQL WorkBench,MYSQLYOG etc.,
+
+ NOTE
+ ====
+  Oracle Database >>>> DBA Account is  "system/manager".
+
+  MYSQL Database  >>>> DBA Account is  "root/root".
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
