@@ -1,0 +1,158 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : Oracle Joins
+                               		         Date  : 30/12/2022
+                                                  (Session - 29)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
+
+>> Class Updates  :  No Session on 31/12/2022
+   
+                     Next Session on 02/01/2023
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Yesterday Session :
+==================
+* Introduction To SQL Joins in Relational Database Softwares
+
+Today Session : Will Explore More  on SQL JOINS
+===============================================
+* In the earlier discussion we created the relationship between database tables using primary key and foreign key             constraints i.e., Physical Join.
+
+* Joins in oracle are mainly used to retreive the data from one or more database tables.
+
+* Basically we can retrieve the data from multiple tables based on common columns between the tables.
+
+* If there is no common column between the database tables then we won't extract the data from multiple tables.
+
+* Whenever we wanted to extract the data from multiple tables as programmer we need to specify the "JOIN CONDITION".
+
+* JOIN CONDITION is nothing but primary key column of one table and foreign key column of another table.
+
+         dept table >>>>>>>>>>>>>>> deptno >>>>>>>>>>>> primary key
+
+         emp table  >>>>>>>>>>>>>>> deptno >>>>>>>>>>>> Foreign key
+
+         select * from emp e,dept d where d.deptno = e.deptno; 
+
+         d.deptno = e.deptno >>>>>>>>>>>>Join Condition
+
+* Oracle supports following types of Joins 
+
+    1) Inner Join 
+
+    2) left Join
+
+    3) Right Join
+
+    4) Full Outer Join
+ 
+    5) Cross Join
+
+    6) Self Join
+
+    7) Natural Join
+
+* For better Understanding of the above JOINS created office database which contains employees,departments,managers,projects
+  for this we are going to maintain the data with below tables
+
+        ashokit_dept >>>>>>>>>>>>>> Maintaining the department information
+
+        ashokit_managers >>>>>>>>>>>>>> Maintaining the Managers information
+
+        ashokit_emp >>>>>>>>>>>> Maintaining the employees information 
+ 
+        ashokit_projects >>>>>>>>> Maintaining the projets related information
+
+
+* Observe the information for above tables 
+
+***************************************
+ashokit_dept >>>>> Primary Key(dept_id)
+***************************************
+dept_id    dept_name
+-------    --------
+D1	    IT
+D2  	    HR
+D3	    FINANCE
+D4	    ADMIN
+D5	    NON-ADMIN
+D6	    MARKETING
+D7	    SALES
+
+*******************************************************************
+ashokit_managers >>>>> Primary Key(Manager_id), ForeignKey(dept_id)
+*******************************************************************
+Manager_id     Manager_name     dept_id
+----------     ------------     -------
+M1	       ASHOK	         D4
+M2	       MAHESH	         D1
+M3	       SURESH	         D2
+M4	       RAMESH	         D2
+M5	       RAJESH	         D6
+M6	       NARESH	         D7
+M7	       YAGNESH	         D5
+M8	       GANESH	         D1
+M9	       RAGHU	         D1
+M10	       CHANTI	         D4
+
+**********************************************************************
+ashokit_emp >>>> Primary Key(emp_id), Foreign keys(dept_id,manager_id)
+**********************************************************************
+emp_id  emp_name     salary     dept_id     manager_id
+------  --------     ------     -------     ----------
+E1	Anil	     18000	D7	    M1
+E2	Avinash	     28000	D1	    M2
+E3	Raju	     38000	D2	    M3
+E4	Raghavendra  48000	D4	    M6
+E5	Abdul	     58000	D6  	    M5
+E6	Gupta	     68000	D1	    M2
+E7	Bhavya	     78000	D7	    M1
+E8	SUNIL	     88000	D11	    M1
+E9	ABHI	     98000	D12	    M2
+
+***********************************************
+ashokit_projects
+***********************************************
+Project_id   project_name    team_member_id
+----------   ------------    --------------
+P1	     SPRING PROJECT	E1
+P1	     SPRING PROJECT	E2
+P1	     SPRING PROJECT	M1
+P2	     BANKING PROJECT	E3
+P2	     BANKING PROJECT	E6
+P2	     BANKING PROJECT	M2
+P3	     WEBSITE PROJECT	M3
+P3	     WEBSITE PROJECT	E5
+
+************************
+1) INNER JOIN/EQUI JOIN
+************************
+* In this type of Join will get only matched rows from left hand side table and right hand side based on join condition.
+
+* Make sure need to have the common column between the tables is mandatory.
+
+* We can specify the join condition in two ways
+
+   1) We can specify the join condition in where condition but it is not recommended because always where condition is used        to add filters while seleting the data from table.
+
+      SYNTAX
+      ======
+       select columnlist from <tables> where <Join Condition>;
+
+      Ex: select e.empno,e.ename,d.dname from emp e,dept d where e.deptno=d.deptno;
+
+   2) We can specify the join condition in "on" clause which is recommended in the real time application development
+
+       SYNTAX
+       ======
+        select columnlist from <parent_Table_Name> [join/inner join] <child_table_name> on <Join Condition>;
+
+      Ex: select e.empno,e.ename,d.dname from emp e join dept d on e.deptno = d.deptno;
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
