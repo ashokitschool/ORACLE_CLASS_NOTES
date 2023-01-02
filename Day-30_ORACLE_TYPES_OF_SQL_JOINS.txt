@@ -1,0 +1,227 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : Types Of SQL Joins
+                               		         Date  : 2/01/2023
+                                                  (Session - 30)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Last Session : We Started Explored on Types Of SQL JOINS
+========================================================
+* In the earlier discussion we created the relationship between database tables using primary key and foreign key                constraints i.e., Physical Join.
+
+* Joins in oracle are mainly used to retreive the data from one or more database tables.
+
+* Basically we can retrieve the data from multiple tables based on common columns between the tables.
+
+* If there is no common column between the database tables then we won't extract the data from multiple tables.
+
+* Whenever we wanted to extract the data from multiple tables as programmer we need to specify the "JOIN CONDITION".
+
+* JOIN CONDITION is nothing but primary key column of one table and foreign key column of another table.
+
+         dept table >>>>>>>>>>>>>>> deptno >>>>>>>>>>>> primary key
+
+         emp table  >>>>>>>>>>>>>>> deptno >>>>>>>>>>>> Foreign key
+
+         select * from emp e,dept d where d.deptno = e.deptno; 
+
+         d.deptno = e.deptno >>>>>>>>>>>>Join Condition
+
+* Oracle supports following types of Joins 
+
+    1) Inner Join 
+
+    2) left Join
+
+    3) Right Join
+
+    4) Full Outer Join
+ 
+    5) Cross Join
+
+    6) Self Join
+
+    7) Natural Join
+
+* For better Understanding of the above JOINS created office database which contains employees,departments,managers,projects
+  for this we are going to maintain the data with below tables
+
+        ashokit_dept >>>>>>>>>>>>>> Maintaining the department information
+
+        ashokit_managers >>>>>>>>>>>>>> Maintaining the Managers information
+
+        ashokit_emp >>>>>>>>>>>> Maintaining the employees information 
+ 
+        ashokit_projects >>>>>>>>> Maintaining the projets related information
+
+
+* Observe the information for above tables 
+
+***************************************
+ashokit_dept >>>>> Primary Key(dept_id)
+***************************************
+dept_id    dept_name
+-------    --------
+D1	    IT
+D2  	    HR
+D3	    FINANCE
+D4	    ADMIN
+D5	    NON-ADMIN
+D6	    MARKETING
+D7	    SALES
+
+*******************************************************************
+ashokit_managers >>>>> Primary Key(Manager_id), ForeignKey(dept_id)
+*******************************************************************
+Manager_id     Manager_name     dept_id
+----------     ------------     -------
+M1	       ASHOK	         D4
+M2	       MAHESH	         D1
+M3	       SURESH	         D2
+M4	       RAMESH	         D2
+M5	       RAJESH	         D6
+M6	       NARESH	         D7
+M7	       YAGNESH	         D5
+M8	       GANESH	         D1
+M9	       RAGHU	         D1
+M10	       CHANTI	         D4
+
+**********************************************************************
+ashokit_emp >>>> Primary Key(emp_id), Foreign keys(dept_id,manager_id)
+**********************************************************************
+emp_id  emp_name     salary     dept_id     manager_id
+------  --------     ------     -------     ----------
+E1	Anil	     18000	D7	    M1
+E2	Avinash	     28000	D1	    M2
+E3	Raju	     38000	D2	    M3
+E4	Raghavendra  48000	D4	    M6
+E5	Abdul	     58000	D6  	    M5
+E6	Gupta	     68000	D1	    M2
+E7	Bhavya	     78000	D7	    M1
+E8	SUNIL	     88000	D11	    M1
+E9	ABHI	     98000	D12	    M2
+
+1) While inserting the E8 & E9 Records we need to disable foreign key temporaily.
+
+2) We need to insert respective D11 & D12 departments in "ashokit_dept" table and followed to execute insert statements in    emp table for E8 & E9 Records after that delete D11 & D12 departements from ashokit_dept table.
+
+***********************************************
+ashokit_projects
+***********************************************
+Project_id   project_name    team_member_id
+----------   ------------    --------------
+P1	     SPRING PROJECT	E1
+P1	     SPRING PROJECT	E2
+P1	     SPRING PROJECT	M1
+P2	     BANKING PROJECT	E3
+P2	     BANKING PROJECT	E6
+P2	     BANKING PROJECT	M2
+P3	     WEBSITE PROJECT	M3
+P3	     WEBSITE PROJECT	E5
+
+************************
+1) INNER JOIN/EQUI JOIN
+************************
+* In this type of Join will get only matched rows from left hand side table and right hand side based on join condition.
+
+* Make sure need to have the common column between the tables is mandatory.
+
+* We can specify the join condition in two ways
+
+   1) We can specify the join condition in where condition but it is not recommended because always where condition is used        to add filters while seleting the data from table.
+
+      SYNTAX
+      ======
+       select columnlist from <tables> where <Join Condition>;
+
+      Ex: select e.empno,e.ename,d.dname from emp e,dept d where e.deptno=d.deptno;
+
+   2) We can specify the join condition in "on" clause which is recommended in the real time application development
+
+       SYNTAX
+       ======
+        select columnlist from <parent_Table_Name> [join/inner join] <child_table_name> on <Join Condition>;
+
+      Ex: select e.empno,e.ename,d.dname from emp e join dept d on e.deptno = d.deptno;
+
+***************
+Example Queries
+***************
+1) Display employee name and department name they belonging too using office database tables
+SQL >> select * from ashokit_emp;
+SQL >> select * from ashokit_dept;
+--Writing the Joins
+SQL >> select e.emp_name,d.dept_name from ashokit_emp e,ashokit_dept d where d.dept_id= e.dept_id;
+SQL >> select e.emp_name,d.dept_name from ashokit_emp e join ashokit_dept d on d.dept_id=e.dept_id;
+
+-- Display empno,empname and manager name  from emp table and manager table
+SQL >> select * from ashokit_emp;
+SQL >> select * from ashokit_managers;
+--Writing the Joins
+SQL >> select e.emp_name,m.manager_name from ashokit_emp e join ashokit_managers m on e.manager_id = m.manager_id; 
+
+3) Display empname,deptname,manager_name belonging too using office database tables
+select * from ashokit_emp; ---- empname;
+select * from ashokit_dept; --- department name;
+select * from ashokit_managers;  --- manager name
+
+-- Common column between ashokit_emp & ashokit_dept is dept_id
+-- common column between ashokit_dept & ashokit_managers is dept_id
+-- common column between ashokit_emp & ashokot_managers is manager_id & dept_id
+
+-- Writing the SQL Query
+select ae.emp_id,ae.emp_name,ad.dept_name,am.manager_name
+from ashokit_emp ae inner join ashokit_dept ad on ae.dept_id = ad.dept_id
+inner join ashokit_managers am on am.manager_id=ae.manager_id
+order by ae.emp_id;
+
+OUTPUT
+======
+E1	Anil	     SALES	     ASHOK
+E2	Avinash	     IT	             MAHESH
+E3	Raju	     HR	             SURESH
+E4	Raghavendra  ADMIN	     NARESH
+E5	Abdul	     MARKETING	     RAJESH
+E6	Gupta	     IT    	     MAHESH
+E7	Bhavya	     SALES	     ASHOK
+
+****************************
+2) LEFT JOIN/LEFT OUTER JOIN
+*****************************
+* In this type of SQL Join Oracle performs first Inner Join and then will get unmatched rows from left hand side table as     well.
+
+* Left Join / Left outer Join =  Inner Join  + Additional Records from Left hand side table 
+
+* Left Join is also called as "Left Outer Join".
+
+Example
+=======
+  select * from ashokit_emp ae left join ashokit_dept on ae.dept_id = ad.dept_id order by ae.emp_id;
+
+* In the above query left hand side table is most important for join i.e.,ashokit_emp because it will get all the records   from this table and unmatched join condition for righ hand table column values as  "null".
+
+-- Display All employees information and department information using office database table
+
+SQL>>> Select ae.emp_id,ae.emp_name,ad.dept_name from ashokit_emp ae left join ashokit_dept ad on ae.dept_id = ad.dept_id
+       order by ae.empid asc;
+
+OUTPUT
+======
+E1	Anil	      SALES
+E2	Avinash	      IT
+E3	Raju	      HR
+E4	Raghavendra   ADMIN
+E5	Abdul	      MARKETING
+E6	Gupta	      IT
+E7	Bhavya	      SALES
+E8	SUNIL	      null          -> UnMatched records from right hand side table column as null
+E9	ABHI	      null          -> UnMatched records from right hand side table column as null
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
