@@ -1,0 +1,142 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : Outer Join & Cross Join & Natural Join
+                               		         Date  : 5/01/2023
+                                                  (Session - 32)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Last Session
+============
+* We completed three types of Joins(InnerJoin,Left Join,Right Join)
+
+* Inner Join are also called as "Equi Join" it will fetch only matched records from both tables.
+
+* Left Join are also called as "Left outer Join" it will fetch matched Records + additional records from left table which are  
+  not matched with join condition.
+
+* Right join are alo called as "Right Outer Join" It will fetch matched records + additional records from right table which 
+  are not matched with Join condition.
+
+**********************************************************************
+ashokit_emp >>>> Primary Key(emp_id), Foreign keys(dept_id,manager_id)
+**********************************************************************
+emp_id  emp_name     salary     dept_id     manager_id
+------  --------     ------     -------     ----------
+E1	Anil	     18000	D7	    M1
+E2	Avinash	     28000	D1	    M2
+E3	Raju	     38000	D2	    M3
+E4	Raghavendra  48000	D4	    M6
+E5	Abdul	     58000	D6  	    M5
+E6	Gupta	     68000	D1	    M2
+E7	Bhavya	     78000	D7	    M1
+E8	SUNIL	     88000	D11	    M1
+E9	ABHI	     98000	D12	    M2
+
+***************************************
+ashokit_dept >>>>> Primary Key(dept_id)
+***************************************
+dept_id    dept_name
+-------    --------
+D1	    IT
+D2  	    HR
+D3	    FINANCE
+D4	    ADMIN
+D5	    NON-ADMIN
+D6	    MARKETING
+D7	    SALES
+
+
+4) Full Join
+=============
+ * Full Join is also called as Full Outer Join.
+
+ * When we are working Full Outer Join (or) Full Join Consider below as formula
+
+   Full Join = Inner Join + Additional Records from left table (returns null value for any column fetched from right table).
+                  
+                          + Additional Records from Right table(returns null value for any column fetched from left table).
+Query
+=====
+-- Full join (Inner Join Results + Additional Records from Left table + Additional Records from Right table)
+select ae.emp_id,ae.emp_name,ad.dept_name,ae.dept_id,ad.dept_id
+from ashokit_emp ae full join ashokit_dept ad 
+on ae.dept_id = ad.dept_id
+order by ae.emp_id;
+
+OUTPUT
+======
+E1	Anil		SALES		D7	D7
+E2	Avinash		IT		D1	D1
+E3	Raju		HR		D2	D2
+E4	Raghavendra	ADMIN		D4	D4
+E5	Abdul		MARKETING	D6	D6
+E6	Gupta		IT		D1	D1
+E7	Bhavya		SALES		D7	D7 -----------------Inner Join Results join condition is matching
+E8	SUNIL		null		D11	null
+E9	ABHI		null		D12	null......(E8 & E9)...Left Table Records join condition is not matching
+null	null		NON-ADMIN	null	D5
+null    null		FINANCE		null	D3....................Right Table Records join condition is not matching
+
+
+NOTE
+====
+* In the Realtime mostly we are going to work with following joins "Inner,Left Join,Right Join,Full Join,Self Join"
+
+5) Cross join
+=============
+ * Cross join is also called as cartesian product.
+
+ * While working with cross join no need to specify the join condition in on clause (or) where clause.
+
+ * If we are joining two tables by using cross join every row in left table is mapped with every row in right table.
+
+SQL
+===
+Q) Write a query to fetch employee name and their corresponding department name also make sure to display company name &       company location for every employee.
+
+SQL>>>> select ae.emp_name,coalesce(ad.dept_name,'NO-DEPARTMENT') as dname,
+       ci.company_name,ci.company_location from 
+       ashokit_emp ae left join ashokit_dept ad on ae.dept_id = ad.dept_id 
+       cross join companies_info ci order by ae.emp_name;
+
+OUTPUT
+======
+ABHI		NO-DEPARTMENT	ASHOKIT	HYDERABAD
+Abdul		MARKETING	ASHOKIT	HYDERABAD
+Anil		SALES		ASHOKIT	HYDERABAD
+Avinash		IT		ASHOKIT	HYDERABAD
+Bhavya		SALES		ASHOKIT	HYDERABAD
+Gupta		IT		ASHOKIT	HYDERABAD
+Raghavendra	ADMIN		ASHOKIT	HYDERABAD
+Raju		HR		ASHOKIT	HYDERABAD
+SUNIL		NO-DEPARTMENT	ASHOKIT	HYDERABAD
+
+
+6) Natural Join
+===============
+  * If we are joining the two tables using word called "Natural Join" at this time no need to join condition explictly by         the programmer because Oracle Engine will add the join condition automatically based on common column names between         database tables.
+
+  * If We don't have any common columns between the database tables oracle engine will perform cartesian product (cross join)
+
+--natural join
+select ae.emp_id,ae.emp_name,ad.dept_name 
+from ashokit_emp ae natural join ashokit_dept ad 
+order by ae.emp_id;
+
+OUTPUT
+======
+E1	Anil	SALES
+E2	Avinash	IT
+E3	Raju	HR
+E4	Raghavendra	ADMIN
+E5	Abdul	MARKETING
+E6	Gupta	IT
+E7	Bhavya	SALES
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
