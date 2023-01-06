@@ -1,0 +1,121 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : Self Join & Set Operators
+                               		         Date  : 6/01/2023
+                                                  (Session - 33)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
+
+>> Sunday Session : 10.30 AM To 12.30
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Yesterday Session
+=================
+1) We Completed several types of SQL Joins
+
+   1) Inner Join
+
+   2) Left Join
+
+   3) Right Join
+
+   4) Full Join
+
+   5) Cross Join
+
+   6) Natural Join  >>> If there is common columns between database tables then oracle will give inner join results.
+                        
+                        If there is no common columns between database tables then oracle will given you cross join results
+
+
+  Important Join Types for Realtime Application Development: Inner,Left Join,Right Join,Full Join,Self Join.
+
+Today Session : 
+===============
+7) Self Join
+============
+* A self join is a join in which a table is joined with itself.
+
+* To join a table itself means that each row of the table is combined with itself and with every other row of the table.
+
+* The table appears twice in the FROM clause and is followed by table aliases that qualify column names in the join     condition.
+
+* The self join can be viewed as a join of two copies of the same table. The table is not actually copied, but SQL performs     the command as though it were.
+
+* To perform a self join, Oracle Database combines and returns rows of the table that satisfy the join condition
+
+Syntax-1
+========
+  SELECT a.column_name, b.column_name... FROM table1 a, table1 b  WHERE a.common_filed = b.common_field;
+
+Syntax-2
+========
+  SELECT a.column_name, b.column_name... FROM table1 a, join table1 b on a.common_filed = b.common_field;
+
+Example on Self Join
+====================
+select e.ename||' Works Under Manager '||m.ename as "Employee_Manager_Name"
+from emp e join emp m
+on e.mgr = m.empno
+order by e.ename;
+
+OUTPUT
+======
+ADAMS Works Under Manager SCOTT
+ALLEN Works Under Manager BLAKE
+BLAKE Works Under Manager KING
+CLARK Works Under Manager KING
+FORD Works Under Manager JONES
+JAMES Works Under Manager BLAKE
+JONES Works Under Manager KING
+MARTIN Works Under Manager BLAKE
+MILLER Works Under Manager CLARK
+SCOTT Works Under Manager JONES
+SMITH Works Under Manager FORD
+TURNER Works Under Manager BLAKE
+WARD Works Under Manager BLAKE
+
+=========================
+More Example on Self Join
+=========================
+
+Family
+======
+
+Member_id        Name         age          parent_id
+---------        -----        ----         ---------
+F1               Ashok         4               F5
+F2               Mahesh        10              F5
+F3               Johnson       12              F5
+F4               Suresh        36              null
+F5               Naresh        40              F6
+F6               Rajesh        19              null
+F7               Avinash       20              F4
+F8               Anil          22              F4
+
+Write Query to fetch the child name and their age corresponding to thier parent name.
+
+SQL>>> Select f1.name || ' Parent is ' || f2.name
+       from family f1 left join family f2 
+       on f1.parent_id = f2.member_id 
+       order by f2.member_id;
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+1) Practise the Joins using emp table and dept table
+
+2) Practise the Joins using office database (ashokit_dept,ashokit_managers,ashokit_emp,ashokit_projects)
+
+3) Utilize online resources try to write join's on sample database table data they give.
+
+   Website Url ::: https://www.w3resource.com/sql-exercises/sql-joins-exercises.php
+
+
+
+
+
+
