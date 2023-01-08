@@ -1,0 +1,276 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : Set Operators & Sequence
+                               		         Date  : 6/01/2023
+                                                  (Session - 34)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1) Giving Script for those office database tables.
+
+2) Understanding Set Operators in SQL.
+
+3) Understanding Sequences in Oracle.
+
+
+1) Giving Script for those office database tables
+=================================================
+ -- office database scripts for oracle
+ -- ashokit_dept
+ -- ashokit_managers
+ -- ashokit_emp
+ -- ashokit_projects
+ 
+ -- creating the departments table 
+create table ashokit_dept_1 (dept_id varchar2(10) primary key, dept_name varchar2(30));
+
+--inserting the 7 departments information
+insert into ashokit_dept_1 values('D1','IT');
+insert into ashokit_dept_1 values('D2','HR');
+insert into ashokit_dept_1 values('D3','FINANCE');
+insert into ashokit_dept_1 values('D4','ADMIN');
+insert into ashokit_dept_1 values('D5','NON-ADMIN');
+insert into ashokit_dept_1 values('D6','MARKETING');
+insert into ashokit_dept_1 values('D7','SALES');
+
+select * from ashokit_dept_1;
+
+-- creating manager table
+drop table ashokit_managers_1;
+create table ashokit_managers_1(manager_id  varchar2(10) primary key,manager_name varchar2(50),
+                              dept_id  varchar2(10) references ashokit_dept_1(dept_id));
+
+--inserting the data of the table												   
+insert into ashokit_managers_1 values('M1','ASHOK',(select dept_id  from ashokit_dept where dept_name='ADMIN'));
+insert into ashokit_managers_1 values('M2','MAHESH',(select dept_id  from ashokit_dept where dept_name='IT'));
+insert into ashokit_managers_1 values('M3','SURESH',(select dept_id  from ashokit_dept where dept_name='HR'));
+insert into ashokit_managers_1 values('M4','RAMESH',(select dept_id  from ashokit_dept where dept_name='HR'));
+insert into ashokit_managers_1 values('M5','RAJESH',(select dept_id  from ashokit_dept where dept_name='MARKETING'));
+insert into ashokit_managers_1 values('M6','NARESH',(select dept_id  from ashokit_dept where dept_name='SALES'));
+insert into ashokit_managers_1 values('M7','YAGNESH',(select dept_id  from ashokit_dept where dept_name='NON-ADMIN'));
+insert into ashokit_managers_1 values('M8','GANESH',(select dept_id  from ashokit_dept where dept_name='IT'));
+insert into ashokit_managers_1 values('M9','RAGHU',(select dept_id  from ashokit_dept where dept_name='IT'));
+insert into ashokit_managers_1 values('M10','CHANTI',(select dept_id  from ashokit_dept where dept_name='ADMIN'));
+
+--selecting the data 
+select * from ashokit_managers_1;
+
+--creating the emp table
+create table ashokit_emp_1(emp_id varchar2(10) primary key,emp_name varchar2(30),salary number,
+                           dept_id varchar2(10),manager_id varchar2(10),
+                           foreign key(dept_id) references ashokit_dept_1(dept_id),
+                           foreign key(manager_id) references ashokit_managers_1(manager_id));
+                         
+insert into ashokit_emp_1 values('E1','Anil',18000,(select dept_id from ashokit_dept_1 where dept_name='SALES'),(select manager_id from ashokit_managers_1 where manager_name='ASHOK'));
+insert into ashokit_emp_1 values('E2','Avinash',28000,(select dept_id from ashokit_dept_1 where dept_name='IT'),(select manager_id from ashokit_managers_1 where manager_name='MAHESH'));
+insert into ashokit_emp_1 values('E3','Raju',38000,(select dept_id from ashokit_dept_1 where dept_name='HR'),(select manager_id from ashokit_managers_1 where manager_name='SURESH'));
+insert into ashokit_emp_1 values('E4','Raghavendra',48000,(select dept_id from ashokit_dept_1 where dept_name='ADMIN'),(select manager_id from ashokit_managers_1 where manager_name='NARESH'));
+insert into ashokit_emp_1 values('E5','Abdul',58000,(select dept_id from ashokit_dept_1 where dept_name='MARKETING'),(select manager_id from ashokit_managers_1 where manager_name='RAJESH'));
+insert into ashokit_emp_1 values('E6','Gupta',68000,(select dept_id from ashokit_dept_1 where dept_name='IT'),(select manager_id from ashokit_managers_1 where manager_name='MAHESH'));
+insert into ashokit_emp_1 values('E7','Bhavya',78000,(select dept_id from ashokit_dept_1 where dept_name='SALES'),(select manager_id from ashokit_managers_1 where manager_name='ASHOK'));
+
+alter table ashokit_emp_1 disable constraint SYS_C007535;
+
+insert into ashokit_emp_1 values('E8','SUNIL',88000,'D11',(select manager_id from ashokit_managers_1 where manager_name='ASHOK'));
+insert into ashokit_emp_1 values('E9','ABHI',98000,'D12',(select manager_id from ashokit_managers_1 where manager_name='MAHESH'));
+
+select * from ashokit_emp_1;
+
+-- creating ashokit_project table'
+create table ashokit_projects_1(project_id varchar2(10), project_name varchar2(30),team_member_id varchar2(10));
+
+--inserting the data 
+insert into ashokit_projects_1 values('P1','SPRING PROJECT','E1');
+insert into ashokit_projects_1 values('P1','SPRING PROJECT','E2');
+insert into ashokit_projects_1 values('P1','SPRING PROJECT','M1');
+insert into ashokit_projects_1 values('P2','BANKING PROJECT','E3');
+insert into ashokit_projects_1 values('P2','BANKING PROJECT','E6');
+insert into ashokit_projects_1 values('P2','BANKING PROJECT','M2');
+insert into ashokit_projects_1 values('P3','WEBSITE PROJECT','M3');
+insert into ashokit_projects_1 values('P3','WEBSITE PROJECT','E5');
+
+select * from ashokit_projects_1;
+
+NOTE
+====
+>>> When we are working with project don't hard code the foreign key values always recommended to collect the values from     primary key column value through the sql select statement.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Set Operators
+=============
+>> Set operators are used to combine results of two or more sql queries into a single result.
+
+>> When we are working with set operators makes sure combined queries must return the same no of columns and compatible data    types.
+
+>>> The name of the corresponding columns can be different.
+
+  Example
+  =======
+
+      emp >>>> empno(number),ename(varchar2),job(varchar2)
+  
+      SQL>>>> select empno,ename,job from emp;           
+
+      dept >>>> deptno(number),dname(varchar2),job(varchar2)
+
+      SQL>>>> select deptno,dname,job from dept;
+
+>>> Oracle supports three types of set operators 
+
+     1) union (or) union all
+
+     2) intersect 
+
+     3) minus (or) except
+
+1) union (or) union all
+=======================
+  * Union combines the results of two result sets and removes the duplicates.
+
+  * Union all  doesn't removes the duplicate rows
+
+SQL Statements
+==============
+create table countries(country_id number primary key,country_name varchar2(30),code varchar2(10));
+insert into countries values(1,'INDIA','IND');
+insert into countries values(2,'United States','US');
+
+create table countries_1(country_id number primary key,country_name varchar2(30),code varchar2(10));
+insert into countries_1 values(1,'INDIA','IND');
+insert into countries_1 values(2,'United States','US');
+insert into countries_1 values(3,'United Kingdom','UK');
+insert into countries_1 values(4,'France','FR');
+insert into countries_1 values(5,'JAPAN','JPN');
+
+commit;
+
+Example
+======
+select * from countries
+union
+select * from countries_1;
+
+OUTPUT
+======
+1	INDIA		IND
+2	United States	US
+3	United Kingdom	UK
+4	France		FR
+5	JAPAN		JPN
+
+Example
+=======
+select * from countries
+union all
+select * from countries_1;
+
+OUTPUT
+======
+1	INDIA		IND
+2	United States	US
+1	INDIA		IND
+2	United States	US
+3	United Kingdom	UK
+4	France		FR
+5	JAPAN		JPN
+
+
+2) intersect
+============
+* Intersect returns only rows that appear in both result sets.
+
+Example
+=======
+select * from countries
+intersect
+select * from countries_1;
+
+OUTPUT
+======
+1	INDIA		IND
+2	United States	US
+
+3) minus
+=========
+* minus returns only the rows that appear in first result set but do not appear in the second result set.
+
+Example
+=======
+select * from countries_1
+minus
+select * from countries;
+
+OUTPUT
+======
+3	United Kingdom	UK
+4	France		FR
+5	JAPAN		JPN
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Sequence
+========
+* Sequence is one of the oracle database object.
+
+* Sequence in the oracle is used to generate numeric values dynamically for a database column of an table.
+
+Use case
+========
+ 1) You created with Database table with three columns (empId,emName,location)
+
+ 2) empId is primary key column(not null + duplicate values)
+
+ 3) while inserting the data into the employee data programmer need to supply the primary key column value explictly.
+
+ 4) Here we have one problem with primary key column programmer may have change to supply the duplicate value for a primary     key column this will leads to unique constraint error in database.
+
+ 5) To avoid such problem programmer need to generate value for primary key column dynamically through sequence
+
+* In order to create the sequence in the Oracle Database we need to follow the below syntax.
+  
+    CREATE SEQUENCE sequence_name
+    [MINVALUE value]   >>>> default "1"
+    [MAXVALUE value]   >>>> default "9999999999999999999999999999"
+    [START WITH value] 
+    [INCREMENT BY value] >>>> default "1"
+    [CYCLE/NO CYCLE]     >>>> default no cycle
+    [CACHE value];       >>>> default 20
+
+Example
+=======
+
+Creating the sequence
+=====================
+   create sequence ashokit_emp_seq
+
+   create sequence maheshit_seq 
+   MINVALUE 100
+   maxvalue 1000
+   start with 150
+   increment by 2
+   nocycle
+   cache 25;
+
+select the value from sequence using pseudo column(nextval)
+===========================================================
+    select ashokit_emp_seq.nextval from dual;
+
+Getting to know about current value of sequence using pseudo column(currval)
+===========================================================================
+    select ashokit_emp_seq.currval from dual;
+
+Getting to know about all sequences in database
+===============================================
+   select * from user_sequences;    >>>> user created sequences
+ 
+   select * from all_sequences;     >>>> Predefined sequences + user defined sequence
+
+dropping the sequences
+======================
+   drop sequence ashokit_emp_seq;
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
