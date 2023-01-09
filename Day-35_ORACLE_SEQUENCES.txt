@@ -1,0 +1,187 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : Oracle Sequence
+                               		         Date  : 9/01/2023
+                                                  (Session - 35)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Yesterday Session
+=================
+1) Given script for office database tables
+
+2) Completed with SET Operators in oracle.
+
+3) Started the discusssion of Oracle Sequences.
+
+Today Session
+=============
+
+Sequence
+========
+* Sequence is one of the oracle database object.
+
+* Sequence in the oracle is used to generate numeric values dynamically for a database column of an table.
+
+Use case
+========
+ 1) You created with Database table with three columns (empId,empName,location)
+
+ 2) empId is primary key column(not null + duplicate values)
+
+ 3) while inserting the data into the employee table programmer need to supply the primary key column value explictly.
+
+ 4) Here we have one problem with primary key column programmer may have chance to supply the duplicate value for a primary       key column this will leads to unique constraint error in database.
+
+ 5) To avoid such problem programmer need to generate value for primary key column dynamically through sequence
+
+* In order to create the sequence in the Oracle Database we need to follow the below syntax.
+  
+    CREATE SEQUENCE sequence_name
+    [MINVALUE value]     >>>> default "1"
+    [MAXVALUE value]     >>>> default "9999999999999999999999999999"
+    [START WITH value] 
+    [INCREMENT BY value] >>>> default "1"
+    [CYCLE/NO CYCLE]     >>>> default no cycle
+    [CACHE value];       >>>> default 20
+
+Example
+=======
+
+Creating the sequence
+=====================
+SQL >>> create sequence ashokit_emp_seq;
+
+SQL >>> create sequence maheshit_seq 
+        MINVALUE 100
+        maxvalue 1000
+        start with 150
+        increment by 2
+        nocycle
+        cache 25;
+
+select the value from sequence using pseudo column(nextval)
+===========================================================
+    select ashokit_emp_seq.nextval from dual;
+
+Getting to know about current value of sequence using pseudo column(currval)
+===========================================================================
+    select ashokit_emp_seq.currval from dual;
+
+Getting to know about all sequences in database
+===============================================
+   select * from user_sequences;    >>>> user created sequences
+ 
+   select * from all_sequences;     >>>> Predefined sequences + user defined sequence
+
+dropping the sequences
+======================
+   drop sequence ashokit_emp_seq;
+
+Utilize the sequence for a primary key column value
+===================================================
+* Today itself we are going the collect the value for primary key column through oracle database sequence.
+
+* One most importance for Sequences are nothing but resuable database object means multiple tables can reuse the same   sequence.
+
+       ashokit_courses >>>>>>>>>>>>>>>>>>>>>>>>> maheshit_seq
+
+       ashokit_contact_info >>>>>>>>>>>>>>>>>>>>> maheshit_seq
+
+* If we observe the data for the above two tables primary key columns values becomes not in sync.
+
+ashokit_courses
+===============
+172	CoreJava	5000	09-JAN-23
+174	AdvancedJava	6000	09-JAN-23
+176	SpringBoot	7000	09-JAN-23
+178	Microservice	8000	09-JAN-23
+180	AngularJS	9000	09-JAN-23
+186	Devops		15000	09-JAN-23
+188	AWS		12000	09-JAN-23
+
+ashokit_Contact_info
+====================
+182	Ashok	123456
+184	Mahesh	123456
+
+* To overcome the above problem as database programmer we need to create database sequence per database table
+
+         ashokit_courses  >>>>>>>>>>>>>>>>>>>>>>>>>>>> ashokit_courses_seq
+
+         ashokit_contacts >>>>>>>>>>>>>>>>>>>>>>>>>>>>>ashokit_contacts_seq
+
+         ashokit_students >>>>>>>>>>>>>>>>>>>>>>>>>>>>>ashokit_students_seq
+
+         ashokit_emp      >>>>>>>>>>>>>>>>>>>>>>>>>>>>>ashokit_emp_seq
+
+
+* For the above two tables we will be creating two sequences independently
+
+
+Creating sequence for ashokit_courses table
+===========================================
+create sequence ashokit_courses_seq
+minvalue 1000
+maxvalue 10000
+start with 1010
+increment by 1
+cache 50;
+
+creating sequence for ashokit_contact_info table
+================================================
+create sequence ashokit_contact_info_seq
+minvalue 5000
+maxvalue 15000
+start with 5020
+increment by 1
+cache 50;
+
+No cycle
+========
+create sequence test_seq
+minvalue 1
+maxvalue 5
+start with 1
+increment by 1
+cache 5;
+
+-- selected for 5 times and when we are selecting the 6th time getting below error
+select test_seq.nextval from dual;
+
+ERROR
+=====
+ORA-08004: sequence TEST_SEQ.NEXTVAL exceeds MAXVALUE and cannot be instantiated
+08004. 00000 -  "sequence %s.NEXTVAL %s %sVALUE and cannot be instantiated"
+*Cause:    instantiating NEXTVAL would violate one of MAX/MINVALUE
+*Action:   alter the sequence so that a new value can be requested
+
+
+cycle
+=====
+create sequence demo_seq
+minvalue 1
+maxvalue 5
+start with 1
+increment by 1
+cycle
+cache 4;
+
+select demo_seq.nextval from dual;
+
+NOTE
+====
+The above sequence is used to upto 5 values onces it reached to 5th values again resetted to 1..
+
+Assignment
+==========
+1) How to reset the database sequence and which properties are allowed for resetting ?
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
