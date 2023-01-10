@@ -1,0 +1,102 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : Oracle Index
+                               		         Date  : 10/01/2023
+                                                  (Session - 36)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
+
+>> Pongal Holidays :::13,14,15 No Sessions
+
+>> Again Session ::::16th i.e.,Monday
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Yesterday Session
+=================
+* Worked the Oracle sequence
+
+* Sequence is an database object which can be used generating values dynmaically.
+
+* We can use sequence object during inserting of data in table.
+
+* Selecting the value from sequence >>>>>>>> select <sequence_name>.nextval from dual
+
+* current value from sequqnce >>>>>>>>> select <sequence_name>.currval from dual;
+
+Today Session 
+=============
+* Sequence concept is only applicable for oracle.
+
+* How can we generate the values dynamically for a column in mysql database ?
+
+  Ans) auto_increment
+
+* By using the auto_increment field we can populate the value of column in database table automatically.
+
+MySQL Database
+===============
+create table ashokit_users(user_id bigint primary key auto increment,user_name varchar(50),user_pwd varchar(50));
+
+MySQL Queries
+=============
+create table ashokit_user(user_id bigint auto_increment primary key,
+						  user_name varchar(50),
+						  user_pwd varchar(50));
+                          
+desc ashokit_user;
+
+insert into ashokit_user(user_name,user_pwd) values('Mahesh','Mahesh');
+insert into ashokit_user(user_name,user_pwd) values('Ashok','Ashok');
+insert into ashokit_user(user_name,user_pwd) values('Suresh','Suresh');
+insert into ashokit_user(user_name,user_pwd) values('Rajesh','Rajesh');
+
+select * from ashokit_user;
+
+-- changing the auto increment value
+alter table ashokit_user auto_increment=1510;
+
+Index
+=====
+* Index is one of the predefined Oracle Database object.
+
+* Index are used for getting results of the query fastly.
+
+* Basically Index's are created on columns of the database table.
+
+Example
+=======
+ SQL >>>> select * from emp;   >>>> Returns all the employee information 
+
+ SQL >>>> select rowid,e.* from emp e; >>>> Returns all the employee information with row id
+
+ Row id  >>>>> Memory Address of the particular record in oracle database. 
+
+* If we want to see the execution plan for sql Query  CLI Interface
+
+        set autotrace on explain
+
+        select * from emp where sal <=3000;
+
+* If we want to see the execution plan for sql query through SQL Developer
+
+        select * from emp where sal <=3000 and then select the query and just right click >>>> Explain >>>> Explain Plan
+
+
+* When we pass the sql statement to the Oracle Engine by default scan will happen "Table Access Full Scan" i.e.,row by row   checking (or) linear search.
+
+*  We can create an index in oracle on sal column by usin below ddl command
+
+     create index <index_name> on <table_name>(column_name_1........column_name_n);
+
+  Ex: create index emp_sal_index on emp(sal);
+
+* When we pass the sql statement to the oracle engine now search will happen "Index based Range" scan.
+
+NOTE
+====
+* When we create an index of table column oracle internally the data into "balanced Tree"
