@@ -1,0 +1,194 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : Oracle Views
+                               		         Date  : 11/01/2023
+                                                  (Session - 37)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
+
+>> Pongal Holidays :::13,14,15 No Sessions
+
+>> Again Session ::::16th i.e.,Monday
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Yesterday Session
+=================
+* Index in Oracle  >>>> Retreving the data fastly from the database table
+
+* syntax for creating index on column of the table 
+  
+    create index <index_name> on <table_name>(column_name's);
+
+* we can create index key for multiple columns of an database table.
+
+* Actually when we create an index on database column of table oracle internally scattered the data into "balanced tree".
+
+* we can have option for dropping the index.
+
+* To view the execution plan for an SQL Query in Command Line interface of SQL i.e., set autotrace on explain;
+
+* To View the execution plan for an SQL Query in SQL Developer Interface (Select the query >>> Right click on it >>   Explain >>> Explain plan.
+
+Today Session : Views
+=====================
+
+    Database Objects (table,sequence,index,view)
+
+* View is also one of the database object in the oracle database.
+
+* View always contains logical data from database table.
+
+   Table >>>>>>>>>>>>> Storing the Data physically on disk.
+
+   View  >>>>>>>>>>>>> doesn't store the data on disk its just representing logically view
+
+   view always getting the data <-----------------------> Database Table.
+
+* view acts like virtual table for the Original database table and we can apply DML operations on view as well.
+
+Advantage of using views
+========================
+
+1) simplifying the data retrevial
+=================================
+ 
+    >>>> You got requirement for developing the report in the application 
+
+    >>>> Generation of report is equal to combining the multiple tables and extracting required information.
+
+    >>>> DB Programmer He/She will be written complex query  >>> Delivered to client. >>> After seeing the report by client            may ask to add new columns (or) remove the unnecessary columns from report.
+
+    >>>>> DB Programmer He/She will write complex query from top to bottom for doing amendments hence it is repetive process.
+
+    >>>>> Inorder to overcome problem DB Programmer need to create view for placing His/her Complex query.
+
+    >>>> The advantage of placing the complex query into view avoid writing the complex query with joins instead of that we            can create view simply for extracting the information from multiple database.
+
+2) Views provide the security 
+=============================
+   
+    >>>> Views allow you to implement an additional security layer. They help you hide certain columns and rows from the        
+         underlying tables and expose only needed data to the appropriate users.      
+
+3) Generating the reporting
+===========================
+     >>>>> Mostly we are going to use the views when your generating the reports in application. 
+
+
+Syntax for Creating view in Oracle Database
+===========================================
+  CREATE [or replace] VIEW view_name AS
+  SELECT columns
+  FROM tables
+  [WHERE conditions];
+
+Ex: create or replace view emp_view as select * from emp;
+
+    create or replace view emp_sal_view as select * from emp where sal <=5000;
+
+    create or replace view emp_details_view as select empno,ename,sal,job,hire_dt from emp;
+
+Types of Views
+==============
+ 1) Simple View (or) Updatable view 
+
+ 2) Read only View
+
+ 3) Complex View
+
+ 4) Maternalized View
+
+
+1) Simple View
+==============
+  * If the view is created from single table with out have any joins and aggregations such views called "simple view".
+
+  * Simple view always created from original table with all data (or) partial data.
+
+  * Onces the view created here as DB Programmer we can have option for performing DML Operation on view hence this will also     called as "Updatable" views
+
+    Database Table <----------------------------> View Got Generated <----------> If we are performing any operations on view                      immediately it will be reflected to original data and vice versa.
+
+Examples
+========
+-- creating the view
+create or replace view demo_customer_view as
+select customer_id ,cust_first_name,cust_last_name from demo_customers;
+
+-- selecting the data from view
+select * from demo_customer_view;
+
+-- performing the update operation on view
+update demo_customer_view set cust_first_name='maheshit' where customer_id=7;
+
+--performing the delete operation on view
+delete from demo_customer_view where customer_id=6; 
+
+NOTE
+====
+ Whenever we do any modifications on view immediately reflected to database table and vice versa.
+
+
+2) Read-only view
+=================
+ * The view which can create with read only option such views called as "Read only Views".
+
+ * Read only view always used for selecting the data but not for performing DML operations.
+
+ * The below examples gives you for creating view with read only
+
+Example
+=======
+create or replace view emp_dept_view as
+select * from emp where deptno=20 with READ only;
+
+--selecting the data from view
+select * from emp_dept_view;
+
+-- update the data in the view
+update emp_dept_view set sal=1200 where empno=7369;
+
+Error
+=====
+SQL Error: ORA-42399: cannot perform a DML operation on a read-only view
+42399.0000 - "cannot perform a DML operation on a read-only view"
+
+3) Complex Views
+================
+  * If the view is created by taking the help of multiple tables of an database such views called as "Complex View".
+
+Example
+=======
+create or replace view ashokit_view as
+
+select ae.emp_id,ae.emp_name,ad.dept_name,am.manager_name,ap.project_name 
+from 
+ashokit_emp ae left join ashokit_dept ad on ae.dept_id = ad.dept_id
+left join ashokit_managers am on am.manager_id = ae.manager_id
+left join ashokit_projects ap on ap.team_member_id=ae.emp_id
+order by ap.project_name;
+
+-- Selecting the data from view
+select * from ashokit_view;
+
+-- Updating the data into view
+update ashokit_view set project_name='Banking project' where emp_id='E4';
+
+Error
+=====
+SQL Error: ORA-01779: cannot modify a column which maps to a non key-preserved table
+01779. 00000 -  "cannot modify a column which maps to a non key-preserved table"
+*Cause:    An attempt was made to insert or update columns of a join view which
+           map to a non-key-preserved table.
+*Action:   Modify the underlying base tables directly.
+
+NOTE
+====
+Complex views are also called  "Read only views"
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
