@@ -1,0 +1,117 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : Oracle Views
+                               		         Date  : 12/01/2023
+                                                  (Session - 38)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
+
+>> Pongal Holidays ::: 13,14,15 No Sessions
+
+>> Next Session    ::: 16th i.e.,Monday
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Yesterday Session
+=================
+* We Just started understanding about SQL Views
+
+* View >>>>>>>>>> It is a one of database object in the oracle which contains logical data from base table.
+
+* Advantages Of Views
+  
+   1) Simplifying the Data retreival Process.
+
+   2) Provides Security
+
+   3) Report Generation
+
+
+* Types Of SQL Views
+
+   1) Simple View  >>>> It always extracts the data from single table.
+
+                   >>>> Simple View also called "Updatable View".
+
+                   >>>> If base table is modified with some records automatically view data also reflected.
+
+                   >>>> If view is modified withh some records automatically base table also reflected
+
+   2) Read only view >>>>> We can create an view with Read only operation i.e.,Only select will be performed and we can't 
+                           perform non-select operations 
+
+   3) Complex Views >>>>>> We can create an view by giving selecting query which retrieves the data from multiple tables.
+                    
+                    >>>>>> We can't perform non-select operations on complex views.
+
+                    >>>>>> We can perform non-select operations on base tables automatically complex view will be reflected                            with new data
+
+  4) materialized Views  >>>>> It is one oracle database object always executes given sql query on base tables and                                materialized view will hold results of the query.
+
+                         >>>>>> If the based table got modified materialized view results will not modified until we do                                 refresh the materialized view
+
+   Creating materialized view
+   --------------------------
+   create materialized view emp_mat_vw
+   as select deptno,sum(sal) from emp group by deptno order by deptno;
+
+  Selecting the data from materialized view
+  ------------------------------------------
+   select * from emp_mat_vw
+   
+  OUTPUT
+  ======
+  10	8750
+  20	10875
+  30	9400 
+  
+   Updating the data in base table by increasing the sal of every employee
+   ========================================================================
+   update emp set sal = sal + 1000;
+
+   Latest results from select query (select deptno,sum(sal) from emp group by deptno order by deptno;)
+   ================================
+   10	11750
+   20	15875
+   30	15400
+
+   Again selecting materialized view data
+   ======================================
+   select * from emp_mat_vw; [We can observe the output as first results]
+   
+  OUTPUT
+  ======
+  10	8750
+  20	10875
+  30	9400 
+
+   Refreshing the materialized views
+   =================================
+   exec dbms_mview.refresh("emp_mat_vw");
+
+    exec  >>> execute
+
+    dbms_mview >>>>> package
+
+    refresh() >>> function 
+    
+    emp_mat_vw >>>>> materialized view
+
+   OUTPUT
+   ======
+   PL/SQL procedure successfully completed.
+
+    Again selecting materialized view data
+   ======================================
+   select * from emp_mat_vw; [We can observe the output as latest results]
+
+   OUTPUT
+   =======
+   10	11750
+   20	15875
+   30	15400
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
