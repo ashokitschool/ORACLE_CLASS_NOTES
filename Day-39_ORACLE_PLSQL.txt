@@ -1,0 +1,205 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : Introduction To PL/SQL
+                               		         Date  : 16/01/2023
+                                                  (Session - 39)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Last Session
+============
+* We Just Completed SQL Part.
+
+* Views and Types of Views 
+
+    1) Simple view
+
+    2) Readonly view
+  
+    3) Complex view
+
+    4) Maternalized View
+
+* Normal View (vs) Maternalized View
+
+   Normal Views       >>> By using the normal views always select query will executed on base tables directly.
+                       
+                      >>> If base table is modified with some data automatically view will be reflected.
+  
+
+   Maternalized Views >>> By using this kind of views always executing the selecting query on base table + Holding output of                            an select query.
+
+                      >>> If Base table is modified with some data automatically maternalized view data (or) output can't be                           reflected.
+
+                      >>> As DB Programmer we need to refresh maternalized view manualy with help of below command
+
+                                   exec dbms_mview.refresh("emp_mat_vw");
+Today Session : PL/SQL
+======================
+* PL/SQL Stands "Procedural Language by Structured Query Language".
+
+* PL/SQL is an extension of SQL Language.
+
+* SQL is an Declarative Programming Language where PL/SQL is not a Declarative Programming language.
+    Ex: select * from emp;
+
+* SQL Language we can execute only one SQL Command at a time but where as in PL/SQL we can execute group of statements as     Single unit at atime. 
+
+* SQL Language can't support for control structures but where as in Pl/SQL allows the programmer to implement the different   control structure.
+
+* Pl/SQL provides most important concepts related to OOPS (Reusability) through "Stored Procedure and Stored Functions".
+
+* Pl/SQL Plays central role through cursors,Exceptions,Procedures,Functions,Triggers etc.,
+
+        cursors >>>>>>>>>> Holding the data and retrieving the data same as ResultSet Object in Jdbc
+
+        Exceptions >>>>>>>>>>>>>> Handling the runtime exceptions
+
+        Stored Procedures & Stored Functions >>>>>>>>>>>>> Reusable components in Database
+
+        Triggers >>>>>>>>>>>>>>> Auditing
+
+* PL/SQL is an programming approach to execute the SQL Statements
+
+**************************
+Block Structure of Pl/SQL
+**************************
+ 
+   1 --------------------------------- Declaration Section ------------------------ Optional Section                          
+
+                                       ...................
+ 
+                                       ...................
+
+   2---------------------------------- Begin--------------------------------------- Mandatory Section
+
+                                       ....................
+
+                                       ....................
+
+   3----------------------------------Exception------------------------------------ Optional Section
+
+                                      ......................
+                                      
+                                      ......................
+
+   4--------------------------------- End------------------------------------------ Mandatory Section
+
+
+   5--------------------------------- / -------------------------------------------
+
+
+1) Declaration Section
+======================
+ * It is optional section (or) optional block.
+
+ * In this section we can declare variables constants,cursors,exceptions etc.,
+
+ * We can declare only one variable at atime through out plsql block.
+
+
+2) Begin
+========
+  
+ * It is a mandatory section and it contains all executable statements of SQL and PL/SQL.
+
+ * Every executable statement in PLSQL block must be terminated with semicolon(;)
+
+ * Every assignment operations must be follow as ":=" 
+     
+       a := 10;  
+
+3) Exception
+============
+ * It is an Optional section and it contains the code recording the error handling occured during the Program execution.
+
+
+4) End
+======
+ * It is a mandatory section and it indicates the termination of plsql program it must be end with semicolon.
+
+     ex: end;
+
+5) /
+====
+ * It is used to run the script file (or) plsql block and it is an Mandatory block
+
+
+   Example
+   ======
+      begin
+        // block of statements
+        dbms_output.put_line('Welcome To AshokIT PL/SQL Programming.........');
+      end;
+
+  NOTE
+  ====
+   * If the above PLSQL block doesn't having any errors then you will receive a message from server as "PL/SQL Procedure            Successfully Completed" otherwise you will get errors list on the console.
+
+   * To See the output statements on the console we need to enable PLSQL environment by providing the below command
+
+              set serveroutput on 
+
+   * Re-execute the PL/SQL block by using "/" then we can see the below message
+        
+              Welcome To AshokIT PL/SQL Programming.........
+
+   * dbms_output.put_line() is an output statement which can be used to display some message on the console
+
+         dbms_output  >>>>>>>>>>> Predefined package
+
+         put_line()   >>>>>>>>>>> Function 
+
+         ||           >>>>>>>>>>> Concation
+
+     Example
+     =======
+          declare
+          uname varchar2(50) := 'Mahesh'
+          begin
+          dbms_output.put_line('Welcome To Ashok IT For Oracle Sessions By.....' || uname);
+          end;
+          /
+
+     Example 
+     =======
+          declare 
+          a  number := 10;
+          b  number := 20;
+          c  number;
+          begin
+          dbms_output.put_line('Sum of two numbers:::::' || c);
+          end; 
+          /
+
+     OUTPUT
+     ====== 
+         Sum of two numners::::: 30
+
+         PL/SQL procedure succesfully completed.
+
+DataTypes 
+=========
+ * The Datatypes same as SQL in PLSQL.
+
+Operators
+=========
+ * Same as SQL operators.
+
+ * Assignment will be using ":=".
+
+Output Statement 
+================
+  dbms_output.put_line('message');
+
+Input Statement
+===============
+  * There is no predefined input function given by plsql for this we need to use & to read values from enduser.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
