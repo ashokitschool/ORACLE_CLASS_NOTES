@@ -1,0 +1,195 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : Introduction To PL/SQL-Blocks
+                               		         Date  : 17/01/2023
+                                                  (Session - 40)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Yesterday Session
+==================
+* We Just started PL/SQL Introduction.
+
+* SQL Datatypes  = PLSQL Datatypes
+
+* SQL Operators  = PLSQL Operators ("=", ":=")
+
+* Output Statement for PL/SQL i.e.,dbms_output.put_line('Message');      >>>>> System.out.println("Message");
+
+                                   dbms_output.put_line('Message' || a); >>>>> System.out.println("Message:::" + a);
+
+* Input Statement For PL/SQL i.e.,&
+
+* PL/SQL Program Structure
+  ========================
+    1) declaration section  >>>>>>>>>  Optional Section
+
+    2) begin section        >>>>>>>>>  Mandatory Section
+
+    3) end section          >>>>>>>>>  Mandatory Section 
+
+    4) Exception Section    >>>>>>>>>  Optional Section
+
+    5) /                    >>>>>>>>>  Mandatory section
+
+* We can define the business logic between the begin section and end section of an PL/SQL block.
+
+
+Today Session
+=============
+
+First Example
+=============
+  Develop the Pl/SQL Block to display the welcome message.
+
+     begin
+     dbms_output.put_line('Welcome To Ashok IT PL/SQL Programming.....');
+     end;
+     /
+
+  PL/SQL Procedure Completed Successfully
+
+  SQL> set serveroutput on       (Enabling the Pl/SQL Environment)
+
+  SQL>  / (Executing the previous PL/SQL block)
+
+  Welcome To Ashok IT PL/SQL Programming.....  
+
+  PL/SQL Procedure Completed Successfully
+
+
+Second Example
+==============
+ Develop the Pl/SQL Block to display value of declared variable.
+
+     declare 
+     a number;
+     begin
+     -- This is for Declaration
+     a := 150;
+     dbms_output.put_line('Defined Variable value::::' || a);
+     end;
+     /
+
+OUTPUT
+======
+Defined Variable value:::::150
+
+PL/SQL procedure successfully completed.
+
+Third Example
+=============
+Develop the PL/SQL Block to perform addition of two numbers
+
+      declare
+      a  number := 150;
+      b  number := 250;
+      c  number;
+      begin
+      c := a + b;
+      dbms_output.put_line('Addition Of Two Numbers:::::' || c);
+      end;
+      /
+
+Addition Of Two Numbers:::::400
+
+PL/SQL procedure successfully completed.
+
+
+Fourth Example
+================
+Develop the PL/SQL Block to perform addition of two numbers using dynamic values
+
+      declare
+      a  number := &firstNumber;
+      b  number := &secondNumber;
+      c  number;
+      begin
+      c := a + b;
+      dbms_output.put_line('Addition Of Two Numbers:::::' || c);
+      end;
+      /
+
+Enter value for firstnumber: 254
+old   2: a number := &FirstNumber;
+new   2: a number := 254;
+Enter value for secondnumber: 547
+old   3: b number := &SecondNumber;
+new   3: b number := 547;
+Addition of Two Numbers:::::801
+
+PL/SQL procedure successfully 
+
+
+Fifth Example
+=============
+Develop the PL/SQL block to get the customer details based on given customer Id ?
+
+   1)   ashokit_customers  >>>>>>>>> Table Name
+
+   2)   customer_id,customer_name,customer_location,bill_amount >>>>>>>>> Columns
+
+    declare
+    customerId number := &customerId;
+    customerName varchar2(30);
+    customerLocation varchar2(30);
+    billAmount number    
+    begin    
+    select customer_name,customer_location,bill_amount into customerName,customerLocation,billAmount
+    from ashokit_customers where customer_id = customerId;    
+    dbms_output.put_line(customerId || customerName || customerLocation || billAmount);
+    end;
+    /
+
+OUTPUT
+======
+Enter value for customerid: 123
+old   2: customerId number := &customerId;
+new   2: customerId number := 123;
+123 Mahesh Hyderabad 15000
+
+PL/SQL procedure successfully completed.
+
+%row type
+=========
+* By using this object we can able to declare plsql variable according to the collection of columns in sql table.
+
+* This variable can store a value from any column in that table.
+
+Example code
+============
+      declare 
+    
+      customerId number := &customerId;
+      customer_record ashokit_customers%rowtype   >>>>>>>>>>This is for holding the particular row of information from table
+    
+      begin
+     
+      select * into customer_record from ashokit_customers where customer_id=customerId;
+     
+      dbms_output.put_line(customer_record.customer_name || customer_record.bill_amount);
+
+      end;
+      /
+
+OUTPUT
+======
+Enter value for customerid: 123
+old   2: customerId number := &customerId;
+new   2: customerId number := 123;
+Mahesh15000
+
+PL/SQL procedure successfully completed.
+
+Assignments
+============
+1) Develop the Plsql block to check whether given number is even number or odd number.
+
+2) Develop the Plsql block to get the emp details from emp table.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
