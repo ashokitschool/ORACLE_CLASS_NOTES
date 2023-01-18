@@ -1,0 +1,280 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : Introduction To PL/SQL-Control Statements
+                               		         Date  : 18/01/2023
+                                                  (Session - 41)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Yesterday session
+=================
+* We executed some PL/SQL blocks using oracle Command Line Interface.
+
+* If PL/SQL block wanted to retrieve the particular row from database table always recommended to use %rowtype type.
+
+  Example
+  =======
+      declare     
+      customerId number := &customerId;
+      customer_record ashokit_customers%rowtype    
+      begin     
+      select * into customer_record from ashokit_customers where customer_id=customerId;     
+      dbms_output.put_line(customer_record.customer_name || customer_record.bill_amount);
+      end;
+      /
+
+Today Session 
+=============
+%type
+=====
+* By using %type object we can declare plsql variable according to the column datatype in database table.
+
+        Consider we have emp table which contains the below columns
+            
+               empno  >>>>>>>>>> number
+             
+               ename  >>>>>>>>>> varchar2
+
+               job    >>>>>>>>>> varchar2
+
+    Plsql Block
+    ===========
+        declare
+	
+        employeeno emp.empno %type;
+	employeename emp.ename %type;
+        employeejob emp.job %type;
+	
+        begin
+        -- reading the input from enduser
+	employeeno := &employeeno;
+	select ename,job into employeename,employeejob from emp where empno=employeeno;
+	dbms_output.put_line('Employee Name::::'  || employeename);
+	dbms_output.put_line('Employee Job ::::'  || employeejob);
+	end;
+	/
+
+Plsql Control Statements
+========================
+* Inorder to write some conditions in program definetly need to take support control statements.
+
+* In plsql we have two types of control statements
+
+    1) conditional control statements
+    
+         - simple if 
+
+         - if-else
+
+         - nested if
+
+         - case
+
+    2) looping control statements
+
+         - basic
+
+         - while
+
+         - for
+
+
+1) IF-THEN Statement   >>>>>>>>>>>>> Simple If Statement
+=========================================================
+ * The IF-THEN statement is mainly used to execute a particular section of codes only when the condition is satisfied.
+
+Syntax
+======
+IF <condition: returns Boolean> THEN
+ -- executed only if the condition returns TRUE 
+ <action_block>
+END if;
+
+Program
+=======
+DECLARE 
+a NUMBER := &a;
+BEGIN
+dbms_output.put_line(‘Program started.' );
+IF( a > 100 ) THEN
+dbms_output.put_line('a is greater than 100'); 
+END IF;
+dbms_output.put_line(‘Program completed.');
+END;
+/
+
+
+2) IF-THEN-ELSE Statement  >>>>>>>>>>>>>>>if-else statement
+============================================================
+* The IF-THEN-ELSE statement is mainly used to select between two alternatives based on the condition.
+
+Syntax
+======
+IF <condition: returns Boolean> THEN
+	-executed only if the condition returns TRUE
+	<action_blockl>
+ELSE
+	-execute if the condition failed (returns FALSE)
+	<action_block2>
+END if;
+
+Program
+=======
+DECLARE 
+a NUMBER:= &provideValue;
+BEGIN
+dbms_output.put_line (‘Program started');
+IF(mod(a,2)=0) THEN 
+dbms_output.put_line('Given Number is Even' ); 
+ELSE
+dbms_output.put_line('Given Number is Odd'); 
+END IF;
+dbms_output.put_line (‘Program completed.’);
+END;
+/
+
+3) IF-THEN-ELSIF Statement
+==========================
+* The IF-THEN-ELSIF statement is mainly used where one alternative should be chosen from a set of alternatives, where each   alternative has its own conditions to be satisfied.
+
+* The first conditions that return <TRUE> will be executed, and the remaining conditions will be skipped.
+
+* The IF-THEN-ELSIF statement may contain ‘ELSE’ block in it. This ‘ELSE’ block will be executed if none of the conditions is   satisfied.
+
+Syntax 
+=====
+IF <conditionl: returns Boolean> THEN
+   -- executed only if the condition returns TRUE
+   <action_blockl>
+
+ELSIF <condition2 returns Boolean>
+   <action_block2>
+
+ELSIF <condition3:returns Boolean> 
+   <action_block3>
+
+ELSE — optional 
+  <action_block_else>
+
+END if;
+
+
+Program
+======
+DECLARE
+mark NUMBER :=&studentMarks;
+BEGIN
+dbms_output.put_line(‘Program started.’ );
+IF( mark >= 70) THEN 
+dbms_output.put_line(‘Grade A’);
+ELSIF(mark >= 40 AND mark < 70) THEN
+dbms_output.put_line(‘Grade B'); 
+ELSIF(mark >=35 AND mark < 40) THEN
+dbms_output.put_line(‘Grade C’);
+END IF;
+dbms_output.put_line(‘Program completed.’); 
+END;
+/
+
+4) case-when statement
+=======================
+* If we try to describe the case statement in one line then, then we can say means "one out of many". 
+
+* It is a decision making statement that selects only one option out of the multiple available options.
+
+Syntax
+=====
+CASE selector
+	when value1 then Statement1;
+	when value2 then Statement2;
+	...
+	...
+	else statement;
+end CASE;
+
+Example
+=======
+DECLARE
+	a number;
+	b number;
+BEGIN
+	a := &a;
+	b := mod(a,2);
+	CASE b
+		when 0 then dbms_output.put_line('Even Number');
+		when 1 then dbms_output.put_line('Odd Number');
+ 		else dbms_output.put_line('User has not given any input value to check');
+	END CASE;
+END;
+
+looping control statement
+============================
+
+1) Basic loop
+=============
+LOOP
+  sequence of statements
+END LOOP;
+
+Example
+=======
+DECLARE
+        i number;
+BEGIN
+	i := 1;
+	LOOP
+		if i>10 then
+		   exit;
+		end if;
+		dbms_output.put_line('i = ' || i);
+		i := i+1;
+	END LOOP;
+END;
+
+While loop
+===========
+WHILE <test_condition> LOOP
+	<action>
+END LOOP;
+
+Example
+=======
+set serveroutput on;
+
+DECLARE
+	num number:=1;
+BEGIN
+	while(num <= 10) LOOP
+		dbms_output.put_line('num'|| num);
+		num := num+2;
+	END LOOP;
+END;
+
+
+for loop
+=======
+FOR counter_variable IN start_value..end_value LOOP
+   
+   statement to be executed
+
+END LOOP;
+
+
+Example
+=======
+set serveroutput on;
+
+DECLARE
+	i number(2);
+BEGIN
+	FOR i IN 1..10 LOOP
+	   dbms_output.put_line(i);
+	END LOOP;
+END;
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
