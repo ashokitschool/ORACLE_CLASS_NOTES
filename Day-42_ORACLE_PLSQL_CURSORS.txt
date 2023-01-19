@@ -1,0 +1,217 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : Introduction To PL/SQL-Cursors
+                               		         Date  : 19/01/2023
+                                                  (Session - 42)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Yesterday Session
+=================
+* We completed related plsql control statements
+
+* we have only two types of control statements in plsql 
+
+  1) conditional control statements
+    
+     -> If then condition
+
+     -> If then else 
+
+     -> If-elsIf-then
+
+     -> case when
+
+  2) looping control statements
+
+     -> Basic
+  
+     -> while
+
+     -> for
+
+Today Session
+=============
+Example
+=======
+Develop the plsql block for taking customer accountnumber,name of the customer, currentbalance of account,transaction amount and transaction code(d for depoist and w for withdrawal) calculate the net balance of customer
+
+     depoist  operation    >>>>> net_balance  = current_balance + transaction_amount;
+
+     with drawal operation >>>>> net_balance  = current_balance - transaction_amount;
+
+   
+         declare         
+         accountNumber number := &accountNumber;
+         accountName   varchar2(20) := '&accountName';
+         currentBalance number := &currentBalance;
+         transactionAmount    number := &transactionAmount;
+         transactionCode varchar2(1) := '&transactionCode';
+         netBalance number;
+         begin
+         -- business logic
+         if( transactionCode = 'd') then
+           netBalance := currentBalance + transactionAmount;
+         elsif (transactionCode = 'w') then
+           netBalance := currentBalance - transactionAmount;
+         end if;
+         dbms_output.put_line('Customer Net Balance::::' || netBalance);
+         end;
+         /
+
+Cursor
+======
+* A cursor is a pointer that points to a result of a query.
+
+* Basically Cursor is used for processing the bulk of records in database table.
+
+* Oracle Supports the two types of cursors
+
+   1) Implicit cursors : If cursor managed by the oracle such cursors are called "Predefined/Implicit" cursors.
+
+   2) Explict Cursors  : If cursor managed by the programmer such cursors are called "Explicit/Userdefined" cursors.
+
+* Every Oracle Cursor having four parameters
+
+   1) Declaring the cursor
+
+   2) opening the cursor
+
+   3) fetching the cursor
+
+   4) closing the cursor
+
+* Declaring the cursor is nothing but defining the cursor variable and associated with DML Statement using is keyword.
+
+   Example :
+   =========
+      declare
+      cursor <cursor_name> is DML(Or)DRL Statement
+
+      declare
+      cursor emp_cursor is select * from emp;
+
+* Opening the cursor means Oracle internally executing the sql statement by Oracle Engine which is defined in cursor      declaration.
+
+    Example
+    =======
+     open <cursor_name>;
+
+     open emp_cursor;
+
+* fetching the cursor means getting the data from cursor into plsql variables.
+
+     Example 
+     =======
+      fetch <cursor_name> into <plsql_variables>
+
+      fetch emp_cursor into employeeno,employeename,employeesal,employeeJob
+
+* Onces we are completed working with cursor in oracle as programmer need to close the cursor by using close statement
+
+     Example 
+     =======
+      close  <cursor_name>;
+
+      close emp_cursor;
+
+Example (Explicit Cursor)
+=========================
+declare
+cursor emp_cursor is select empno,ename from emp;
+employeeNo emp.empno%type;
+employeeName emp.ename%type;
+begin
+open emp_cursor;
+loop
+fetch emp_cursor into employeeNo,employeeName;
+exit when emp_cursor%notfound;
+dbms_output.put_line(employeeNo || ' ' || employeeName);
+end loop;
+close emp_cursor;
+end;
+/
+
+* Every Oracle Cursor contains following below attributes
+  
+   1) %isopen >>>> This attribute is TRUE if the cursor is open or FALSE if it is not.
+
+   2) %found  >>>> If fetch got success will returns true otherwise return false.
+
+   3) %notfound >>>> If fetch got success will returns false otherwise return true.
+
+   4) %rowcount >>>> It returns no of rows returned from cursor
+
+
+Example on %found
+=================
+declare
+employeeId number := &employeeId;
+begin
+delete from mahesh_employees where employee_id = employeeId;
+if sql%found then
+dbms_output.put_line('Record Deleted Successfully.....');
+else
+dbms_output.put_line('No Data Found Given Employee Id');
+end if;
+end;
+/
+
+
+Example on %rowcount
+====================
+declare
+no_of_records_count number;
+begin
+update emp set sal = sal + 500;
+commit;
+no_of_records_count := sql%rowcount;
+dbms_output.put_line('Test'||sql%rowcount); 
+dbms_output.put_line('All Rows Updated....' || no_of_records_count);
+end;
+/
+
+
+Example
+=======  
+     declare
+     cursor c1 is select empno,ename,sal from emp;
+     employeeNo emp.empno%type;
+     employeeName emp.ename%type;
+     employeeSal emp.sal%type;
+     begin
+     open c1;
+     loop
+     fetch c1 into employeeNo,employeeName,employeeSal;
+     exit when c1%notfound;
+     dbms_output.put_line(employeeNo|| ' '||employeeName|| ' ' ||employeeSal);
+     end loop;
+     close c1;
+     end;
+     /
+
+ Example
+ =======
+    declare
+    cursor emp_cursor is select * from emp;
+    begin
+    for emp_counter in emp_cursor
+    loop
+    dbms_output.put_line(emp_counter.empno || ' '|| emp_counter.ename || ' '||emp_counter.sal|| ' ' || emp_counter.job);
+    end loop;
+    end;
+    /
+ 
+
+   
+
+
+
+
+
