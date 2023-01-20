@@ -1,0 +1,549 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : Introduction To PL/SQL-Cursors
+                               		         Date  : 20/01/2023
+                                                  (Session - 43)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Yesterday Session
+=================
+Cursor
+======
+* A cursor is a pointer that points to a result of a query.
+
+* Basically Cursor is used for processing the bulk of records in database table.
+
+* Oracle Supports the two types of cursors
+
+   1) Implicit cursors : If cursor managed by the oracle such cursors are called "Predefined/Implicit" cursors.
+
+   2) Explict Cursors  : If cursor managed by the programmer such cursors are called "Explicit/Userdefined" cursors.
+
+* Every Oracle Cursor having four parameters
+
+   1) Declaring the cursor
+
+   2) opening the cursor
+
+   3) fetching the cursor
+
+   4) closing the cursor
+
+* Declaring the cursor is nothing but defining the cursor variable and associated with DML Statement using is keyword.
+
+   Example :
+   =========
+      declare
+      cursor <cursor_name> is DML(Or)DRL Statement
+
+      declare
+      cursor emp_cursor is select * from emp;
+
+* Opening the cursor means Oracle internally executing the sql statement by Oracle Engine which is defined in cursor        declaration.
+
+    Example
+    =======
+     open <cursor_name>;
+
+     open emp_cursor;
+
+* fetching the cursor means getting the data from cursor into plsql variables.
+
+     Example 
+     =======
+      fetch <cursor_name> into <plsql_variables>;
+
+      fetch emp_cursor into employeeno,employeename,employeesal,employeeJob;
+
+* Onces we are completed working with cursor in oracle as programmer need to close the cursor by using close statement
+
+     Example 
+     =======
+      close  <cursor_name>;
+
+      close emp_cursor;
+
+Example (Explicit Cursor)
+=========================
+declare
+cursor emp_cursor is select empno,ename from emp;
+employeeNo emp.empno%type;
+employeeName emp.ename%type;
+begin
+open emp_cursor;
+loop
+fetch emp_cursor into employeeNo,employeeName;
+exit when emp_cursor%notfound;
+dbms_output.put_line(employeeNo || ' ' || employeeName);
+end loop;
+close emp_cursor;
+end;
+/
+
+Example on Explicit cursor
+==========================
+declare
+cursor c1 is select empno,ename,sal from emp;
+employeeNo emp.empno%type;
+employeeName emp.ename%type;
+employeeSal emp.sal%type;
+begin
+open c1;
+loop
+fetch c1 into employeeNo,employeeName,employeeSal;
+exit when c1%notfound;
+dbms_output.put_line(employeeNo|| ' '||employeeName|| ' ' ||employeeSal);
+end loop;
+close c1;
+end;
+/
+
+Example on Explicit cursor
+==========================
+declare
+cursor c1 is select * from emp;
+emp_record emp %rowtype;
+begin
+open c1;
+loop
+fetch c1 into emp_record;
+exit when c1%notfound;
+dbms_output.put_line(emp_record.empno|| ' '||emp_record.ename|| ' ' ||emp_record.sal || ' ' || emp_record.job);
+end loop;
+close c1;
+end;
+/
+
+* Every Oracle Cursor contains following below attributes
+  
+   1) %isopen >>>> This attribute is TRUE if the cursor is open or FALSE if it is not.
+
+   2) %found  >>>> If fetch got success will returns true otherwise return false.
+
+   3) %notfound >>>> If fetch got success will returns false otherwise return true.
+
+   4) %rowcount >>>> It returns no of rows returned from cursor
+
+
+Example on %found
+=================
+declare
+employeeId number := &employeeId;
+begin
+delete from mahesh_employees where employee_id = employeeId;
+if sql%found then
+dbms_output.put_line('Record Deleted Successfully.....');
+else
+dbms_output.put_line('No Data Found Given Employee Id');
+end if;
+end;
+/
+
+Example on %rowcount
+====================
+declare
+no_of_records_count number;
+begin
+update emp set sal = sal + 500;
+no_of_records_count := sql%rowcount;
+commit; 
+dbms_output.put_line('All Rows Updated....' || no_of_records_count);
+end;
+/
+
+Example on %rowcount
+====================
+declare
+departmentNo emp.deptno%type := &departmentNo;
+no_of_records_count number;
+begin
+update emp set sal = sal + 500 where deptno= departmentNo;
+no_of_records_count := sql%rowcount;
+commit; 
+dbms_output.put_line('All Rows Updated....' || no_of_records_count);
+end;
+/
+
+OUTPUT
+======
+Enter value for departmentno: 10
+old   2: departmentNo emp.deptno%type := &departmentNo;
+new   2: departmentNo emp.deptno%type := 10;
+All Rows Updated....3
+
+PL/SQL procedure successfully completed.
+
+Example on %isopen
+==================
+declare
+departmentNo emp.deptno%type := &departmentNo;
+cursor emp_cursor is select * from emp where deptno=departmentNo;
+emp_record emp %rowtype;
+begin
+open emp_cursor;
+if emp_cursor %isopen then
+loop
+  fetch emp_cursor into emp_record;
+exit when emp_cursor %notfound;
+dbms_output.put_line(emp_record.empno || ' '|| emp_record.ename || ' ' || emp_record.sal);
+end loop;
+close emp_cursor;
+else
+dbms_output.put_line('No Cursor Opened in your program for retreiving');
+end if;
+end;
+/
+
+OUTPUT
+======
+Enter value for departmentno: 10
+old   2: departmentNo emp.deptno%type := &departmentNo;
+new   2: departmentNo emp.deptno%type := 10;
+7839 KING 8500
+7782 CLARK 5950
+7934 MILLER 4800
+
+
+Example on %isopen :::: second version
+======================================
+declare
+departmentNo emp.deptno%type := &departmentNo;
+cursor emp_cursor is select * from emp where deptno=departmentNo;
+emp_record emp %rowtype;
+begin
+-- open emp_cursor;
+if emp_cursor %isopen then
+loop
+  fetch emp_cursor into emp_record;
+exit when emp_cursor %notfound;
+dbms_output.put_line(emp_record.empno || ' '|| emp_record.ename || ' ' || emp_record.sal);
+end loop;
+close emp_cursor;
+else
+dbms_output.put_line('No Cursor Opened in your program for retreiving');
+end if;
+end;
+/
+
+OUTPUT
+======
+Enter value for departmentno: 10
+old   2: departmentNo emp.deptno%type := &departmentNo;
+new   2: departmentNo emp.deptno%type := 10;
+No Cursor Opened in your program for retreiving
+
+PL/SQL procedure successfully completed.
+
+Example on cursors using for loop
+=================================
+declare
+cursor emp_cursor is select * from emp;
+begin
+for emp_counter in emp_cursor
+loop
+dbms_output.put_line(emp_counter.empno || ' '|| emp_counter.ename || ' '||emp_counter.sal|| ' ' || emp_counter.job);
+end loop;
+end;
+/
+
+OUTPUT
+======
+7839 KING 8500 PRESIDENT
+7698 BLAKE 5850 MANAGER
+7782 CLARK 5950 MANAGER
+7566 JONES 5975 MANAGER
+7788 SCOTT 6000 ANALYST
+7902 FORD 6000 ANALYST
+7369 SMITH 3800 CLERK
+7499 ALLEN 4600 SALESMAN
+7521 WARD 4250 SALESMAN
+7654 MARTIN 4250 SALESMAN
+7844 TURNER 4500 SALESMAN
+7876 ADAMS 4100 CLERK
+7900 JAMES 3950 CLERK
+7934 MILLER 4800 CLERK
+
+PL/SQL procedure successfully completed.
+
+Cursor Attributes
+=================
+1) SQL%isOpen 
+
+2) SQL%found
+
+3) SQL%notfound
+
+4) SQL%rowcount
+
+Every Plsql Block
+=================
+1) declaration section i.e., declare
+
+2) begin section i.e., begin
+
+3) end section i.e., end
+
+4) exception section i.e.,exception
+
+5) /
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Exceptions
+==========
+*  Exception is known as an error which can be handled by the user by displaying user friendly error messages.
+
+*  Exceptions can be divided into two types.
+
+   1) predefined exceptions :  
+   ==========================
+   * some exceptions are defined by the oracle itself such exception are called "Predefined Exceptions".
+
+   * This exceptions are called frequently occured as common errors during program execution.
+
+   2) userdefined exceptions : 
+   ===========================
+   *  Exceptions are declared and raised explictly by the programmer are called "User defined Exceptions".
+
+Syntax
+======
+    declare
+       <Statements>
+    begin
+       <Statements>
+    exception
+       <Statements>
+    end;
+    /
+
+1) Pre-defined Exceptions
+=========================  
+  zero_divided : This exception will be raise if the advisor is equal to zero.
+  =============  
+  declare
+    a number := &a;
+    b number := &b;
+    c number;
+  begin
+    c := a / b;
+    dbms_output.put_line('Division Operations::::' || c);
+  end;
+  /
+
+OUTPUT
+======
+Enter value for a: 10
+old   2:     a number := &a;
+new   2:     a number := 10;
+Enter value for b: 5
+old   3:     b number := &b;
+new   3:     b number := 5;
+Division Operations::::2
+
+PL/SQL procedure successfully completed.
+
+OUTPUT
+======
+Enter value for a: 10
+old   2:     a number := &a;
+new   2:     a number := 10;
+Enter value for b: 0
+old   3:     b number := &b;
+new   3:     b number := 0;
+
+ERROR at line 1:
+ORA-01476: divisor is equal to zero
+ORA-06512: at line 6
+
+  Exception Handling Code
+  =======================
+    declare
+    a number(2)  := &a;
+    b number(2)  := &b;
+    c number;
+    -- declaration of ecxception
+    division_error exception;
+    begin
+    if b = 1 then
+       raise division_error;
+    end if ;
+    c := a/b;
+    dbms_output.put_line('Division Result' || c);
+    exception
+     when zero_divide then
+       dbms_output.put_line('Division By Zero Error');
+     when division_error then
+       dbms_output.put_line('Division By One Error');
+     when others then
+       dbms_output.put_line('Error' || sqlerrm);
+     end;
+     / 
+
+First Version
+=============
+Enter value for a: 10
+old   2:     a number(2)  := &a;
+new   2:     a number(2)  := 10;
+Enter value for b: 5
+old   3:     b number(2)  := &b;
+new   3:     b number(2)  := 5;
+Division Result2
+
+PL/SQL procedure successfully completed.
+
+Second Version
+==============
+Enter value for a: 10
+old   2:     a number(2)  := &a;
+new   2:     a number(2)  := 10;
+Enter value for b: 0
+old   3:     b number(2)  := &b;
+new   3:     b number(2)  := 0;
+Division By Zero Error
+
+PL/SQL procedure successfully completed.
+
+Third Version
+=============
+Enter value for a: 10
+old   2:     a number(2)  := &a;
+new   2:     a number(2)  := 10;
+Enter value for b: 1
+old   3:     b number(2)  := &b;
+new   3:     b number(2)  := 1;
+Division By One Error
+
+PL/SQL procedure successfully completed.
+
+
+Fourth Version
+==============
+Enter value for a: 10
+old   2:     a number(2)  := &a;
+new   2:     a number(2)  := 10;
+Enter value for b: 250
+old   3:     b number(2)  := &b;
+new   3:     b number(2)  := 250;
+declare
+*
+ERROR at line 1:
+ORA-06502: PL/SQL: numeric or value error: number precision too large
+ORA-06512: at line 3
+
+2) value_error: 
+===============
+* This exception will be raised if the programmer try to manipulate the mismatching datatype.
+
+   Example
+   =======
+    declare
+    employeeno number;
+    begin
+    select ename into employeeno from emp where empno=7902;
+    end;
+    /
+
+   Example : Handling the Exception
+   ================================
+    declare
+    no number;
+    begin
+    select ename into no from emp where empno=7902;
+    dbms_output.put_line('Display empno:::::' || no);
+    exception
+    when value_error then 
+    dbms_output.put_line('Value Error:::::' || sqlerrm);
+    dbms_output.put_line('Change datatype of column from number to varchar2(100)');
+    end;
+    /
+
+OUTPUT
+======
+Value Error:::::ORA-06502: PL/SQL: numeric or value error: character to number conversion error
+Change datatype of column from number to varchar2(100)
+
+PL/SQL procedure successfully completed.
+
+
+3) no_data_found : This exception will raise if the programmer submitted query doesnot returns any information from table
+ 
+       Example
+       =======
+       declare
+       emp_rec emp %rowtype;
+       begin
+       select * into emp_rec from emp where empno=1234;
+       end;
+       /
+
+       OUTPUT
+       ======
+       ERROR at line 1:
+       ORA-01403: no data found
+       ORA-06512: at line 4
+
+       Example
+       =======
+       declare
+       emp_rec emp %rowtype;
+       begin
+       select * into emp_rec from emp where empno=1234;
+       exception 
+        when no_data_found then
+          dbms_output.put_line('No Record Found.....');
+       end; 
+       /
+   
+       OUTPUT
+       ======
+       No Record Found.....
+
+       PL/SQL procedure successfully completed.
+
+       Example
+       =======
+       declare
+       employeeNo emp.empno%type := &empno;
+       emp_rec emp %rowtype;
+       record_not_found_error exception;
+       begin
+       select * into emp_rec from emp where empno= employeeNo;
+       if sql % found then 
+        dbms_output.put_line(emp_rec.empno || ' ' || emp_rec.ename);
+       else 
+        raise record_not_found_error;
+       end if;
+       exception 
+         when no_data_found then
+            dbms_output.put_line('No Record Found.....');
+         when record_not_found_error then
+            dbms_output.put_line('Custom Exception Record Not Found....');
+        end; 
+        /
+
+OUTPUT
+=======
+Enter value for empno: 7839
+old   2:        employeeNo emp.empno%type := &empno;
+new   2:        employeeNo emp.empno%type := 7839;
+7839 KING
+
+PL/SQL procedure successfully completed.
+
+
+OUTPUT
+======
+Enter value for empno: 1234
+old   2:        employeeNo emp.empno%type := &empno;
+new   2:        employeeNo emp.empno%type := 1234;
+No Record Found.....
+
+PL/SQL procedure successfully completed.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
