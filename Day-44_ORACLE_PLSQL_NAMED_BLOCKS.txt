@@ -1,0 +1,423 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : Introduction To PL/SQL- Named Blocks
+                               		         Date  : 21/01/2023
+                                                  (Session - 44)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
+
+>> Tomorrow We have session at 11AM....
+
+>> For MySQL Related Stored procedure & Functions refer following article i.e., https://www.mysqltutorial.org/
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Yesterday Session
+=================
+* We worked with Plsql cursors and cursors attributes.
+
+* We Explored how to handle the exceptions in plsql block
+    
+     1) Declaring the exception variable in declaration section
+
+     2) Raising the exception based on business logic
+
+     3) Handling exception using exception section in plsql block.
+
+* In PlSql we have two kinds of blocks
+
+    1) Nameless Blocks  :::: Not Reusable blocks and even it is not saved in database software.
+
+    2) Named Blocks     :::: Reusable blocks and will occupied some space in database software.(stored Procedures & 			     Functions)
+
+Today Session : Named Blocks
+=============================
+* So far we executed some PLSQL blocks i.e.,Nameless blocks which are not reusable for multiple programs and even not yet       stored in database software as well.
+
+* If wanted to create some named plsql block which can be stored permanently in database software for this we need to go for
+  "Stored Procedures & Stored Functions" in plsql.
+
+* Procedures and Functions are the subprograms which can be created and saved in the database as database objects.They can      be called or referred inside the other blocks also.
+
+Features
+========
+1) StoredProcedures are saved in database as pre-compiled objects.
+
+2) Stored Procedures are executed explictly by using "execute/exec" command 
+
+       Ex : execute/exec <procedure_name>([parameters])
+
+3) Stored Procedures can be executed by calling implictly.
+
+       Ex: procedure_name([parameters]);
+
+4) Stored Procedures may (or) maynot accepts the parameters.
+
+5) By default Stored proceduce should not return any value to the calling program.
+
+6) Stored Procedure can't be executed through select sql statement.
+
+7) Stored Procedures may called from other procedures or functions
+
+
+Syntax
+======
+ CREATE [OR REPLACE] PROCEDURE <procedure_name> ([Parameters])
+ [ IS | AS ]
+  <declaration_part>
+ BEGIN
+   <execution part>
+ EXCEPTION
+   <exception handling part>
+ END [<procedure_name>];
+
+* CREATE PROCEDURE instructs the compiler to create new procedure in Oracle. Keyword ‘OR REPLACE’ instructs the compile to     replace the existing procedure (if any) with the current one.
+
+* Procedure name should be unique.
+
+* Keyword ‘IS’ will be used, when the stored procedure in Oracle is nested into some other blocks. If the procedure is      standalone then ‘AS’ will be used. Other than this coding standard, both have the same meaning.
+
+Types of Parameters in Named Blocks
+==================================
+1) IN
+=====
+* An IN parameter is read-only. You can reference an IN parameter inside a procedure, but you cannot change its value. 
+* Oracle uses IN as the default mode. 
+* It means that if you don’t specify the mode for a parameter explicitly, Oracle will use the IN mode.
+
+2) OUT
+======
+* An OUT parameter is writable. Typically, you set a returned value for the OUT parameter and return it to the calling     program. 
+
+* Note that a procedure ignores the value that you supply for an OUT parameter.
+
+3)INOUT
+=======
+* An INOUT parameter is both readable and writable. The procedure can read and modify it.
+
+Example on Stored Procedure-1
+==============================
+CREATE OR REPLACE PROCEDURE welcome_msg 
+IS
+BEGIN
+ dbms_output.put_line ('Welcome To Ashok IT For PL/SQL Stored Procedure Programming......');
+END;
+/
+
+OUTPUT
+======
+Procedure created.
+
+Execution
+=========
+SQL> execute welcome_msg
+Welcome To Ashok IT For PL/SQL Stored Procedure Programming......
+
+PL/SQL procedure successfully completed.
+
+SQL> exec welcome_msg
+Welcome To Ashok IT For PL/SQL Stored Procedure Programming......
+
+PL/SQL procedure successfully completed.
+
+Example on Stored Procedure-2
+==============================
+CREATE OR REPLACE PROCEDURE welcome_msg_with_name(name in varchar2) 
+IS
+BEGIN
+ dbms_output.put_line ('Hello User ' || name || ' Welcome To Ashok IT For PLSQL Programming....');
+END;
+/
+
+OUTPUT
+======
+Procedure created.
+
+Execution
+=========
+SQL> execute welcome_msg_with_name
+Hello User Mahesh  Welcome To Ashok IT For PLSQL programming.......
+PL/SQL procedure successfully completed.
+
+SQL> exec welcome_msg_with_name
+Hello User Mahesh  Welcome To Ashok IT For PLSQL programming.......
+
+PL/SQL procedure successfully completed.
+
+Example on Stored Procedure-3
+==============================
+CREATE OR REPLACE PROCEDURE addition_two_numbers(a in number,b in number,c out number)
+IS
+BEGIN
+ c := a + b;
+ dbms_output.put_line ('Addition Of Two Numbers is::::' || c);
+END;
+/
+
+Execution
+=========
+SQL> variable sumOfNumbers number
+
+SQL> execute addition_two_numbers(250,250,:sumOfNumbers);
+Addition Of Two Numbers is::::500
+
+PL/SQL procedure successfully completed.
+
+SQL> print sumOfNumbers
+
+SUMOFNUMBERS
+------------
+         500
+
+
+Example on Stored Procedure-4
+==============================
+CREATE OR REPLACE PROCEDURE Get_Emp_Details_By_Id(employeeNumber in emp.empno%type)
+IS
+emp_record emp%rowtype;
+BEGIN
+ select * into emp_record from emp where empno = employeeNumber;
+ dbms_output.put_line(emp_record.empno || '----'|| emp_record.ename || '---'|| emp_record.job|| '---'|| emp_record.sal);
+exception
+  when no_data_found then
+  dbms_output.put_line('Given Employee is not existed in database table');
+END;
+/
+
+Output
+======
+Procedure Created
+
+Execution
+=========
+SQL> exec Get_Emp_Details_By_Id(7839);
+7839----KING---PRESIDENT---9500
+
+PL/SQL procedure successfully completed.
+
+SQL> exec Get_Emp_Details_By_Id(123456);
+Given Employee is not existed in database table
+
+PL/SQL procedure successfully completed.
+
+Example on Stored Procedure-5
+=============================
+CREATE OR REPLACE PROCEDURE update_employee_salary(employeeNumber in number,amount in number,salary out number)
+IS
+BEGIN
+ update emp  set sal = sal + amount where empno = employeeNumber;
+ commit;
+ select sal into salary from emp where empno = employeeNumber;
+END;
+/
+
+OUTPUT
+======
+Procedure Created
+
+Execution
+=========
+SQL> variable latestSalary number;
+SQL> execute update_employee_salary(7839,500,:latestSalary);
+
+PL/SQL procedure successfully completed.
+
+SQL> print latestSalary
+
+LATESTSALARY
+------------
+       10000
+
+Example on Stored Procedure-6
+=============================
+create or replace procedure Get_Employees_By_Deptno(departmentno number,emp_details out SYS_REFCURSOR) as
+begin
+    open emp_details for select * from emp where deptno = departmentno;
+end;
+/
+
+OUTPUT
+======
+Procedure Created
+
+Execution
+=========
+SQL> variable employeeDetails refcursor;
+SQL> execute Get_Employees_By_Deptno(10,:employeeDetails);
+
+PL/SQL procedure successfully completed.
+
+SQL> print employeeDetails
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7839 KING       PRESIDENT            17-NOV-81      10000                    10
+      7782 CLARK      MANAGER         7839 09-JUN-81       5950                    10
+      7934 MILLER     CLERK           7782 23-JAN-82       4800                    10
+
+
+Example on Stored Procedure-7
+=============================
+create or replace procedure Get_All_Employees(emp_details out SYS_REFCURSOR) as
+begin
+   open emp_details for select * from emp;
+end;
+/
+
+SQL> variable all_employees refcursor
+SQL> execute Get_All_Employees(:all_employees);
+
+PL/SQL procedure successfully completed.
+
+SQL> print all_employees;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7839 KING       PRESIDENT            17-NOV-81      10000                    10
+      7698 BLAKE      MANAGER         7839 01-MAY-81       5850                    30
+      7782 CLARK      MANAGER         7839 09-JUN-81       5950                    10
+      7566 JONES      MANAGER         7839 02-APR-81       5975                    20
+      7788 SCOTT      ANALYST         7566 09-DEC-82       6000                    20
+      7902 FORD       ANALYST         7566 03-DEC-81       6000                    20
+      7369 SMITH      CLERK           7902 17-DEC-80       3800                    20
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       4600        300         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       4250        500         30
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       4250       1400         30
+      7844 TURNER     SALESMAN        7698 08-SEP-81       4500          0         30
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7876 ADAMS      CLERK           7788 12-JAN-83       4100                    20
+      7900 JAMES      CLERK           7698 03-DEC-81       3950                    30
+
+
+Executing the Stored Procedure through PlSQL Block
+==================================================
+SQL> declare
+  2  employeeNo number := &employeeNo;
+  3  begin
+  4  Get_Emp_Details_By_Id(employeeNo);
+  5  end;
+  6  /
+Enter value for employeeno: 7839
+old   2: employeeNo number := &employeeNo;
+new   2: employeeNo number := 7839;
+7839----KING---PRESIDENT---10000
+
+PL/SQL procedure successfully completed.
+
+
+Executing the stored Procedure through plsql block
+==================================================
+declare
+a number := &a;
+b number := &b;
+c number;
+begin
+addition_two_numbers(a,b,c);
+dbms_output.put_line('Addition From Plsql block ' || c);
+end;
+/
+Enter value for a: 10
+old   2: a number := &a;
+new   2: a number := 10;
+Enter value for b: 20
+old   3: b number := &b;
+new   3: b number := 20;
+Addition Of Two Numbers is::::30
+Addition From Plsql block 30
+
+PL/SQL procedure successfully completed.
+
+Stored Functions
+================
+* Similar to a procedure, a PL/SQL function is a reusable program unit stored as a schema object in the Oracle Database.
+
+Syntax
+======
+CREATE [OR REPLACE] FUNCTION function_name (parameter_list) RETURN return_type
+IS
+
+[declarative section]
+
+BEGIN
+
+[executable section]
+
+[EXCEPTION]
+
+[exception-handling section]
+
+END;
+
+Example on Stored Function-1
+=============================
+CREATE OR REPLACE FUNCTION Welcome_Message(p_name IN VARCHAR2) RETURN VARCHAR2
+IS
+BEGIN
+RETURN (' Welcome To Ashok IT '|| p_name);
+END;
+/  
+
+Executing the Stored Function through plsql block
+=================================================
+DECLARE
+welcome_message VARCHAR2(250);
+BEGIN
+welcome_message := Welcome_Message('Mahesh');
+dbms_output.put_line(welcome_message);
+END;
+
+Executing the Stored Function throuhg SQL Select Statement
+==========================================================
+SELECT Welcome_Message('Mahesh') FROM DUAL;
+
+Example on Stored Function-2
+=============================
+create or replace function adder(n1 in number, n2 in number) return number    
+is     
+n3 number(8);    
+begin    
+n3 :=n1+n2;    
+return n3;    
+end;    
+/  
+
+Example on Stored Function-3
+============================
+CREATE OR REPLACE FUNCTION totalEmployees RETURN number 
+IS  
+   total number(2) := 0;  
+BEGIN  
+   SELECT count(*) into total FROM emp;  
+   RETURN total;  
+END;  
+/  
+
+Output
+======
+TOTALEMPLOYEES
+--------------
+            14
+
+Stored Procedure (Vs) Stored Function
+=====================================
+Stored Procedure
+================
+1) Used mainly to a execute certain process
+2) Cannot call in SELECT statement
+3) Use OUT parameter to return the value
+4) It is not mandatory to return the value
+
+Stored Function
+===============
+1) Used mainly to perform some calculation
+2) A Function that contains no DML statements can be called in SELECT statement
+3) Use RETURN to return the value
+4) It is mandatory to return the value
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
