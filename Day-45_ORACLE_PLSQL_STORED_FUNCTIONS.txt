@@ -1,0 +1,165 @@
+				                "Welcome To Ashok IT"
+                                   		 "Oracle Database"
+                                 	         Topic : Introduction To PL/SQL- Stored Functions & Triggers
+                               		         Date  : 22/01/2023
+                                                  (Session - 45)
+_____________________________________________________________________________________________________________________________
+Important Information
+*********************
+>> Oracle Class Notes  ::: https://github.com/ashokitschool/ORACLE_CLASS_NOTES
+
+>> Class Recording     ::: Will be available through Ashok IT Portal
+
+>> Class Related Updates "Join In WhatsApp Group" check with Admin Team.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Yesterday Session
+=================
+* We developed some named blocks using stored procedures and stored functions.
+
+* We can execute stored procedure using execute (or) exec command.
+
+* We can execute stored function using select statement.
+
+* We can execute stored procedure & stored function using plsql block.
+
+* Procedure doesn't have any return type but where as function must have return type.
+
+* Procedure are mainly recommended for executing some process.
+
+  Functions are maily recommnended for executing some calculations (or) executing some business logic.
+
+* The main Advantage of stored procedure & stored Function is used to define business logic at database as onces and we can     reuse these objects for multiple times.
+
+Today Session : Executing the stored functions & Information About Triggers
+============================================================================
+
+Example on Stored Function-1 : Created stored function to get total experience of an given employee.
+====================================================================================================
+create or replace function get_employee_experience(employeeno emp.empno%type) return number
+is
+join_date date;
+experience number;
+begin
+select hiredate into join_date from emp where empno = employeeno;
+experience := trunc(months_between(sysdate,join_date)/12);
+return experience;
+end;
+/
+
+OUTPUT
+======
+Function Created
+
+Execution
+=========
+SQL> select get_employee_experience(7839) as Total_Experience from dual;
+
+TOTAL_EXPERIENCE
+----------------
+              41
+
+
+Example on Stored Function-2 :: Create stored function for finding first and second maximium salary
+==================================================================================================
+create or replace function emp_max_sal(findSalaryNo number) return number
+is
+max_sal number;
+begin
+if findSalaryNo = 1 then
+ select max(sal) into max_sal from emp;
+ return max_sal;
+elsif findSalaryNo = 2 then
+ select max(sal) into max_sal from emp where sal <=(select max(sal) from emp where sal <(select max(sal) from emp));
+ return max_sal;
+end if;
+end;
+/
+
+Output
+======
+Function Created
+
+Execution
+=========
+SQL> select emp_max_sal(1) from dual;
+
+EMP_MAX_SAL(1)
+--------------
+         10000
+
+SQL> select emp_max_sal(2) from dual;
+
+EMP_MAX_SAL(2)
+--------------
+          6000
+
+
+Example on Stored Function-3
+============================
+create or replace function get_emp_details(employeeno in out number,employeename out varchar) return number
+is
+begin
+  select empno,ename into employeeno,employeename from emp where empno = employeeno;
+  return employeeno;
+end;
+/
+
+OUTPUT
+======
+Function Created
+
+
+Example on Stored Function-4
+============================
+create or replace function get_emp_details(employeeno in out number,employeename out varchar) return number
+is
+begin
+  select empno,ename into employeeno,employeename from emp where empno = employeeno;
+  return employeeno;
+  exception 
+   when no_data_found then 
+   dbms_output.put_line('Given employee no is not found');
+end;
+/
+
+OUTPUT
+======
+Function Created
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Triggers
+========
+* create table emp_ashokit as select * from emp;
+
+* create  table mytgr_audit(emp number(4),ename varchar2(30),oldsal number(7,2),newsal number(7,2),
+  operation varchar2(10),operation_date varchar2(30));
+
+Sample Trigger
+==============
+create or replace trigger insert_rec after insert on emp_ashokit for each row
+declare
+eno number;
+ename varchar2(30);
+oldsal number;
+newsal number;
+operation varchar2(10);
+begin
+ if inserting then 
+   operation := 'Inserting';
+ end if;
+ eno := :new.empno;
+ ename :=:new.ename;
+ oldsal :=:old.sal;
+ newsal :=:new.sal;
+ insert into mytgr_audit values(eno,ename,oldsal,newsal,operation,to_char(sysdate,'DD/MM/yyyy HH24:MI:SS'));
+ end;
+ /
+
+Inserting the row of information
+================================
+insert into emp_ashokit(empno,ename,sal) values(123,'Mahesh',15000);
+=============================================================================================================================
+mahesh.ashokit@gmail.com
+You can drop an message whats group
+ 
+
+
